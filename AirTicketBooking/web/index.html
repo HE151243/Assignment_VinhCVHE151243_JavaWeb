@@ -61,65 +61,85 @@ http://www.tooplate.com/view/2093-flight
                         <div id="tab1">
                             <div class="submit-form">
                                 <h4>Check availability for <em>direction</em>:</h4>
-                                <form id="form-submit" action="#" method="get">
+                                <form id="form-submit" action="DsChuyenBay" method="get">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="from">From:</label>
+                                                <label for="from">Điểm khởi hành:</label>
                                                 <select required name='from' onchange='this.form.()'>
-                                                    <option value="">Select a location...</option>
-                                                    <option value="Cambodia">Cambodia</option>
-                                                    <option value="Hong Kong">Hong Kong</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Japan">Japan</option>
-                                                    <option value="Korea">Korea</option>
-                                                    <option value="Laos">Laos</option>
-                                                    <option value="Myanmar">Myanmar</option>
-                                                    <option value="Singapore">Singapore</option>
-                                                    <option value="Thailand">Thailand</option>
-                                                    <option value="Vietnam">Vietnam</option>
+                                                    <option value="">Chọn địa điểm...</option>
+                                                    <option value="HaNoi">Hà Nội</option>
+                                                    <option value="HaiPhong">Hải Phòng</option>
+                                                    <option value="TP.HCM">TP.HCM</option>
+                                                    <option value="DaNang">Đà Nẵng</option>
+                                                    <option value="PhuQuoc">Phú Quốc</option>
+                                                    <option value="CanTho">Cần Thơ</option>
+                                                    <option value="QuyNhon">Quy Nhơn</option>
+                                                    <option value="DienBien">Điện Biên</option>
+                                                    <option value="ConDao">Côn Đảo</option>
+                                                    <option value="NhaTrang">Nha Trang</option>
                                                 </select>
                                             </fieldset>
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="to">To:</label>
+                                                <label for="to">Điểm đến:</label>
                                                 <select required name='to' onchange='this.form.()'>
-                                                    <option value="">Select a location...</option>
-                                                    <option value="Cambodia">Cambodia</option>
-                                                    <option value="Hong Kong">Hong Kong</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Japan">Japan</option>
-                                                    <option value="Korea">Korea</option>
-                                                    <option value="Laos">Laos</option>
-                                                    <option value="Myanmar">Myanmar</option>
-                                                    <option value="Singapore">Singapore</option>
-                                                    <option value="Thailand">Thailand</option>
-                                                    <option value="Vietnam">Vietnam</option>
+                                                    <option value="">Chọn địa điểm...</option>
+                                                    <option value="HaNoi">Hà Nội</option>
+                                                    <option value="HaiPhong">Hải Phòng</option>
+                                                    <option value="TP.HCM">TP.HCM</option>
+                                                    <option value="DaNang">Đà Nẵng</option>
+                                                    <option value="PhuQuoc">Phú Quốc</option>
+                                                    <option value="CanTho">Cần Thơ</option>
+                                                    <option value="QuyNhon">Quy Nhơn</option>
+                                                    <option value="DienBien">Điện Biên</option>
+                                                    <option value="ConDao">Côn Đảo</option>
+                                                    <option value="NhaTrang">Nha Trang</option>
                                                 </select>
                                             </fieldset>
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="departure">Departure date:</label>
-                                                <input name="deparure" type="text" class="form-control date" id="deparure" placeholder="Select date..." required="" onchange='this.form.()'>
+                                                <label for="timeFrom">Ngày đi:</label>
+                                                <input name="timeFrom" type="text" class="form-control date" id="timeFrom" placeholder="Chọn ngày..." required="" onchange='this.form.()'>
                                             </fieldset>
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="return">Return date:</label>
-                                                <input name="return" type="text" class="form-control date" id="return" placeholder="Select date..." required="" onchange='this.form.()'>
+                                                <label for="timeReturn">Ngày về:</label>
+                                                <input name="timeReturn" type="text" class="form-control date" id="timeReturn" placeholder="Chọn ngày..." required="" onchange='this.form.()'>
                                             </fieldset>
                                         </div>
+                                        
+                                        <div class="col-md-4">
+                                            <fieldset>
+                                                <label for="NguoiLon">Người lớn</label>
+                                                <input name="NguoiLon" type="number" class="form-control SoNguoi" id="NguoiLon" placeholder="Số người..." required="" onchange='this.form.()'>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <fieldset>
+                                                <label for="TreEm">Trẻ em</label>
+                                                <input name="TreEm" type="number" class="form-control SoNguoi" id="TreEm" placeholder="Số người..." required="" onchange='this.form.()'>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <fieldset>
+                                                <label for="EmBe">Em bé</label>
+                                                <input name="EmBe" type="number" class="form-control SoNguoi" id="EmBe" placeholder="Số người..." required="" onchange='this.form.()'>
+                                            </fieldset>
+                                        </div>
+                                        
                                         <div class="col-md-6">
                                             <div class="radio-select">
                                                 <div class="row">
                                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                                        <label for="round">Round</label>
+                                                        <label for="round" style="font-size: 10px">Khứ hồi</label>
                                                         <input type="radio" name="trip" id="round" value="round" required="required"onchange='this.form.()'>
                                                     </div>
                                                     <div class="col-md-6 col-sm-6 col-xs-6">
-                                                        <label for="oneway">Oneway</label>
+                                                        <label for="oneway" style="font-size: 10px">Một chiều</label>
                                                         <input type="radio" name="trip" id="oneway" value="one-way" required="required"onchange='this.form.()'>
                                                     </div>
                                                 </div>
@@ -127,7 +147,7 @@ http://www.tooplate.com/view/2093-flight
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <button type="submit" id="form-submit" class="btn">Order Ticket Now</button>
+                                                <button type="submit" id="form-submit" class="btn">Tìm kiếm</button>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -755,6 +775,14 @@ http://www.tooplate.com/view/2093-flight
             log: function() { }
         };
     }
+    
+    $(document).ready(function () {
+$('#dtVerticalScrollExample').DataTable({
+"scrollY": "200px",
+"scrollCollapse": true,
+});
+$('.dataTables_length').addClass('bs-select');
+});
     </script>
 </body>
 

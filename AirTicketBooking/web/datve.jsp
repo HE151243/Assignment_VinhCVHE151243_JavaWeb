@@ -44,8 +44,26 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Spectral:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <style>
+            .datve{
+
+                border-radius: 6px;
+                margin: 5px 0;
+                background-color: #EFEFEF; 
+
+            }
+            .bt-book{
+                font-size: 200%;
+                width: 70%; 
+                margin: 5px 0; 
+                border-radius: 6px
+            }
+
+
+        </style>
     </head>
 
     <body>
@@ -87,197 +105,128 @@
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
                         </div>
                     </div>
-                    <c:set var="listReturn" value="${listCbReturn}"/>
-                    <c:if test="${listReturn==null}">
-                        <div class="col-md-8 " style="font-size: 1.2rem">
-                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">Số thứ tự
-                                        </th>
-                                        <th class="th-sm">Hãng bay
-                                        </th>                   
-                                        <th class="th-sm">Thời gian đi
-                                        </th>
-                                        <th class="th-sm">Thời gian đến
-                                        </th>
-                                        <th class="th-sm">Ngày khởi hành
-                                        </th>
-                                        <th class="th-sm">Giá vé
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
+
+                    <div class="col-md-8">
+                        <form action="DsChuyenBay" method="post">
+                            <input hidden="" name="go" value="thanhtoan">
+                            <div class="col-md-12 datve row">
+                                <div class="col-md-4">
+
+                                    <table style="width: 100%">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2"><p>TP. Hồ Chí Minh <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> Hà Nội</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p><img src="img/hang1.gif" style="max-width: 40px; margin: 0"></p></td>
+                                                <td><p>VUJ20</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><p>Máy bay: VKASW167</p></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-3">
+                                    <table style="width: 100%">
+                                        <tbody>
+                                            <tr>
+                                                <td><p>Ngày bay: 21/11</p></td>
+                                            </tr>
+                                            <tr>
+                                                <td><p>Giờ bay: 21:00 - 23:55</p></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-md-5">
+                                    <table style="width: 100%">
+                                        <tbody>
+                                            <tr>
+                                                <td><p>Vé người lớn</p></td>
+                                                <td style="padding: 0 20px"><p> x1=</p></td>
+                                                <td style="padding: 0 5px; text-align: right"><p>1000.000<u>đ</u></p></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding:"><p>Tổng giá vé</p></td>
+                                                <td style="padding:0 5px; text-align: right"><p style="color: red">999.000<u>đ</u></p></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 datve">
+                                <table>                                   
+                                    <tbody>
                                         <tr>
-                                            <td>${i.index+1}</td>
-                                            <td>${cb.name}</td>
-                                            <td>${cb.timeFrom}</td>
-                                            <td>${cb.timeTo}</td>
-                                            <td>${cb.dateFrom}</td>
-                                            <td>${cb.price}00đ</td>
+                                            <td colspan="2"><p><b>Họ và tên người bay</b>(vd: Nguyễn Văn A)</p></td>
                                         </tr>
-                                    </c:forEach>
+                                        <tr>
+                                            <td>
+                                                <p><select required  onchange='this.form' style="font-size: 20px">
+                                                        <option value="">...</option>
+                                                        <option value="">Anh</option>
+                                                        <option value="">Chị</option>
+                                                        <option value="">Ông</option>
+                                                        <option value="">Bà</option>
+                                                    </select></p>
+                                            </td>
+                                            <td style="padding: 0 20px">
+                                                <p><input style="font-size: 15px; width: 100%" type="text" placeholder="Nhập họ tên..." name="ten" required="" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                </tbody>
-                            </table>
+                            <div class="col-md-12 datve">
+                                <table>                                  
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2"><p><b>Thông tin liên hệ</b></p></td>                                          
+                                        </tr>
+                                        <tr>
+                                            <td><p>Tên liên hệ</p></td>
+                                            <td style="padding-left: 30px">
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập tên liên hệ..." name="tenlh" required="" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Điện thoại</p></td>
+                                            <td style="padding-left: 30px">
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập số điện thoại..." name="sdt" required="" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Email</p></td>
+                                            <td style="padding-left: 30px">
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Không bắt buộc..." name="email" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                        </div>
-                    </c:if>
-                    <c:if test="${listReturn!=null}">
-                        <div class=" col-md-8 section-heading" style="font-size: 1rem">
-                            <table style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm" style="text-align: center; font-size: 3rem"><b>A->B</b>
-                                        </th>
-                                        <th class="th-sm" style="text-align: center; font-size: 3rem"><b>B->A</b>
-                                        </th>                   
+                            <div class="col-md-12" style="text-align: center">
+                                <button type="submit" class="btn btn-primary bt-book">Đặt Vé</button>
+                            </div>
+                        </form>
 
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr>
-                                        <td style="padding: 0 5px">
-                                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="th-sm">Số thứ tự
-                                                        </th>
-                                                        <th class="th-sm">Hãng bay
-                                                        </th>                   
-                                                        <th class="th-sm">Thời gian đi
-                                                        </th>
-                                                        <th class="th-sm">Thời gian đến
-                                                        </th>
-                                                        <th class="th-sm">Ngày khởi hành
-                                                        </th>
-                                                        <th class="th-sm">Giá vé
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
-                                                        <tr>
-                                                            <td>${i.index+1}</td>
-                                                            <td>${cb.name}</td>
-                                                            <td>${cb.timeFrom}</td>
-                                                            <td>${cb.timeTo}</td>
-                                                            <td>${cb.dateFrom}</td>
-                                                            <td>${cb.price}00đ</td>
-                                                        </tr>
-                                                    </c:forEach>
-
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td style="padding: 0 5px">
-                                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="th-sm">Số thứ tự
-                                                        </th>
-                                                        <th class="th-sm">Hãng bay
-                                                        </th>                   
-                                                        <th class="th-sm">Thời gian đi
-                                                        </th>
-                                                        <th class="th-sm">Thời gian đến
-                                                        </th>
-                                                        <th class="th-sm">Ngày khởi hành
-                                                        </th>
-                                                        <th class="th-sm">Giá vé
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
-                                                        <tr>
-                                                            <td>${i.index+1}</td>
-                                                            <td>${cb.name}</td>
-                                                            <td>${cb.timeFrom}</td>
-                                                            <td>${cb.timeTo}</td>
-                                                            <td>${cb.dateFrom}</td>
-                                                            <td>${cb.price}00đ</td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-
+                        <div class="col-md-12" style="text-align: center">
+                            <form>
+                                <button type="submit" class="btn btn-primary bt-book">Chọn lại chuyến bay</button>
+                            </form>
                         </div>
 
-                    </c:if>
+                    </div>
+
+
 
                     <div class="col-md-4 section-heading" style="font-size: 1.5rem">
                         <div class="section-heading">
-                            <div class="filters" style="margin-bottom: 10px"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Bộ Lọc<span class="px-1 fas fa-filter"></span></button> </div>
-                            <!--                            <div id="mobile-filter">
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Categories</h5>
-                                                                <ul class="list-group">
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> vegetables <span class="badge badge-primary badge-pill">328</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Fruits <span class="badge badge-primary badge-pill">112</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kitchen Accessories <span class="badge badge-primary badge-pill">32</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Chefs Tips <span class="badge badge-primary badge-pill">48</span> </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Brands</h5>
-                                                                <form class="brand">
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Royal Fields <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Crasmas Fields <input type="checkbox" checked> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Vegetarisma Farm <input type="checkbox" checked> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Farmar Field Eve <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">True Farmar Steve <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Rating</h5>
-                                                                <form class="rating">
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>-->
-                            <div class="content py-md-0 py-3" style="border: groove; background: #f9f9f9;">
-                                <section id="sidebar">
-                                    <div class="py-3">
-                                        <h5 class="font-weight-bold">Sắp xếp</h5>
-                                        <form class="brand" style="border: groove; margin: 5px; background: white">
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx"> <span class="check">Tổng thời gian bay </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" >Giá(Thấp tới Cao)<span class="check"></span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" > <span class="check">Thời gian khởi hành </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx"> <span class="check">Hãng hàng không </span> </label> </div>
-                                        </form>
-                                    </div>
-                                    <div class="py-3">
-                                        <h5 class="font-weight-bold">Chọn Lọc</h5>
-                                        <form class="brand" style="border: groove; margin: 5px; background: white">
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="checkbox"> <span class="check">Vietnam Airlines </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="checkbox" checked>BamBoo Airways  <span class="check"></span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="checkbox" checked> <span class="check">VietjetAir </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="checkbox"> <span class="check">Vietravel Airlines	 </span> </label> </div>
-                                        </form>
-                                    </div>
-                                    <!--                                    <div class="py-3">
-                                                                            <h5 class="font-weight-bold">Rating</h5>
-                                                                            <form class="rating">
-                                                                                <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                                <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                                <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                                <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                                <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                            </form>
-                                                                        </div>-->
-                                </section>
-                            </div>
                         </div>
                         <section id="first-tab-group" class="tabgroup" style="margin-top: 10px; background-color: rgba(250, 250, 250, 0.95);">
                             <div id="tab1">

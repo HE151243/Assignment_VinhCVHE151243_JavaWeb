@@ -7,20 +7,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.AirDAO;
-import model.ChuyenBay;
 
 /**
  *
  * @author admin
  */
-public class ChuyenBayServlet extends HttpServlet {
+@WebServlet(name = "avbc", urlPatterns = {"/avbc"})
+public class avbc extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,39 +32,18 @@ public class ChuyenBayServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String service = request.getParameter("go");
-        if (service == null) {
-            service = "default";
-
-        }
-
         try (PrintWriter out = response.getWriter()) {
-            if (service.equals("default")) {
-                response.sendRedirect("index.html");
-            }
-            if (service.equals("booking")) {
-                AirDAO ad = new AirDAO();
-                String from = request.getParameter("from");
-                String to = request.getParameter("to");
-                String dateFrom = request.getParameter("timeFrom");
-                String dateReturn = request.getParameter("timeReturn");
-                String tripSTT = request.getParameter("trip");
-                int NL = Integer.parseInt(request.getParameter("NguoiLon"));
-                int TE = Integer.parseInt(request.getParameter("TreEm"));
-                int EB = Integer.parseInt(request.getParameter("EmBe"));
-                int totalSeat = NL + TE + EB;
-                ArrayList<ChuyenBay> lcbReturn = null;
-                if(tripSTT!=null){
-                    lcbReturn = ad.getAllReturn(dateFrom, to, dateFrom, totalSeat);                 
-                } 
-                request.setAttribute("listCbReturn", lcbReturn);
-//        ArrayList<ChuyenBay> lcb = ad.getAllCb(from, to, dateFrom, totalSeat);
-                ArrayList<ChuyenBay> lcb = ad.getAll();
-                request.setAttribute("listCb", lcb);
-                request.getRequestDispatcher("timKiem.jsp").forward(request, response);
-            }
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet avbc</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet avbc at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

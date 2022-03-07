@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +52,7 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
                 flight.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(AirDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         return flight;
     }
@@ -120,9 +122,22 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
     
     public static void main(String[] args) throws SQLException {
         AirDAO ad = new AirDAO();
-        ArrayList<ChuyenBay> lcb = ad.getAllCb("HaNoi", "TP.HCM", "12/12/2022", 10);
-        for (ChuyenBay cb : lcb) {
-            System.out.println(cb);
+        ArrayList<ChuyenBay> lcb = ad.getAll();
+        System.out.println(Integer.parseInt(lcb.get(0).getTimeTo().toString().split(":")[0])*60
+                            +Integer.parseInt(lcb.get(0).getTimeTo().toString().split(":")[1]));   
+        System.out.println((lcb.get(0).getTimeTo().toString()));
+        
+        Collections.sort(lcb, new Comparator<ChuyenBay>() {
+                @Override
+                public int compare(ChuyenBay o1, ChuyenBay o2) {
+                    
+                    
+                    return o2.getName().compareTo(o1.getName());
+                }
+            });
+        
+        for (ChuyenBay c : lcb) {
+            System.out.println(c);
         }
     }
 }

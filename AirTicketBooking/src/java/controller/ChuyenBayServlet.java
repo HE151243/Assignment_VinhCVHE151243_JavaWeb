@@ -34,6 +34,8 @@ public class ChuyenBayServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String service = request.getParameter("go");
         if (service == null) {
             service = "default";
@@ -47,22 +49,35 @@ public class ChuyenBayServlet extends HttpServlet {
             if (service.equals("booking")) {
                 AirDAO ad = new AirDAO();
                 String from = request.getParameter("from");
+                request.setAttribute("from", from);
                 String to = request.getParameter("to");
+                request.setAttribute("to", to);
                 String dateFrom = request.getParameter("timeFrom");
+                request.setAttribute("dateFrom", dateFrom);
                 String dateReturn = request.getParameter("timeReturn");
+                request.setAttribute("dateReturn", dateReturn);
                 String tripSTT = request.getParameter("trip");
+                request.setAttribute("tripSTT", tripSTT);
+                
                 int NL = Integer.parseInt(request.getParameter("NguoiLon"));
                 int TE = Integer.parseInt(request.getParameter("TreEm"));
                 int EB = Integer.parseInt(request.getParameter("EmBe"));
                 int totalSeat = NL + TE + EB;
-                ArrayList<ChuyenBay> lcbReturn = null;
-                if(tripSTT!=null){
-                    lcbReturn = ad.getAllReturn(dateFrom, to, dateFrom, totalSeat);                 
-                } 
-                request.setAttribute("listCbReturn", lcbReturn);
-//        ArrayList<ChuyenBay> lcb = ad.getAllCb(from, to, dateFrom, totalSeat);
-                ArrayList<ChuyenBay> lcb = ad.getAll();
-                request.setAttribute("listCb", lcb);
+                request.setAttribute("totalSeat", totalSeat);
+//                out.print(to + from + dateFrom + "abc");
+                ArrayList<ChuyenBay> lcb1 = ad.getAll();
+                ArrayList<ChuyenBay> lcbReturn = new ArrayList<>();
+                if (tripSTT != null) {
+                    lcbReturn = ad.getAllReturn(from, to, dateReturn, totalSeat);
+                }
+//                out.print(lcbReturn.isEmpty());
+                request.setAttribute("listCbReturn", lcb1);
+                
+                ArrayList<ChuyenBay> lcb = ad.getAllCb(from, to, dateFrom, totalSeat);
+                request.setAttribute("listCb", lcb1);
+                
+                
+                
                 request.getRequestDispatcher("timKiem.jsp").forward(request, response);
             }
         }

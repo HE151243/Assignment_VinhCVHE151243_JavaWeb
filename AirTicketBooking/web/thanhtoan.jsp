@@ -77,18 +77,46 @@
                     <div style="text-align: center"><h1><b>Thanh toán đơn hàng</b></h1></div>
                     <div style="width: 100%; ">
                         <section style="background-color: #eee; border-radius: 10px">
-                            <div style="margin: 10px;text-align: center">
-                                <h1><b>Thông tin chuyến bay</b></h1>
+                            <div style="margin: 10px;">
+                                <h1 style="text-align: center"><b>Thông tin chuyến bay</b></h1>
                                 <h1>Số tiền: <span style="color: red">999.000đ</span></h1>
-                                <h1>Anh Nguyễn Văn A</h1>
-                                <h1>TP. Hồ Chí Minh <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> Hà Nội</h1>
-                                <h1>18:00 - 21:00, Ngày 12-12</h1>
-                                <h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;VUJ20</span> </h1>
-                                <h1>abc</h1>
+                                <h1>Anh &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nguyễn Văn A</h1>
+                                <h1>Hành trình: TP. Hồ Chí Minh <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> Hà Nội</h1>
+                                <h1>Thời gian: 18:00 - 21:00 - 12 - 12 - 2022 </h1>
+                                <h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;VUJ20</span> </h1>
+
                             </div>
-                            
-                            <div>
+                            <hr>
+                            <div style="margin: 10px">
                                 <h1 style="text-align: center"><b>Thanh toán qua chuyển khoản</b></h1>
+                                <h1>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>Ngân hàng</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; Vietcombank</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tên tài khoản</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; HE151243</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Số tài khoản</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; 18711103</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Số tiền</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red"> 999.000đ</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ghi nội dung</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; mã chuyến bay</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </h1>
+                                
+                                <h2 style="color: red">Vui lòng ghi đúng thông tin chuyển khoản!</h2>
                             </div>
                         </section>
                     </div>

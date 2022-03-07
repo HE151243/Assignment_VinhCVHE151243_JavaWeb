@@ -4,6 +4,8 @@
     Author     : admin
 --%>
 
+<%@page import="model.ChuyenBay"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -41,11 +43,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 
 
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Spectral:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
     <body>
@@ -81,127 +85,160 @@
                         </div>
                     </div>
 
+
+
                     <div class="col-md-4">
                         <div class="section-heading">
                             <h2>Tùy Chọn</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
                         </div>
                     </div>
-                    <c:set var="listReturn" value="${listCbReturn}"/>
-                    <c:if test="${listReturn==null}">
-                        <div class="col-md-8 " style="font-size: 1.2rem">
-                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm">Số thứ tự
-                                        </th>
-                                        <th class="th-sm">Hãng bay
-                                        </th>                   
-                                        <th class="th-sm">Thời gian đi
-                                        </th>
-                                        <th class="th-sm">Thời gian đến
-                                        </th>
-                                        <th class="th-sm">Ngày khởi hành
-                                        </th>
-                                        <th class="th-sm">Giá vé
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
+
+
+                    <c:set var="trip" value="${tripSTT}"/>
+                    <c:if test="${trip==null}">                  <!-- Một chiều -->
+                        <c:set var="listFrom" value="${listCb}"/>
+                        <c:if test="${listFrom.isEmpty()}">
+                            <div class="col-md-8">
+                                <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
+                                <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
+                            </div>
+                        </c:if>
+                        <c:if test="${!listFrom.isEmpty()}">
+                            <div class="col-md-8 " style="font-size: 1.2rem">
+                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+                                    <thead>
                                         <tr>
-                                            <td>${i.index+1}</td>
-                                            <td>${cb.name}</td>
-                                            <td>${cb.timeFrom}</td>
-                                            <td>${cb.timeTo}</td>
-                                            <td>${cb.dateFrom}</td>
-                                            <td>${cb.price}00đ</td>
+                                            <th colspan="6">
+                                                <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
+                                            </th>
                                         </tr>
-                                    </c:forEach>
-
-                                </tbody>
-                            </table>
-
-                        </div>
+                                        <tr>
+                                            <th class="th-sm">Số thứ tự
+                                            </th>
+                                            <th class="th-sm">Hãng bay
+                                            </th>                   
+                                            <th class="th-sm">Thời gian đi
+                                            </th>
+                                            <th class="th-sm">Thời gian đến
+                                            </th>
+                                            <th class="th-sm">Ngày khởi hành
+                                            </th>
+                                            <th class="th-sm">Giá vé
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data">
+                                        <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                            <tr>
+                                                <td>${i.index+1}</td>
+                                                <td>${cb.name}</td>
+                                                <td>${cb.timeFrom}</td>
+                                                <td>${cb.timeTo}</td>
+                                                <td>${cb.dateFrom}</td>
+                                                <td>${cb.price}00đ</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </c:if>
                     </c:if>
-                    <c:if test="${listReturn!=null}">
+                    <c:set var="trip" value="${tripSTT}"/>
+                    <c:if test="${trip!=null}">                          <!--Khứ hồi-->
+
                         <div class=" col-md-8 section-heading" style="font-size: 1rem">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th class="th-sm" style="text-align: center; font-size: 3rem"><b>A->B</b>
+                                        <th class="th-sm" style="text-align: center; font-size: 2rem">
+                                            <b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b>
                                         </th>
-                                        <th class="th-sm" style="text-align: center; font-size: 3rem"><b>B->A</b>
+                                        <th class="th-sm" style="text-align: center; font-size: 2rem">
+                                            <b>${to} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${from}</b>
                                         </th>                   
 
                                     </tr>
                                 </thead>
                                 <tbody >
                                     <tr>
-                                        <td style="padding: 0 5px">
-                                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="th-sm">Số thứ tự
-                                                        </th>
-                                                        <th class="th-sm">Hãng bay
-                                                        </th>                   
-                                                        <th class="th-sm">Thời gian đi
-                                                        </th>
-                                                        <th class="th-sm">Thời gian đến
-                                                        </th>
-                                                        <th class="th-sm">Ngày khởi hành
-                                                        </th>
-                                                        <th class="th-sm">Giá vé
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                        <td style="padding: 0 5px"> <!-- Chiều đi-->
+                                            <c:set var="listFrom" value="${listCb}"/>
+                                            <c:if test="${listFrom.isEmpty()}">
+                                                <h1><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
+                                            </c:if>
+                                            <c:if test="${!listFrom.isEmpty()}">
+                                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                    <thead>
                                                         <tr>
-                                                            <td>${i.index+1}</td>
-                                                            <td>${cb.name}</td>
-                                                            <td>${cb.timeFrom}</td>
-                                                            <td>${cb.timeTo}</td>
-                                                            <td>${cb.dateFrom}</td>
-                                                            <td>${cb.price}00đ</td>
+                                                            <th class="th-sm">Số thứ tự
+                                                            </th>
+                                                            <th class="th-sm">Hãng bay
+                                                            </th>                   
+                                                            <th class="th-sm">Thời gian đi
+                                                            </th>
+                                                            <th class="th-sm">Thời gian đến
+                                                            </th>
+                                                            <th class="th-sm">Ngày khởi hành
+                                                            </th>
+                                                            <th class="th-sm">Giá vé
+                                                            </th>
                                                         </tr>
-                                                    </c:forEach>
+                                                    </thead>
+                                                    <tbody id="dataTo">
+                                                        <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                                            <tr>
+                                                                <td>${i.index+1}</td>
+                                                                <td>${cb.name}</td>
+                                                                <td>${cb.timeFrom}</td>
+                                                                <td>${cb.timeTo}</td>
+                                                                <td>${cb.dateFrom}</td>
+                                                                <td>${cb.price}00đ</td>
+                                                            </tr>
+                                                        </c:forEach>
 
-                                                </tbody>
-                                            </table>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
                                         </td>
-                                        <td style="padding: 0 5px">
-                                            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="th-sm">Số thứ tự
-                                                        </th>
-                                                        <th class="th-sm">Hãng bay
-                                                        </th>                   
-                                                        <th class="th-sm">Thời gian đi
-                                                        </th>
-                                                        <th class="th-sm">Thời gian đến
-                                                        </th>
-                                                        <th class="th-sm">Ngày khởi hành
-                                                        </th>
-                                                        <th class="th-sm">Giá vé
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                        <td style="padding: 0 5px"> <!-- Chiều về -->
+                                            <c:set var="listReturn" value="${listCbReturn}"/>
+                                            <c:if test="${listReturn.isEmpty()}">
+                                                <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
+                                            </c:if>
+                                            <c:if test="${!listReturn.isEmpty()}">
+                                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                    <thead>
                                                         <tr>
-                                                            <td>${i.index+1}</td>
-                                                            <td>${cb.name}</td>
-                                                            <td>${cb.timeFrom}</td>
-                                                            <td>${cb.timeTo}</td>
-                                                            <td>${cb.dateFrom}</td>
-                                                            <td>${cb.price}00đ</td>
+                                                            <th class="th-sm">Số thứ tự
+                                                            </th>
+                                                            <th class="th-sm">Hãng bay
+                                                            </th>                   
+                                                            <th class="th-sm">Thời gian đi
+                                                            </th>
+                                                            <th class="th-sm">Thời gian đến
+                                                            </th>
+                                                            <th class="th-sm">Ngày khởi hành
+                                                            </th>
+                                                            <th class="th-sm">Giá vé
+                                                            </th>
                                                         </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
+                                                    </thead>
+                                                    <tbody id="dataReturn">
+                                                        <c:forEach var="cbr" items="${listCbReturn}" varStatus="i">
+                                                            <tr>
+                                                                <td>${i.index+1}</td>
+                                                                <td>${cbr.name}</td>
+                                                                <td>${cbr.timeFrom}</td>
+                                                                <td>${cbr.timeTo}</td>
+                                                                <td>${cbr.dateFrom}</td>
+                                                                <td>${cbr.price}00đ</td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </c:if>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -251,10 +288,14 @@
                                     <div class="py-3">
                                         <h5 class="font-weight-bold">Sắp xếp</h5>
                                         <form class="brand" style="border: groove; margin: 5px; background: white">
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx"> <span class="check">Tổng thời gian bay </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" >Giá(Thấp tới Cao)<span class="check"></span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" > <span class="check">Thời gian khởi hành </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx"> <span class="check">Hãng hàng không </span> </label> </div>
+<!--                                            <input type="radio" name="sx" value="totaltime" onclick="sapxep1('totaltime');"> totaltime
+                                            <input type="radio" name="sx" value="price" onclick="sapxep1('price');"> price
+                                            <input type="radio" name="sx" value="timeFrom" onclick="sapxep1('timeFrom');"> timeFrom
+                                            <input type="radio" name="sx" value="brand" onclick="sapxep1('brand');"> brand-->
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="totaltime" onclick="sapxep('totaltime', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Tổng thời gian bay </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="price" onclick="sapxep('price', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check"> Giá(Thấp tới Cao) </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="timeFrom" onclick="sapxep('timeFrom', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Thời gian khởi hành </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="brand" onclick="sapxep('brand', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Hãng hàng không </span> </label> </div>
                                         </form>
                                     </div>
                                     <div class="py-3">
@@ -506,9 +547,61 @@
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
+                                                                function sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat) {
+                                                                    $.ajax({
+                                                                        url: "/AirTicketBooking/filterControl",
+                                                                        type: "get", //send it through get method
+                                                                        data: {
+                                                                            service: 'round',
+                                                                            inputValue: ip,
+                                                                            localFrom: localFrom,
+                                                                            localTo: localTo,
+                                                                            dateFrom: dateFrom,
+                                                                            dateReturn: dateReturn,
+                                                                            totalSeat: totalSeat,
+                                                                        },
+                                                                        success: function (response) {
+                                                                            //Do Something
+                                                                                document.getElementById("dataReturn").innerHTML = response;
+                                                                        },
+                                                                        error: function (xhr) {
+                                                                            //Do Something to handle error
+                                                                        }
+                                                                    });
+                                                                }
+
+                                                                function sapxep(ip, tripSTT, localFrom, localTo, dateFrom, dateReturn, totalSeat) {
+                                                                    $.ajax({
+                                                                        url: "/AirTicketBooking/filterControl",
+                                                                        type: "get", //send it through get method
+                                                                        data: {
+                                                                            service: 'oneWay',
+                                                                            inputValue: ip,
+                                                                            localFrom: localFrom,
+                                                                            localTo: localTo,
+                                                                            dateFrom: dateFrom,
+                                                                            dateReturn: dateReturn,
+                                                                            totalSeat: totalSeat,
+                                                                        },
+                                                                        success: function (response) {
+                                                                            //Do Something
+                                                                            if(tripSTT==null){
+                                                                                document.getElementById("data").innerHTML = response;
+                                                                            } else{
+                                                                                document.getElementById("dataTo").innerHTML = response;
+                                                                                sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat);
+                                                                            }
+                                                                            
+                                                                            
+                                                                            
+                                                                        },
+                                                                        error: function (xhr) {
+                                                                            //Do Something to handle error
+                                                                        }
+                                                                    });
+                                                                }
+
                                                                 function timeRe() {
-
-
                                                                     $(function () {
                                                                         $("input[type='checkbox']").each(function (i, el) {
                                                                             var chk = $(el);
@@ -524,7 +617,6 @@
                                                                             }
                                                                         });
                                                                     });
-
                                                                 }
 
                                                                 $(function () {

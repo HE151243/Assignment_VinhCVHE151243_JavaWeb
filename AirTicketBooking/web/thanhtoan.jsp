@@ -5,6 +5,8 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -74,20 +76,33 @@
             <div class="container">
 
                 <div class="row" style="margin: 0 auto; width: 60%">
-                    <div style="text-align: center"><h1><b>Thanh toán đơn hàng</b></h1></div>
+                    <div style="text-align: center"><h1><b>Thanh toán đơn hàng SE1620A${cb.id}</b></h1></div>
                     <div style="width: 100%; ">
                         <section style="background-color: #eee; border-radius: 10px">
-                            <div style="margin: 10px;">
+                            <div style="margin: 10px 10px 10px 20px;">
                                 <h1 style="text-align: center"><b>Thông tin chuyến bay</b></h1>
-                                <h1>Số tiền: <span style="color: red">999.000đ</span></h1>
-                                <h1>Anh &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nguyễn Văn A</h1>
-                                <h1>Hành trình: TP. Hồ Chí Minh <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> Hà Nội</h1>
-                                <h1>Thời gian: 18:00 - 21:00 - 12 - 12 - 2022 </h1>
-                                <h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;VUJ20</span> </h1>
+                                <h1>Số tiền: <span style="color: red">${totalPrice}00đ</span></h1>
+                                <!--<h1>-->
+                                    <table>
+                                        <tbody>
+                                            <c:forEach begin="0" end="${fn:length(tenNL)-1}" varStatus="i">
+                                                <tr>
+                                                    <td> <h1>${GTNL[i.index]}</h1> </td>
+                                                    <td style="padding-left: 20px"> <h1>${tenNL[i.index]}</h1> </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                <!--</h1>-->
+                                
+                                <h1>Hành trình: ${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</h1>
+                                <h1>Thời gian: ${cb.timeFrom} - ${cb.timeTo} </h1>
+                                <h1>Ngày bay: <fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h1>
+                                <h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h1>
 
                             </div>
                             <hr>
-                            <div style="margin: 10px">
+                            <div style="margin: 10px 10px 10px 20px;">
                                 <h1 style="text-align: center"><b>Thanh toán qua chuyển khoản</b></h1>
                                 <h1>
                                     <table>
@@ -106,16 +121,16 @@
                                             </tr>
                                             <tr>
                                                 <td>Số tiền</td>
-                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red"> 999.000đ</span></td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red"> ${totalPrice}00đ</span></td>
                                             </tr>
                                             <tr>
                                                 <td>Ghi nội dung</td>
-                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; mã chuyến bay</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; SE1620A${cb.id}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </h1>
-                                
+
                                 <h2 style="color: red">Vui lòng ghi đúng thông tin chuyển khoản!</h2>
                             </div>
                         </section>

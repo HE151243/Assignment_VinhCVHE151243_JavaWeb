@@ -78,7 +78,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="section-heading">
                             <h2>Các chuyến bay</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
@@ -87,7 +87,7 @@
 
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="section-heading">
                             <h2>Tùy Chọn</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
@@ -99,56 +99,60 @@
                     <c:if test="${trip==null}">                  <!-- Một chiều -->
                         <c:set var="listFrom" value="${listCb}"/>
                         <c:if test="${listFrom.isEmpty()}">
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
                                 <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
                             </div>
                         </c:if>
                         <c:if test="${!listFrom.isEmpty()}">
-                            <div class="col-md-8 " style="font-size: 1.2rem">
-                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-
-                                    <thead>
-                                        <tr>
-                                            <th colspan="6">
-                                                <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th class="th-sm">Số thứ tự
-                                            </th>
-                                            <th class="th-sm">Hãng bay
-                                            </th>                   
-                                            <th class="th-sm">Thời gian đi
-                                            </th>
-                                            <th class="th-sm">Thời gian đến
-                                            </th>
-                                            <th class="th-sm">Ngày khởi hành
-                                            </th>
-                                            <th class="th-sm">Giá vé
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="data">
-                                        <c:forEach var="cb" items="${listCb}" varStatus="i">
+                            <div class="col-md-9 " style="font-size: 1.2rem">
+                                <form action="DsChuyenBay" method="post">    
+                                    <input hidden="" value="booking" name="go">
+                                    
+                                    <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                        <thead>
                                             <tr>
-                                                <td>${i.index+1}</td>
-                                                <td>${cb.name}</td>
-                                                <td>${cb.timeFrom}</td>
-                                                <td>${cb.timeTo}</td>
-                                                <td>${cb.dateFrom}</td>
-                                                <td>${cb.price}00đ</td>
+                                                <th colspan="7">
+                                                    <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
+                                                </th>
                                             </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <th class="th-sm">Số thứ tự
+                                                </th>
+                                                <th class="th-sm">Hãng bay
+                                                </th>                   
+                                                <th class="th-sm">Thời gian đi
+                                                </th>
+                                                <th class="th-sm">Thời gian đến
+                                                </th>
+                                                <th colspan="2" class="th-sm">Ngày khởi hành
+                                                </th>
+                                                <th  class="th-sm">Giá vé
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="data">
+                                            <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                                <tr>
+                                                    <td>${i.index+1}</td>
+                                                    <td>${cb.name}</td>
+                                                    <td>${cb.timeFrom}</td>
+                                                    <td>${cb.timeTo}</td>
+                                                    <td colspan="2">${cb.dateFrom}</td>
+                                                    <td>${cb.price}00đ</td>
+                                                    <td><button class="btn-danger" style="border-radius: 6px; font-size: 15px" name="bookingInfo" value="${cb},${cus}"> Chọn Vé</button></td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </form>
                             </div>
                         </c:if>
                     </c:if>
                     <c:set var="trip" value="${tripSTT}"/>
                     <c:if test="${trip!=null}">                          <!--Khứ hồi-->
 
-                        <div class=" col-md-8 section-heading" style="font-size: 1rem">
+                        <div class=" col-md-9 section-heading" style="font-size: 1rem">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
@@ -221,7 +225,7 @@
                                                             </th>
                                                             <th class="th-sm">Ngày khởi hành
                                                             </th>
-                                                            <th class="th-sm">Giá vé
+                                                            <th colspan="2" class="th-sm">Giá vé
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -233,6 +237,7 @@
                                                                 <td>${cbr.timeFrom}</td>
                                                                 <td>${cbr.timeTo}</td>
                                                                 <td>${cbr.dateFrom}</td>
+                                                                <td>${cbr.price}00đ</td>
                                                                 <td>${cbr.price}00đ</td>
                                                             </tr>
                                                         </c:forEach>
@@ -249,7 +254,7 @@
 
                     </c:if>
 
-                    <div class="col-md-4 section-heading" style="font-size: 1.5rem">
+                    <div class="col-md-3 section-heading" style="font-size: 1.5rem">
                         <div class="section-heading">
                             <div class="filters" style="margin-bottom: 10px"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Bộ Lọc<span class="px-1 fas fa-filter"></span></button> </div>
                             <!--                            <div id="mobile-filter">
@@ -288,14 +293,14 @@
                                     <div class="py-3">
                                         <h5 class="font-weight-bold">Sắp xếp</h5>
                                         <form class="brand" style="border: groove; margin: 5px; background: white">
-<!--                                            <input type="radio" name="sx" value="totaltime" onclick="sapxep1('totaltime');"> totaltime
-                                            <input type="radio" name="sx" value="price" onclick="sapxep1('price');"> price
-                                            <input type="radio" name="sx" value="timeFrom" onclick="sapxep1('timeFrom');"> timeFrom
-                                            <input type="radio" name="sx" value="brand" onclick="sapxep1('brand');"> brand-->
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="totaltime" onclick="sapxep('totaltime', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Tổng thời gian bay </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="price" onclick="sapxep('price', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check"> Giá(Thấp tới Cao) </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="timeFrom" onclick="sapxep('timeFrom', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Thời gian khởi hành </span> </label> </div>
-                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="brand" onclick="sapxep('brand', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}');"> <span class="check">Hãng hàng không </span> </label> </div>
+                                            <!--                                            <input type="radio" name="sx" value="totaltime" onclick="sapxep1('totaltime');"> totaltime
+                                                                                        <input type="radio" name="sx" value="price" onclick="sapxep1('price');"> price
+                                                                                        <input type="radio" name="sx" value="timeFrom" onclick="sapxep1('timeFrom');"> timeFrom
+                                                                                        <input type="radio" name="sx" value="brand" onclick="sapxep1('brand');"> brand-->
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="totaltime" onclick="sapxep('totaltime', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}', '${cus}');"> <span class="check">Tổng thời gian bay </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="price" onclick="sapxep('price', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}', '${cus}');"> <span class="check"> Giá(Thấp tới Cao) </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="timeFrom" onclick="sapxep('timeFrom', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}', '${cus}');"> <span class="check">Thời gian khởi hành </span> </label> </div>
+                                            <div class="form-inline d-flex align-items-center py-1"> <label class="tick"><input type="radio" name="sx" value="brand" onclick="sapxep('brand', '${tripSTT}', '${from}', '${to}', '${dateFrom}', '${dateReturn}', '${totalSeat}', '${cus}');"> <span class="check">Hãng hàng không </span> </label> </div>
                                         </form>
                                     </div>
                                     <div class="py-3">
@@ -547,7 +552,7 @@
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
-                                                                function sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat) {
+                                                                function sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat, cus) {
                                                                     $.ajax({
                                                                         url: "/AirTicketBooking/filterControl",
                                                                         type: "get", //send it through get method
@@ -559,10 +564,11 @@
                                                                             dateFrom: dateFrom,
                                                                             dateReturn: dateReturn,
                                                                             totalSeat: totalSeat,
+                                                                            cus: cus,
                                                                         },
                                                                         success: function (response) {
                                                                             //Do Something
-                                                                                document.getElementById("dataReturn").innerHTML = response;
+                                                                            document.getElementById("dataReturn").innerHTML = response;
                                                                         },
                                                                         error: function (xhr) {
                                                                             //Do Something to handle error
@@ -570,7 +576,7 @@
                                                                     });
                                                                 }
 
-                                                                function sapxep(ip, tripSTT, localFrom, localTo, dateFrom, dateReturn, totalSeat) {
+                                                                function sapxep(ip, tripSTT, localFrom, localTo, dateFrom, dateReturn, totalSeat, cus) {
                                                                     $.ajax({
                                                                         url: "/AirTicketBooking/filterControl",
                                                                         type: "get", //send it through get method
@@ -582,18 +588,21 @@
                                                                             dateFrom: dateFrom,
                                                                             dateReturn: dateReturn,
                                                                             totalSeat: totalSeat,
+                                                                            cus: cus,
                                                                         },
                                                                         success: function (response) {
                                                                             //Do Something
-                                                                            if(tripSTT==null){
+                                                                            if (tripSTT == '') {
                                                                                 document.getElementById("data").innerHTML = response;
-                                                                            } else{
-                                                                                document.getElementById("dataTo").innerHTML = response;
-                                                                                sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat);
                                                                             }
-                                                                            
-                                                                            
-                                                                            
+
+                                                                            if (tripSTT != '') {
+                                                                                document.getElementById("dataTo").innerHTML = response;
+                                                                                sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat, cus);
+                                                                            }
+
+
+
                                                                         },
                                                                         error: function (xhr) {
                                                                             //Do Something to handle error

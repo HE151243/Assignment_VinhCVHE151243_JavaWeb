@@ -4,7 +4,10 @@
     Author     : admin
 --%>
 
+<%@page import="javax.mail.internet.MailDateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -92,37 +95,45 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-9">
                         <div class="section-heading">
                             <h2>Các chuyến bay</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="section-heading">
                             <h2>Tùy Chọn</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
+                    
+
+                    <div class="col-md-9">
                         <form action="DsChuyenBay" method="post">
                             <input hidden="" name="go" value="thanhtoan">
+                            <input hidden="" name="mb" value="${mb}">
+                            <input hidden="" name="cb" value="${cb}">
+                            <input hidden="" name="NL" value="${NL}">
+                            <input hidden="" name="TE" value="${TE}">
+                            <input hidden="" name="EB" value="${EB}">
+                            <input hidden="" name="totalPrice" value="${NL*cb.price+TE*cb.price*75/100+EB*cb.price*50/100}">
                             <div class="col-md-12 datve row">
                                 <div class="col-md-4">
 
                                     <table style="width: 100%">
                                         <tbody>
                                             <tr>
-                                                <td colspan="2"><p>TP. Hồ Chí Minh <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> Hà Nội</p></td>
+                                                <td colspan="2"><p>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</p></td>
                                             </tr>
                                             <tr>
                                                 <td><p><img src="img/hang1.gif" style="max-width: 40px; margin: 0"></p></td>
-                                                <td><p>VUJ20</p></td>
+                                                <td><p>SE1620A${cb.id}</p></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><p>Máy bay: VKASW167</p></td>
+                                                <td colspan="2"><p>Máy bay: ${mb.getTenMayBay()} ${mb.getMaMayBay()}  </p></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -130,11 +141,15 @@
                                 <div class="col-md-3">
                                     <table style="width: 100%">
                                         <tbody>
+                                            
+                                            <%
+                                                String cbt = "Wed Dec 21 00:00:00 ICT 2022";
+                                            %>
                                             <tr>
-                                                <td><p>Ngày bay: 21/11</p></td>
+                                                <td><p>Ngày bay: <fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/></p></td>
                                             </tr>
                                             <tr>
-                                                <td><p>Giờ bay: 21:00 - 23:55</p></td>
+                                                <td><p>${cb.timeFrom} - ${cb.timeTo}</p></td>
                                             </tr>
 
                                         </tbody>
@@ -146,12 +161,29 @@
                                         <tbody>
                                             <tr>
                                                 <td><p>Vé người lớn</p></td>
-                                                <td style="padding: 0 20px"><p> x1=</p></td>
-                                                <td style="padding: 0 5px; text-align: right"><p>1000.000<u>đ</u></p></td>
+                                                <td style="padding: 0 20px"><p> x${NL}=</p></td>
+                                                <td style="padding: 0 5px; text-align: right"><p>${NL*cb.price}00<u>đ</u></p></td>
                                             </tr>
+                                            <c:set var="te" value="${TE}"/>
+                                            <c:if test="${te > 0}">
+                                                <tr>
+                                                    <td><p>Vé trẻ em</p></td>
+                                                    <td style="padding: 0 20px"><p> x${TE}=</p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p>${TE*cb.price*75/100}00<u>đ</u></p></td>
+                                                </tr>
+                                            </c:if>
+                                            <c:set var="eb" value="${EB}"/>
+                                            <c:if test="${eb > 0}">
+                                                <tr>
+                                                    <td><p>Vé em bé</p></td>
+                                                    <td style="padding: 0 20px"><p> x${EB}=</p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p>${EB*cb.price*50/100}00<u>đ</u></p></td>
+                                                </tr>
+                                            </c:if>
+                                            <c:set var="totalPrice" value="${NL*cb.price+TE*cb.price*75/100+EB*cb.price*50/100}"/>
                                             <tr>
                                                 <td colspan="2" style="padding:"><p>Tổng giá vé</p></td>
-                                                <td style="padding:0 5px; text-align: right"><p style="color: red">999.000<u>đ</u></p></td>
+                                                <td style="padding:0 5px; text-align: right"><p style="color: red">${totalPrice}00<u>đ</u></p></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -162,22 +194,113 @@
                                 <table>                                   
                                     <tbody>
                                         <tr>
-                                            <td colspan="2"><p><b>Họ và tên người bay</b>(vd: Nguyễn Văn A)</p></td>
+                                            <td colspan="4"><p><b>Họ và tên người bay</b>(vd: Nguyễn Văn A)</p></td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <p><select required  onchange='this.form' style="font-size: 20px">
-                                                        <option value="">...</option>
-                                                        <option value="">Anh</option>
-                                                        <option value="">Chị</option>
-                                                        <option value="">Ông</option>
-                                                        <option value="">Bà</option>
-                                                    </select></p>
-                                            </td>
-                                            <td style="padding: 0 20px">
-                                                <p><input style="font-size: 15px; width: 100%" type="text" placeholder="Nhập họ tên..." name="ten" required="" onchange='this.form'></p>
-                                            </td>
-                                        </tr>
+                                        <c:forEach begin="1" end="${NL}">
+                                            <tr>
+                                                <td>
+                                                    <p><select name="gt-NL" onchange='this.form' style="font-size: 15px; width: 100%">
+                                                            <option value="Anh">Anh</option>
+                                                            <option value="Chị">Chị</option>
+                                                            <option value="Ông">Ông</option>
+                                                            <option value="Bà">Bà</option>
+                                                        </select></p>
+                                                </td>
+                                                <td colspan="3" style="padding-left: 20px">
+                                                    <p><input style="font-size: 15px; width: 125%" type="text" placeholder="Nhập họ tên..." name="nlName" required="" onchange='this.form'></p>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:set var="te" value="${TE}"/> <!--Nếu có trẻ em-->
+                                        <c:if test="${te > 0}">
+                                            <c:forEach begin="1" end="${TE}">
+                                                <tr>
+                                                    <td>
+                                                        <p><select  name="gt-TE" onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <option value="Trẻ em trai">Trẻ em trai</option>
+                                                                <option value="Trẻ em gái">Trẻ em gái</option>
+                                                            </select></p>
+                                                    </td>
+                                                    <td colspan="3" style="padding-left: 20px">
+                                                        <p><input style="font-size: 15px; width: 125%" type="text" placeholder="Nhập họ tên..." name="teName" required="" onchange='this.form'></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>Ngày sinh:</p>
+                                                    </td>
+                                                    <td style="padding-left: 20px">
+                                                        <p><select name="day-TE"  onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <c:forEach begin="1" end="31" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                    <td style="padding-left: 2px">
+                                                        <p><select name="month-TE"  onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <c:forEach begin="1" end="12" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                    <td style="padding-left: 2px">
+                                                        <p><select  name="year-TE" onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <jsp:useBean id="now" class="java.util.Date" />
+                                                                <fmt:formatDate var="year" value="${now}" pattern="yyyy" />
+                                                                <c:forEach begin="${year-12}" end="${year-2}" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+
+                                        <c:set var="eb" value="${EB}"/><!--Nếu có em bé-->
+                                        <c:if test="${eb > 0}">
+                                            <c:forEach begin="1" end="${EB}">
+                                                <tr>
+                                                    <td>
+                                                        <p><select  name="gt-EB" onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <option value="Em bé trai">Em bé trai</option>
+                                                                <option value="Em bé gái">Em bé gái</option>
+                                                            </select></p>
+                                                    </td>
+                                                    <td colspan="3" style="padding-left: 20px">
+                                                        <p><input style="font-size: 15px; width: 125%" type="text" placeholder="Nhập họ tên..." name="ebName" required="" onchange='this.form'></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p>Ngày sinh:</p>
+                                                    </td>
+                                                    <td style="padding-left: 20px">
+                                                        <p><select  name="day-EB" onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <c:forEach begin="1" end="31" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                    <td style="padding-left: 2px">
+                                                        <p><select name="month-EB"  onchange='this.form' style="font-size: 15px; width: 100%">
+                                                                <c:forEach begin="1" end="12" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                    <td style="padding-left: 2px">
+                                                        <p><select  name="year-EB" onchange='this.form' style="font-size: 15px; width: 100%">
+
+                                                                <fmt:formatDate var="year" value="${now}" pattern="yyyy" />
+                                                                <c:forEach begin="${year-2}" end="${year}" varStatus="i">
+                                                                    <option value="${i.index}">${i.index}</option>
+                                                                </c:forEach>
+                                                            </select></p>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
                                     </tbody>
                                 </table>
                             </div>
@@ -191,19 +314,19 @@
                                         <tr>
                                             <td><p>Tên liên hệ</p></td>
                                             <td style="padding-left: 30px">
-                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập tên liên hệ..." name="tenlh" required="" onchange='this.form'></p>
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập tên liên hệ..." name="tenNDV" required="" onchange='this.form'></p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><p>Điện thoại</p></td>
                                             <td style="padding-left: 30px">
-                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập số điện thoại..." name="sdt" required="" onchange='this.form'></p>
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập số điện thoại..." name="sdtNDV" required="" onchange='this.form'></p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><p>Email</p></td>
                                             <td style="padding-left: 30px">
-                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Không bắt buộc..." name="email" onchange='this.form'></p>
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Không bắt buộc..." name="emailNDV" onchange='this.form'></p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -225,7 +348,7 @@
 
 
 
-                    <div class="col-md-4 section-heading" style="font-size: 1.5rem">
+                    <div class="col-md-3 section-heading" style="font-size: 1.5rem">
                         <div class="section-heading">
                         </div>
                         <section id="first-tab-group" class="tabgroup" style="margin-top: 10px; background-color: rgba(250, 250, 250, 0.95);">

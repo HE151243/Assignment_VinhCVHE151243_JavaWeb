@@ -46,8 +46,9 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
                 s.setLocalTo(rs.getString(4));
                 s.setTimeFrom(rs.getTime(5));
                 s.setTimeTo(rs.getTime(6));
-                s.setDateFrom(rs.getDate(9));
-                s.setPrice(rs.getFloat(10));
+                s.setIdMB(rs.getString(8));
+                s.setDateFrom(rs.getDate(10));
+                s.setPrice(rs.getFloat(11));
                
                 flight.add(s);
             }
@@ -79,8 +80,9 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
                 s.setLocalTo(rs.getString(4));
                 s.setTimeFrom(rs.getTime(5));
                 s.setTimeTo(rs.getTime(6));
-                s.setDateFrom(rs.getDate(9));
-                s.setPrice(rs.getFloat(10));
+                s.setIdMB(rs.getString(8));
+                s.setDateFrom(rs.getDate(10));
+                s.setPrice(rs.getFloat(11));
                
                 flight.add(s);
             }
@@ -88,6 +90,22 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
             Logger.getLogger(AirDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return flight;
+    }
+    
+    public MayBay getMBbyID(String id){
+        MayBay mb = new MayBay();
+        try {
+            sql = "select * from MayBay where MaMayBay = ?";
+            ps = connection.prepareStatement(sql);   
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                mb.setMaMayBay(rs.getString(1));
+                mb.setTenMayBay(rs.getString(2));
+            }
+        } catch (Exception e) {
+        }
+        return mb;
     }
 
     
@@ -109,8 +127,9 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
                 s.setLocalTo(rs.getString(4));
                 s.setTimeFrom(rs.getTime(5));
                 s.setTimeTo(rs.getTime(6));
-                s.setDateFrom(rs.getDate(9));
-                s.setPrice(rs.getFloat(10));
+                s.setIdMB(rs.getString(8));
+                s.setDateFrom(rs.getDate(10));
+                s.setPrice(rs.getFloat(11));
                
                 flight.add(s);
             }

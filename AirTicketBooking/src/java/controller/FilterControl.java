@@ -100,6 +100,7 @@ public class FilterControl extends HttpServlet {
         String dateFrom = request.getParameter("dateFrom");
         String dateReturn = request.getParameter("dateReturn");
         String totalSeat = request.getParameter("totalSeat");
+        String cus = request.getParameter("cus");
         String trip = request.getParameter("service");
 //        response.getWriter().print(totalSeat);
 //        int slot = Integer.parseInt(totalSeat);
@@ -116,13 +117,14 @@ public class FilterControl extends HttpServlet {
                         + "<td>" + c.getName() + "</td>\n"
                         + "<td>" + c.getTimeFrom() + "</td>\n"
                         + "<td>" + c.getTimeTo() + "</td>\n"
-                        + "<td>" + c.getDateFrom() + "</td>\n"
+                        + "<td colspan=\"2\">" + c.getDateFrom() + "</td>\n"
                         + "<td>" + c.getPrice() + "00đ</td>\n"
+                        + "<td><button class=\"btn-danger\" style=\"border-radius: 6px; font-size: 15px\" name=\"bookingInfo\" value=\""+c+","+cus+"\"> Chọn Vé</button></td>"
                         + "</tr>");
             }
         }
-        
-        if(trip.equals("round")){
+
+        if (trip.equals("round")) {
             for (ChuyenBay c : lcbSorted) {
                 out.println("<tr>\n"
                         + "<td>" + i++ + "</td>\n"

@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 
 /**
@@ -21,11 +21,9 @@ public class ChuyenBay {
     Time timeTo;
     Date dateFrom;
     float price;
+    String idMB;
 
-    public ChuyenBay() {
-    }
-
-    public ChuyenBay(int id, String name, String localFrom, String localTo, Time timeFrom, Time timeTo, Date dateFrom, float price) {
+    public ChuyenBay(int id, String name, String localFrom, String localTo, Time timeFrom, Time timeTo, Date dateFrom, float price, String idMB) {
         this.id = id;
         this.name = name;
         this.localFrom = localFrom;
@@ -34,7 +32,21 @@ public class ChuyenBay {
         this.timeTo = timeTo;
         this.dateFrom = dateFrom;
         this.price = price;
+        this.idMB = idMB;
     }
+
+    public String getIdMB() {
+        return idMB;
+    }
+
+    public void setIdMB(String idMB) {
+        this.idMB = idMB;
+    }
+
+    public ChuyenBay() {
+    }
+
+    
 
     public int getId() {
         return id;
@@ -102,7 +114,7 @@ public class ChuyenBay {
 
     @Override
     public String toString() {
-        return "ChuyenBay{" + "id=" + id + ", name=" + name + ", localFrom=" + localFrom + ", localTo=" + localTo + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", dateFrom=" + dateFrom + ", price=" + price + '}';
+        return id + ", " + name + ", " + localFrom + ", " + localTo + ", " + timeFrom + ", " + timeTo + ", " + dateFrom + ", " + price + ", " + idMB;
     }
 
     

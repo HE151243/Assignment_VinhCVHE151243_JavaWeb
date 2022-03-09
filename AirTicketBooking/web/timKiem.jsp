@@ -50,6 +50,9 @@
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
     </head>
 
     <body>
@@ -108,7 +111,7 @@
                             <div class="col-md-9 " style="font-size: 1.2rem">
                                 <form action="DsChuyenBay" method="post">    
                                     <input hidden="" value="booking" name="go">
-                                    
+                                    <input hidden="" name="cus" value="${cus}">
                                     <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -117,7 +120,7 @@
                                                 </th>
                                             </tr>
                                             <tr>
-                                                <th class="th-sm">Số thứ tự
+                                                <th class="th-sm">Số thứ tự 
                                                 </th>
                                                 <th class="th-sm">Hãng bay
                                                 </th>                   
@@ -152,109 +155,122 @@
                     <c:set var="trip" value="${tripSTT}"/>
                     <c:if test="${trip!=null}">                          <!--Khứ hồi-->
 
-                        <div class=" col-md-9 section-heading" style="font-size: 1rem">
-                            <table style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th class="th-sm" style="text-align: center; font-size: 2rem">
-                                            <b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b>
-                                        </th>
-                                        <th class="th-sm" style="text-align: center; font-size: 2rem">
-                                            <b>${to} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${from}</b>
-                                        </th>                   
+                        <div class=" col-md-9 col-xs-12 col-sm-12" style="font-size: 1rem">
 
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr>
-                                        <td style="padding: 0 5px"> <!-- Chiều đi-->
-                                            <c:set var="listFrom" value="${listCb}"/>
-                                            <c:if test="${listFrom.isEmpty()}">
-                                                <h1><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
-                                            </c:if>
-                                            <c:if test="${!listFrom.isEmpty()}">
-                                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="th-sm">Số thứ tự
-                                                            </th>
-                                                            <th class="th-sm">Hãng bay
-                                                            </th>                   
-                                                            <th class="th-sm">Thời gian đi
-                                                            </th>
-                                                            <th class="th-sm">Thời gian đến
-                                                            </th>
-                                                            <th class="th-sm">Ngày khởi hành
-                                                            </th>
-                                                            <th class="th-sm">Giá vé
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="dataTo">
-                                                        <c:forEach var="cb" items="${listCb}" varStatus="i">
-                                                            <tr>
-                                                                <td>${i.index+1}</td>
-                                                                <td>${cb.name}</td>
-                                                                <td>${cb.timeFrom}</td>
-                                                                <td>${cb.timeTo}</td>
-                                                                <td>${cb.dateFrom}</td>
-                                                                <td>${cb.price}00đ</td>
-                                                            </tr>
-                                                        </c:forEach>
+                            <form action="DsChuyenBay" method="post">
+                                <input hidden="" name="go" value="booking">
+                                <input hidden="" name="cus" value="${cus}">
+                                <table style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th class="th-sm" id="titleFrom" style="text-align: center; font-size: 2rem">
+                                                <b>Chiều đi: ${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b>
+                                            </th>
+                                            <th id="titleReturn" hidden="" class="th-sm" style="text-align: center; font-size: 2rem">
+                                                <b>Chiều về: ${to} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${from}</b>
+                                            </th>                   
 
-                                                    </tbody>
-                                                </table>
-                                            </c:if>
-                                        </td>
-                                        <td style="padding: 0 5px"> <!-- Chiều về -->
-                                            <c:set var="listReturn" value="${listCbReturn}"/>
-                                            <c:if test="${listReturn.isEmpty()}">
-                                                <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
-                                            </c:if>
-                                            <c:if test="${!listReturn.isEmpty()}">
-                                                <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="th-sm">Số thứ tự
-                                                            </th>
-                                                            <th class="th-sm">Hãng bay
-                                                            </th>                   
-                                                            <th class="th-sm">Thời gian đi
-                                                            </th>
-                                                            <th class="th-sm">Thời gian đến
-                                                            </th>
-                                                            <th class="th-sm">Ngày khởi hành
-                                                            </th>
-                                                            <th colspan="2" class="th-sm">Giá vé
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="dataReturn">
-                                                        <c:forEach var="cbr" items="${listCbReturn}" varStatus="i">
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr>
+                                            <td style="padding: 0 5px" id="dataFrom"> <!-- Chiều đi-->
+                                                <c:set var="listFrom" value="${listCb}"/>
+                                                <c:if test="${listFrom.isEmpty()}">
+                                                    <h1><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
+                                                </c:if>
+                                                <c:if test="${!listFrom.isEmpty()}">
+                                                    <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                        <thead>
                                                             <tr>
-                                                                <td>${i.index+1}</td>
-                                                                <td>${cbr.name}</td>
-                                                                <td>${cbr.timeFrom}</td>
-                                                                <td>${cbr.timeTo}</td>
-                                                                <td>${cbr.dateFrom}</td>
-                                                                <td>${cbr.price}00đ</td>
-                                                                <td>${cbr.price}00đ</td>
+                                                                <th class="th-sm">Số thứ tự
+                                                                </th>
+                                                                <th class="th-sm">Hãng bay
+                                                                </th>                   
+                                                                <th class="th-sm">Thời gian đi
+                                                                </th>
+                                                                <th class="th-sm">Thời gian đến
+                                                                </th>
+                                                                <th class="th-sm">Ngày khởi hành
+                                                                </th>
+                                                                <th class="th-sm" colspan="2" style="text-align: center">Giá vé
+                                                                </th>
                                                             </tr>
-                                                        </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </c:if>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                                        </thead>
+                                                        <tbody id="dataTo">
+                                                            <c:forEach var="cb" items="${listCb}" varStatus="i">
+                                                                <tr>
+                                                                    <td>${i.index+1}</td>
+                                                                    <td>${cb.name}</td>
+                                                                    <td>${cb.timeFrom}</td>
+                                                                    <td>${cb.timeTo}</td>
+                                                                    <td>${cb.dateFrom}</td>
+                                                                    <td>${cb.price}00đ</td>
+                                                                    <td><button type="button" class="btn-danger" onclick="fromm('${cb}')" style="border-radius: 6px;" name="bookingInfo" value=""> Chọn Vé</button></td>
+                                                                </tr>
+                                                            </c:forEach>
+
+                                                        </tbody>
+                                                    </table>
+                                                    <input hidden="" id="paramFrom" name="bookingInfo">
+
+                                                </c:if>
+
+                                            </td>
+                                            <td id="dataReturn" hidden="" style="padding: 0 5px"> <!-- Chiều về -->
+                                                <c:set var="listReturn" value="${listCbReturn}"/>
+                                                <c:if test="${listReturn.isEmpty()}">
+                                                    <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
+                                                </c:if>
+                                                <c:if test="${!listReturn.isEmpty()}">
+                                                    <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="th-sm">Số thứ tự
+                                                                </th>
+                                                                <th class="th-sm">Hãng bay
+                                                                </th>                   
+                                                                <th class="th-sm">Thời gian đi
+                                                                </th>
+                                                                <th class="th-sm">Thời gian đến
+                                                                </th>
+                                                                <th class="th-sm">Ngày khởi hành
+                                                                </th>
+                                                                <th colspan="2" class="th-sm" style="text-align: center">Giá vé
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="dataReturn">
+                                                            <c:forEach var="cbr" items="${listCbReturn}" varStatus="i">
+                                                                <tr>
+                                                                    <td>${i.index+1}</td>
+                                                                    <td>${cbr.name}</td>
+                                                                    <td>${cbr.timeFrom}</td>
+                                                                    <td>${cbr.timeTo}</td>
+                                                                    <td>${cbr.dateFrom}</td>
+                                                                    <td>${cbr.price}00đ</td>
+                                                                    <td style="text-align: center">
+                                                                        <button class="btn-danger" style="border-radius: 6px;" name="bookingInfoReturn" value="${cbr}"> Đặt Vé</button> 
+                                                                        <button type="button" class="btn-danger" onclick="selectFromAgain()" style="border-radius: 6px;" > Chọn chiều đi</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+
 
 
                         </div>
 
                     </c:if>
 
-                    <div class="col-md-3 section-heading" style="font-size: 1.5rem">
+                    <div class="col-md-3  col-xs-12 col-sm-12" style="font-size: 1.5rem">
                         <div class="section-heading">
                             <div class="filters" style="margin-bottom: 10px"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Bộ Lọc<span class="px-1 fas fa-filter"></span></button> </div>
                             <!--                            <div id="mobile-filter">
@@ -552,6 +568,23 @@
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
 
+                                                                function selectFromAgain() {
+                                                                    document.getElementById("titleFrom").removeAttribute("hidden");
+                                                                    document.getElementById("dataFrom").removeAttribute("hidden");
+                                                                    document.getElementById("titleReturn").setAttribute("hidden", "hidden");
+                                                                    document.getElementById("dataReturn").setAttribute("hidden", "hidden");
+                                                                }
+
+                                                                function fromm(cb) {
+
+                                                                    document.getElementById("titleReturn").removeAttribute("hidden");
+                                                                    document.getElementById("dataReturn").removeAttribute("hidden");
+                                                                    document.getElementById("titleFrom").setAttribute("hidden", "hidden");
+                                                                    document.getElementById("dataFrom").setAttribute("hidden", "hidden");
+                                                                    document.getElementById("paramFrom").setAttribute("value", cb);
+
+                                                                }
+
                                                                 function sapxep1(ip, localFrom, localTo, dateFrom, dateReturn, totalSeat, cus) {
                                                                     $.ajax({
                                                                         url: "/AirTicketBooking/filterControl",
@@ -581,6 +614,7 @@
                                                                         url: "/AirTicketBooking/filterControl",
                                                                         type: "get", //send it through get method
                                                                         data: {
+                                                                            tripSTT: tripSTT,
                                                                             service: 'oneWay',
                                                                             inputValue: ip,
                                                                             localFrom: localFrom,

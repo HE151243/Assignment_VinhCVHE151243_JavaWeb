@@ -109,6 +109,7 @@ public class FilterControl extends HttpServlet {
         ArrayList<ChuyenBay> lcb1 = ad.getAll();
         ArrayList<ChuyenBay> lcbSorted = sortCb(lcb1, inValue);
         int i = 1;
+        String tripSTT = request.getParameter("tripSTT");
 
         if (trip.equals("oneWay")) {
             for (ChuyenBay c : lcbSorted) {
@@ -118,9 +119,14 @@ public class FilterControl extends HttpServlet {
                         + "<td>" + c.getTimeFrom() + "</td>\n"
                         + "<td>" + c.getTimeTo() + "</td>\n"
                         + "<td colspan=\"2\">" + c.getDateFrom() + "</td>\n"
-                        + "<td>" + c.getPrice() + "00đ</td>\n"
-                        + "<td><button class=\"btn-danger\" style=\"border-radius: 6px; font-size: 15px\" name=\"bookingInfo\" value=\""+c+","+cus+"\"> Chọn Vé</button></td>"
-                        + "</tr>");
+                        + "<td>" + c.getPrice() + "00đ</td>\n");
+                if (tripSTT == null) {
+                    out.println("<td><button class=\"btn-danger\" style=\"border-radius: 6px; font-size: 15px\" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
+                            + "</tr>");
+                } else {
+                    out.println("<td><button class=\"btn-danger\" style=\"border-radius: 6px; \" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
+                            + "</tr>");
+                }
             }
         }
 
@@ -133,6 +139,7 @@ public class FilterControl extends HttpServlet {
                         + "<td>" + c.getTimeTo() + "</td>\n"
                         + "<td>" + c.getDateFrom() + "</td>\n"
                         + "<td>" + c.getPrice() + "00đ</td>\n"
+                        + "<td><button class=\"btn-danger\" style=\"border-radius: 6px;\" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
                         + "</tr>");
             }
         }

@@ -109,52 +109,60 @@
                         </div>
                     </div>
 
-                    
+
 
                     <div class="col-md-9">
                         <form action="DsChuyenBay" method="post">
                             <input hidden="" name="go" value="thanhtoan">
                             <input hidden="" name="mb" value="${mb}">
-                            <input hidden="" name="cb" value="${cb}">
+                            <input hidden="" name="cb" value="${cb}">                            
                             <input hidden="" name="NL" value="${NL}">
                             <input hidden="" name="TE" value="${TE}">
                             <input hidden="" name="EB" value="${EB}">
-                            <input hidden="" name="totalPrice" value="${NL*cb.price+TE*cb.price*75/100+EB*cb.price*50/100}">
+                            <input hidden="" name="cbr" value="${cbr[0]},${cbr[1]},${cbr[2]},${cbr[3]},${cbr[4]},${cbr[5]},${cbr[6]},${cbr[7]},${cbr[8]}">                           
+                            <input hidden="" name="totalPrice" value="${cbr==null ? NL*cb.price+TE*cb.price*75/100+EB*cb.price*50/100 : NL*(cb.price+cbr[7])+TE*(cb.price+cbr[7])*75/100+EB*(cb.price+cbr[7])*50/100}">
                             <div class="col-md-12 datve row">
-                                <div class="col-md-4">
 
-                                    <table style="width: 100%">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2"><p>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p><img src="img/hang1.gif" style="max-width: 40px; margin: 0"></p></td>
-                                                <td><p>SE1620A${cb.id}</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2"><p>Máy bay: ${mb.getTenMayBay()} ${mb.getMaMayBay()}  </p></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-md-3">
-                                    <table style="width: 100%">
-                                        <tbody>
-                                            
-                                            <%
-                                                String cbt = "Wed Dec 21 00:00:00 ICT 2022";
-                                            %>
-                                            <tr>
-                                                <td><p>Ngày bay: <fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/></p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p>${cb.timeFrom} - ${cb.timeTo}</p></td>
-                                            </tr>
+                                <div class="col-md-7 row">
+                                    <div class="col-md-12">
 
-                                        </tbody>
-                                    </table>
+                                        <table style="width: 100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2"><p>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</p></td>
+                                                    <td style="padding-left: 30px"><p>Ngày bay: <fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/></p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><p><img src="img/hang1.gif" style="max-width: 40px; margin: 0"></p></td>
+                                                    <td><p>SE1620A${cb.id}</p></td>
+                                                    <td style="padding-left: 30px"><p>${cb.timeFrom} - ${cb.timeTo}</p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><p>Máy bay: ${mb.getTenMayBay()} ${mb.getMaMayBay()}  </p></td>
+                                                </tr>
+
+                                                <c:set var="a" value="${cbr}"></c:set>
+                                                <c:if test="${a!=null}">
+                                                    <tr>
+                                                        <td colspan="2"><p>${cbr[2]} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cbr[3]}</p></td>
+                                                        <td style="padding-left: 30px"><p>Ngày bay: <fmt:parseDate pattern="yyyy-MM-dd" value="${cbr[6]}" var="date"/> 
+                                                                                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><p><img src="img/hang1.gif" style="max-width: 40px; margin: 0"></p></td>
+                                                        <td><p>SE1620A${cbr[0]}</p></td>
+                                                        <td style="padding-left: 30px"><p>${cbr[4]} - ${cbr[5]}</p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3"><p>Máy bay: ${mbr.getTenMayBay()} ${mbr.getMaMayBay()}  </p></td>
+                                                    </tr>
+                                                </c:if>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
+
 
                                 <div class="col-md-5">
                                     <table style="width: 100%">
@@ -162,14 +170,14 @@
                                             <tr>
                                                 <td><p>Vé người lớn</p></td>
                                                 <td style="padding: 0 20px"><p> x${NL}=</p></td>
-                                                <td style="padding: 0 5px; text-align: right"><p>${NL*cb.price}00<u>đ</u></p></td>
+                                                <td style="padding: 0 5px; text-align: right"><p>${cbr==null? NL*cb.price : NL*(cb.price+cbr[7]) }00<u>đ</u></p></td>
                                             </tr>
                                             <c:set var="te" value="${TE}"/>
                                             <c:if test="${te > 0}">
                                                 <tr>
                                                     <td><p>Vé trẻ em</p></td>
                                                     <td style="padding: 0 20px"><p> x${TE}=</p></td>
-                                                    <td style="padding: 0 5px; text-align: right"><p>${TE*cb.price*75/100}00<u>đ</u></p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p>${cbr==null? TE*cb.price*75/100 : NL*(cb.price+cbr[7])*75/100}00<u>đ</u></p></td>
                                                 </tr>
                                             </c:if>
                                             <c:set var="eb" value="${EB}"/>
@@ -177,10 +185,10 @@
                                                 <tr>
                                                     <td><p>Vé em bé</p></td>
                                                     <td style="padding: 0 20px"><p> x${EB}=</p></td>
-                                                    <td style="padding: 0 5px; text-align: right"><p>${EB*cb.price*50/100}00<u>đ</u></p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p>${cbr==null? EB*cb.price*50/100 : NL*(cb.price+cbr[7])*50/100}00<u>đ</u></p></td>
                                                 </tr>
                                             </c:if>
-                                            <c:set var="totalPrice" value="${NL*cb.price+TE*cb.price*75/100+EB*cb.price*50/100}"/>
+                                            <c:set var="totalPrice" value="${NL*(cb.price+cbr[7])+TE*(cb.price+cbr[7])*75/100+EB*(cb.price+cbr[7])*50/100}"/>
                                             <tr>
                                                 <td colspan="2" style="padding:"><p>Tổng giá vé</p></td>
                                                 <td style="padding:0 5px; text-align: right"><p style="color: red">${totalPrice}00<u>đ</u></p></td>

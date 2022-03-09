@@ -139,24 +139,44 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
         return flight;
     }
     
+    public ChuyenBay getAllById(String id) {
+        ChuyenBay s = new ChuyenBay();
+        try {
+            sql = "select distinct  * from ChuyenBay as cb \n"
+                    + "inner join ThongTinChuyenBay as ttcb\n"
+                    + "on cb.MaChuyenBay = ttcb.MaChuyenBay where cb.MaChuyenBay =?\n";
+            ps = connection.prepareStatement(sql);  
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                s.setId(rs.getInt(1));
+                s.setName(rs.getString(2));
+                s.setLocalFrom(rs.getString(3));
+                s.setLocalTo(rs.getString(4));
+                s.setTimeFrom(rs.getTime(5));
+                s.setTimeTo(rs.getTime(6));
+                s.setIdMB(rs.getString(8));
+                s.setDateFrom(rs.getDate(10));
+                s.setPrice(rs.getFloat(11));
+               
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AirDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return s;
+    }
+    
     public static void main(String[] args) throws SQLException {
         AirDAO ad = new AirDAO();
-        ArrayList<ChuyenBay> lcb = ad.getAll();
-        System.out.println(Integer.parseInt(lcb.get(0).getTimeTo().toString().split(":")[0])*60
-                            +Integer.parseInt(lcb.get(0).getTimeTo().toString().split(":")[1]));   
-        System.out.println((lcb.get(0).getTimeTo().toString()));
+        ChuyenBay cb = ad.getAllById("8");
+        System.out.println(cb);
+        MayBay mb = ad.getMBbyID("DC10");
+        System.out.println(mb);
         
-        Collections.sort(lcb, new Comparator<ChuyenBay>() {
-                @Override
-                public int compare(ChuyenBay o1, ChuyenBay o2) {
-                    
-                    
-                    return o2.getName().compareTo(o1.getName());
-                }
-            });
         
-        for (ChuyenBay c : lcb) {
-            System.out.println(c);
-        }
+        
+        
     }
 }

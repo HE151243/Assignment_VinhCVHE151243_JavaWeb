@@ -94,6 +94,13 @@ public class ChuyenBayServlet extends HttpServlet {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String lcb = request.getParameter("bookingInfo");
                 String[] elm = lcb.split(",");
+                String cbRe = request.getParameter("bookingInfoReturn");
+//                out.print("--" );
+                String[] cbReturn = null;
+                if(cbRe!=null){
+                    cbReturn = request.getParameter("bookingInfoReturn").split(",");
+                }
+                request.setAttribute("cbr", cbReturn);
                 Date date;
                 date = sdf.parse(elm[6]);
 //                out.print(date+"12345");
@@ -101,13 +108,20 @@ public class ChuyenBayServlet extends HttpServlet {
                 Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(elm[4]).getTime());
                 Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(elm[5]).getTime());
                 MayBay mb = ad.getMBbyID(elm[8].trim());
+                MayBay mbr = new MayBay();
+                if (cbReturn != null) {
+                    mbr = ad.getMBbyID(cbReturn[8].trim());
+                }
                 request.setAttribute("mb", mb);
-                ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0]), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);
-
+                request.setAttribute("mbr", mbr);
+                ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0].trim()), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);                             
+                String[] cust = request.getParameter("cus").split(",");
+//                out.print(cust==null    );
                 request.setAttribute("cb", cb);
-                request.setAttribute("NL", elm[9].trim());
-                request.setAttribute("TE", elm[10].trim());
-                request.setAttribute("EB", elm[11].trim());
+                request.setAttribute("NL", cust[0].trim());
+                request.setAttribute("TE", cust[1].trim());
+                request.setAttribute("EB", cust[2].trim());
+//                out.print(cb);
                 request.getRequestDispatcher("datve.jsp").forward(request, response);
             }
 
@@ -115,26 +129,51 @@ public class ChuyenBayServlet extends HttpServlet {
 
                 String[] mbay = request.getParameter("mb").split(",");
                 String[] cbay = request.getParameter("cb").split(",");
+                String[] cbayr = request.getParameter("cbr").split(",");
+                request.setAttribute("cbr", cbayr);
+                for (int i = 0; i < cbayr.length; i++) {
+                    out.print("--" + cbayr[i]);
+
+                }
                 String totalPrice = request.getParameter("totalPrice");
+
                 String[] GTNL = request.getParameterValues("gt-NL");
-                request.setAttribute("GTNL", GTNL);
                 String[] GTTE = request.getParameterValues("gt-TE");
                 String[] GTEB = request.getParameterValues("gt-EB");
-                
+                request.setAttribute("GTNL", GTNL);
+                request.setAttribute("GTTE", GTTE);
+                request.setAttribute("GTEB", GTEB);
+
                 String[] tenNL = request.getParameterValues("nlName");
-                request.setAttribute("tenNL", tenNL);
                 String[] tenTE = request.getParameterValues("teName");
                 String[] tenEB = request.getParameterValues("ebName");
-                out.print(tenEB[0]);
-                out.print(tenNL[0]+tenTE[0]+tenEB[0]);
-                
+                request.setAttribute("tenNL", tenNL);
+                request.setAttribute("tenTE", tenTE);
+                request.setAttribute("tenEB", tenEB);
+
+                String[] dayTE = request.getParameterValues("day-TE");
+                String[] monthTE = request.getParameterValues("month-TE");
+                String[] yearTE = request.getParameterValues("year-TE");
+                request.setAttribute("dayTE", dayTE);
+                request.setAttribute("monthTE", monthTE);
+                request.setAttribute("yearTE", yearTE);
+
+                String[] dayEB = request.getParameterValues("day-EB");
+                String[] monthEB = request.getParameterValues("month-EB");
+                String[] yearEB = request.getParameterValues("year-EB");
+                request.setAttribute("dayEB", dayEB);
+                request.setAttribute("monthEB", monthEB);
+                request.setAttribute("yearEB", yearEB);
+
+//                out.print(tenEB[0]);
+//                out.print(tenNL[0] + tenTE[0] + tenEB[0]);
 //                request.setAttribute("cb", cbay);
 //                request.setAttribute("mb", mbay);
                 request.setAttribute("totalPrice", totalPrice);
                 AirDAO ad = new AirDAO();
                 SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
                 Date date = null;
-                out.print(cbay[6]);
+//                out.print(cbay[6]);
                 date = sdf.parse(cbay[6].trim());
 //                out.print(date);
 //                String date1 = new SimpleDateFormat("dd-MM-YYYY").format(date);

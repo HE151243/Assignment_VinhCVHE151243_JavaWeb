@@ -81,24 +81,86 @@
                         <section style="background-color: #eee; border-radius: 10px">
                             <div style="margin: 10px 10px 10px 20px;">
                                 <h1 style="text-align: center"><b>Thông tin chuyến bay</b></h1>
-                                <h1>Số tiền: <span style="color: red">${totalPrice}00đ</span></h1>
                                 <!--<h1>-->
-                                    <table>
-                                        <tbody>
-                                            <c:forEach begin="0" end="${fn:length(tenNL)-1}" varStatus="i">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><h1>Số tiền:</h1></td>
+                                            <td style="padding-left: 30px"><h1><span style="color: red">${totalPrice}00đ</span></h1></td>
+                                        </tr>
+                                        <c:forEach begin="0" end="${fn:length(tenNL)-1}" varStatus="i">
+                                            <tr>
+                                                <td> <h1>${GTNL[i.index]}</h1> </td>
+                                                <td style="padding-left: 30px"> <h1>${tenNL[i.index]}</h1> </td>
+                                            </tr>
+                                        </c:forEach>
+
+                                        <c:set var="soTE" value="${fn:length(tenTE)}"></c:set>
+                                        <c:if test="${soTE>0}"> <!-- Neu co tre em-->
+                                            <c:forEach begin="0" end="${fn:length(tenTE)-1}" varStatus="i">
                                                 <tr>
-                                                    <td> <h1>${GTNL[i.index]}</h1> </td>
-                                                    <td style="padding-left: 20px"> <h1>${tenNL[i.index]}</h1> </td>
+                                                    <td> <h1>${GTTE[i.index]}</h1> </td>
+                                                    <td style="padding-left: 30px"> <h1>${tenTE[i.index]}</h1> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <h1></h1> </td>
+                                                    <td style="padding-left: 30px"> <p>${dayTE[i.index]}/${monthTE[i.index]}/${yearTE[i.index]}</p> </td>
                                                 </tr>
                                             </c:forEach>
-                                        </tbody>
-                                    </table>
+                                        </c:if>
+
+                                        <c:set var="soEB" value="${fn:length(tenEB)}"></c:set>
+                                        <c:if test="${soEB>0}">                     <!--Neu co em be-->
+                                            <c:forEach begin="0" end="${fn:length(tenEB)-1}" varStatus="i">
+                                                <tr>
+                                                    <td> <h1>${GTEB[i.index]}</h1> </td>
+                                                    <td style="padding-left: 30px"> <h1>${tenEB[i.index]}</h1> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <h1></h1> </td>
+                                                    <td style="padding-left: 30px"> <p>${dayEB[i.index]}/${monthEB[i.index]}/${yearEB[i.index]}</p> </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </c:if>
+                                        <tr>
+                                            <td><h1>Hành trình:</h1></td>
+                                            <td style="padding-left: 30px"><h1>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</h1></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><h1>Thời gian:</h1></td>
+                                            <td style="padding-left: 30px"><h1>${cb.timeFrom} - ${cb.timeTo}</h1></td>
+                                        </tr>
+                                        <tr>
+                                            <td><h1>Ngày bay:</h1></td>
+                                            <td style="padding-left: 30px"><h1><fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h1></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h1></td>
+                                        </tr>
+                                        <c:set var="a" value="${cbr[0]}"></c:set>
+                                        <c:if test="${a!=null}">
+                                            <tr>
+                                                <td><h1>Chiều về: </h1></td>
+                                                <td style="padding-left: 30px"><h1>${cbr[2]} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cbr[3]}</h1></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h1>Thời gian:</h1></td>
+                                                <td style="padding-left: 30px"><h1>${cbr[4]} - ${cbr[5]}</h1></td>
+                                            </tr>
+                                            <tr>
+                                                <td><h1>Ngày bay:</h1></td>
+                                                <td style="padding-left: 30px"><h1><fmt:parseDate pattern="yyyy-MM-dd" value="${cbr[6]}" var="date"/> 
+                                                                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></h1></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cbr[0]}</span> </h1></td>
+                                            </tr>
+                                        </c:if>
+                                    </tbody>
+                                </table>
                                 <!--</h1>-->
-                                
-                                <h1>Hành trình: ${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</h1>
-                                <h1>Thời gian: ${cb.timeFrom} - ${cb.timeTo} </h1>
-                                <h1>Ngày bay: <fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h1>
-                                <h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h1>
+
 
                             </div>
                             <hr>

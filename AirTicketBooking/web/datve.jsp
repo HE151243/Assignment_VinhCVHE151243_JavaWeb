@@ -50,6 +50,10 @@
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        
         <style>
             .datve{
 
@@ -64,27 +68,57 @@
                 margin: 5px 0; 
                 border-radius: 6px
             }
+            
+            @media (min-width: 768px){
+                .navbar-nav{
+                    margin: 0 auto;
+                    display: table;
+                    table-layout: fixed;
+                    float:none;
+                }
+            }
 
 
         </style>
     </head>
 
     <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <a class="navbar-brand" href="index.html">HE151243</a>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#about">Contact</a></li>
+                        <li><a href="index.html">Logout</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
 
 
         <section class="page-heading" id="top">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="logo">
                             <img src="img/logo.png" alt="Flight Template">
                         </div>
                     </div>
-                    <div class="col-md-6">
+<!--                    <div class="col-md-6">
                         <div class="page-direction-button">
                             <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
@@ -416,19 +450,19 @@
                                                 </fieldset>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <fieldset>
                                                     <label for="NguoiLon">Người lớn</label>
                                                     <input name="NguoiLon" type="number" class="form-control SoNguoi" id="NguoiLon" placeholder="Số người..." required="" onchange='this.form'>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <fieldset>
                                                     <label for="TreEm">Trẻ em</label>
                                                     <input name="TreEm" type="number" class="form-control SoNguoi" id="TreEm" placeholder="Số người..." required="" onchange='this.form'>
                                                 </fieldset>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <fieldset>
                                                     <label for="EmBe">Em bé</label>
                                                     <input name="EmBe" type="number" class="form-control SoNguoi" id="EmBe" placeholder="Số người..." required="" onchange='this.form'>

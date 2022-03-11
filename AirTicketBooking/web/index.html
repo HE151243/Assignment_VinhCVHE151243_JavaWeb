@@ -12,7 +12,7 @@
         http://www.tooplate.com/view/2093-flight
         
         -->
-        <title>Flight - Travel and Tour</title>
+        <title>Flight - HE151243</title>
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,11 +28,45 @@
         <link rel="Shortcut Icon" href="img/logo-i.png"  type="img/x-icon" /> 
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        
+        <style>
+            @media (min-width: 768px){
+                .navbar-nav{
+                    margin: 0 auto;
+                    display: table;
+                    table-layout: fixed;
+                    float:none;
+                }
+            }
+        </style>
     </head>
 
     <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">HE151243</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#about">Contact</a></li>
+                        <li><a href="index.html">Logout</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
 
 
         <section class="banner" id="top">
@@ -237,144 +271,12 @@
         </div>
 
 
-        <section class="services">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6" style=" height: 100%">
-                        <div class="service-item first-service">
-                            <div class="service-icon"></div>
-                            <h4>Easy Tooplate</h4>
-                            <p>Donec varius porttitor iaculis. Integer sollicitudin erat et ligula viverra vulputate. In in quam efficitur, pulvinar justo ut, tempor nunc. Phasellus pharetra quis odio.</p>
-
-                        </div>
-                    </div>
-                    <div class="col-md-6" style=" height: 100%">
-                        <div class="service-item second-service">
-                            <div class="service-icon"></div>
-                            <h4>Unique Ideas</h4>
-                            <p>Cras ligula diam, tristique at aliquam at, fermentum auctor turpis. Proin leo massa, iaculis elementum massa et, consectetur varius dolor. Fusce sed ipsum sit.</p>
-
-                        </div>
-                    </div>          
-                </div>
-            </div>
-        </section>
+        
 
 
 
-        <div class="tabs-content" id="recommended-hotel">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-heading">
-                            <h2>Recommended Hotel For You</h2>
-                        </div>
-                    </div>
-                    <div class="wrapper">
-                        <div class="col-md-4">
-                            <ul class="tabs clearfix" data-tabgroup="third-tab-group">
-                                <li><a href="#livingroom" class="active">Living Room <i class="fa fa-angle-right"></i></a></li>
-                                <li><a href="#suitroom">Suit Room <i class="fa fa-angle-right"></i></a></li>
-                                <li><a href="#swimingpool">Swiming Pool <i class="fa fa-angle-right"></i></a></li>
-                                <li><a href="#massage">Massage Service <i class="fa fa-angle-right"></i></a></li>
-                                <li><a href="#fitness">Fitness Life <i class="fa fa-angle-right"></i></a></li>
-                                <li><a href="#event">Evening Event <i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <section id="third-tab-group" class="recommendedgroup">
-                            <div id="livingroom">
-                                <div class="text-content">
-                                    <iframe width="100%" height="400px" src="https://www.youtube.com/watch?v=8nSQUYeCKqQ">
-                                    </iframe>
-                                </div>
-                            </div>
-                            <div id="suitroom">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="owl-suiteroom" class="owl-carousel owl-theme">
-                                            <div class="item">
-                                                <div class="suiteroom-item">
-                                                    <img src="img/suite-02.jpg" alt="">
-                                                    <div class="text-content">
-                                                        <h4>Clean And Relaxing Room</h4>
-                                                        <span>Aurora Resort</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="suiteroom-item">
-                                                    <img src="img/suite-01.jpg" alt="">
-                                                    <div class="text-content">
-                                                        <h4>Special Suite Room TV</h4>
-                                                        <span>Khao Yai Hotel</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="item">
-                                                <div class="suiteroom-item">
-                                                    <img src="img/suite-03.jpg" alt="">
-                                                    <div class="text-content">
-                                                        <h4>The Best Sitting</h4>
-                                                        <span>Hotel Grand</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="swimingpool">
-                                <img src="img/swiming-pool.jpg" alt="">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="text-content">
-                                            <h4>Lovely View Swiming Pool For Special Guests</h4>
-                                            <span>Victoria Resort and Spa</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="massage">
-                                <img src="img/massage-service.jpg" alt="">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="text-content">
-                                            <h4>Perfect Place For Relaxation</h4>
-                                            <span>Napali Beach</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="fitness">
-                                <img src="img/fitness-service.jpg" alt="">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="text-content">
-                                            <h4>Insane Street Workout</h4>
-                                            <span>Hua Hin Beach</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="event">
-                                <img src="img/evening-event.jpg" alt="">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="text-content">
-                                            <h4>Finest Winery Night</h4>
-                                            <span>Queen Restaurant</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        
+    
 
 
 

@@ -48,9 +48,44 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        
+        <style>
+            @media (min-width: 768px){
+                .navbar-nav{
+                    margin: 0 auto;
+                    display: table;
+                    table-layout: fixed;
+                    float:none;
+                }
+            }
+        </style>
     </head>
 
     <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <a class="navbar-brand" href="index.html">HE151243</a>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#about">Contact</a></li>
+                        <li><a href="index.html">Logout</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
 
 
         <section class="page-heading" id="top">
@@ -61,11 +96,11 @@
                             <img src="img/logo.png" alt="Flight Template">
                         </div>
                     </div>
-                    <div class="col-md-6">
+<!--                    <div class="col-md-6">
                         <div class="page-direction-button">
                             <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
@@ -73,7 +108,7 @@
 
 
         <section class="contact-us">
-            <div class="container">
+            <div class="container" >
 
                 <div class="row" style="margin: 0 auto; width: 60%">
                     <div style="text-align: center"><h1><b>Thanh toán đơn hàng SE1620A${cb.id}</b></h1></div>
@@ -85,13 +120,13 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td><h1>Số tiền:</h1></td>
-                                            <td style="padding-left: 30px"><h1><span style="color: red">${totalPrice}00đ</span></h1></td>
+                                            <td><h3>Số tiền:</h3></td>
+                                            <td style="padding-left: 30px"><h3><span style="color: red">${totalPrice}00đ</span></h3></td>
                                         </tr>
                                         <c:forEach begin="0" end="${fn:length(tenNL)-1}" varStatus="i">
                                             <tr>
-                                                <td> <h1>${GTNL[i.index]}</h1> </td>
-                                                <td style="padding-left: 30px"> <h1>${tenNL[i.index]}</h1> </td>
+                                                <td> <h3>${GTNL[i.index]}</h3> </td>
+                                                <td style="padding-left: 30px"> <h3>${tenNL[i.index]}</h3> </td>
                                             </tr>
                                         </c:forEach>
 
@@ -99,11 +134,11 @@
                                         <c:if test="${soTE>0}"> <!-- Neu co tre em-->
                                             <c:forEach begin="0" end="${fn:length(tenTE)-1}" varStatus="i">
                                                 <tr>
-                                                    <td> <h1>${GTTE[i.index]}</h1> </td>
-                                                    <td style="padding-left: 30px"> <h1>${tenTE[i.index]}</h1> </td>
+                                                    <td> <h3>${GTTE[i.index]}</h3> </td>
+                                                    <td style="padding-left: 30px"> <h3>${tenTE[i.index]}</h3> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <h1></h1> </td>
+                                                    <td> <h3></h3> </td>
                                                     <td style="padding-left: 30px"> <p>${dayTE[i.index]}/${monthTE[i.index]}/${yearTE[i.index]}</p> </td>
                                                 </tr>
                                             </c:forEach>
@@ -113,48 +148,48 @@
                                         <c:if test="${soEB>0}">                     <!--Neu co em be-->
                                             <c:forEach begin="0" end="${fn:length(tenEB)-1}" varStatus="i">
                                                 <tr>
-                                                    <td> <h1>${GTEB[i.index]}</h1> </td>
-                                                    <td style="padding-left: 30px"> <h1>${tenEB[i.index]}</h1> </td>
+                                                    <td> <h3>${GTEB[i.index]}</h3> </td>
+                                                    <td style="padding-left: 30px"> <h3>${tenEB[i.index]}</h3> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td> <h1></h1> </td>
+                                                    <td> <h3></h3> </td>
                                                     <td style="padding-left: 30px"> <p>${dayEB[i.index]}/${monthEB[i.index]}/${yearEB[i.index]}</p> </td>
                                                 </tr>
                                             </c:forEach>
                                         </c:if>
                                         <tr>
-                                            <td><h1>Hành trình:</h1></td>
-                                            <td style="padding-left: 30px"><h1>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</h1></td>
+                                            <td><h3>Hành trình:</h3></td>
+                                            <td style="padding-left: 30px"><h3>${cb.localFrom} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cb.localTo}</h3></td>
                                         </tr>
 
                                         <tr>
-                                            <td><h1>Thời gian:</h1></td>
-                                            <td style="padding-left: 30px"><h1>${cb.timeFrom} - ${cb.timeTo}</h1></td>
+                                            <td><h3>Thời gian:</h3></td>
+                                            <td style="padding-left: 30px"><h3>${cb.timeFrom} - ${cb.timeTo}</h3></td>
                                         </tr>
                                         <tr>
-                                            <td><h1>Ngày bay:</h1></td>
-                                            <td style="padding-left: 30px"><h1><fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h1></td>
+                                            <td><h3>Ngày bay:</h3></td>
+                                            <td style="padding-left: 30px"><h3><fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h3></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2"><h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h1></td>
+                                            <td colspan="2"><h3><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h3></td>
                                         </tr>
                                         <c:set var="a" value="${cbr[0]}"></c:set>
                                         <c:if test="${a!=null}">
                                             <tr>
-                                                <td><h1>Chiều về: </h1></td>
-                                                <td style="padding-left: 30px"><h1>${cbr[2]} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cbr[3]}</h1></td>
+                                                <td><h3>Chiều về: </h3></td>
+                                                <td style="padding-left: 30px"><h3>${cbr[2]} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cbr[3]}</h3></td>
                                             </tr>
                                             <tr>
-                                                <td><h1>Thời gian:</h1></td>
-                                                <td style="padding-left: 30px"><h1>${cbr[4]} - ${cbr[5]}</h1></td>
+                                                <td><h3>Thời gian:</h3></td>
+                                                <td style="padding-left: 30px"><h3>${cbr[4]} - ${cbr[5]}</h3></td>
                                             </tr>
                                             <tr>
-                                                <td><h1>Ngày bay:</h1></td>
-                                                <td style="padding-left: 30px"><h1><fmt:parseDate pattern="yyyy-MM-dd" value="${cbr[6]}" var="date"/> 
-                                                                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></h1></td>
+                                                <td><h3>Ngày bay:</h3></td>
+                                                <td style="padding-left: 30px"><h3><fmt:parseDate pattern="yyyy-MM-dd" value="${cbr[6]}" var="date"/> 
+                                                                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></h3></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><h1><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cbr[0]}</span> </h1></td>
+                                                <td colspan="2"><h3><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cbr[0]}</span> </h3></td>
                                             </tr>
                                         </c:if>
                                     </tbody>
@@ -165,8 +200,8 @@
                             </div>
                             <hr>
                             <div style="margin: 10px 10px 10px 20px;">
-                                <h1 style="text-align: center"><b>Thanh toán qua chuyển khoản</b></h1>
-                                <h1>
+                                <h2 style="text-align: center"><b>Thanh toán qua chuyển khoản</b></h2>
+                                <h3>
                                     <table>
                                         <tbody>
                                             <tr>
@@ -191,9 +226,9 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </h1>
+                                </h3>
 
-                                <h2 style="color: red">Vui lòng ghi đúng thông tin chuyển khoản!</h2>
+                                <h4 style="color: red">Vui lòng ghi đúng thông tin chuyển khoản!</h4>
                             </div>
                         </section>
                     </div>

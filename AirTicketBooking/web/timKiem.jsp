@@ -47,15 +47,53 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Spectral:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        
+        
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-
+        <style>
+            @media (min-width: 768px){
+                .navbar-nav{
+                    margin: 0 auto;
+                    display: table;
+                    table-layout: fixed;
+                    float:none;
+                }
+            }
+        </style>
 
     </head>
 
     <body>
+        
+        <div class="navbar navbar-inverse navbar-fixed">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse">
+                    <a class="navbar-brand" href="index.html">HE151243</a>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#about">Contact</a></li>
+                        <li><a href="index.html">Logout</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
 
 
         <section class="page-heading" id="top">
@@ -66,11 +104,11 @@
                             <img src="img/logo.png" alt="Flight Template">
                         </div>
                     </div>
-                    <div class="col-md-6">
+<!--                    <div class="col-md-6">
                         <div class="page-direction-button">
                             <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
@@ -108,7 +146,7 @@
                             </div>
                         </c:if>
                         <c:if test="${!listFrom.isEmpty()}">
-                            <div class="col-md-9 " style="font-size: 1.2rem">
+                            <div class="col-md-8 " style="font-size: 1.2rem">
                                 <form action="DsChuyenBay" method="post">    
                                     <input hidden="" value="booking" name="go">
                                     <input hidden="" name="cus" value="${cus}">
@@ -155,7 +193,7 @@
                     <c:set var="trip" value="${tripSTT}"/>
                     <c:if test="${trip!=null}">                          <!--Khứ hồi-->
 
-                        <div class=" col-md-9 col-xs-12 col-sm-12" style="font-size: 1rem">
+                        <div class=" col-md-8 col-xs-12 col-sm-12" style="font-size: 1.2rem">
 
                             <form action="DsChuyenBay" method="post">
                                 <input hidden="" name="go" value="booking">
@@ -270,7 +308,7 @@
 
                     </c:if>
 
-                    <div class="col-md-3  col-xs-12 col-sm-12" style="font-size: 1.5rem">
+                    <div class="col-md-4  col-xs-12 col-sm-12" style="font-size: 1.5rem">
                         <div class="section-heading">
                             <div class="filters" style="margin-bottom: 10px"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Bộ Lọc<span class="px-1 fas fa-filter"></span></button> </div>
                             <!--                            <div id="mobile-filter">
@@ -770,82 +808,4 @@
     <!-- Mirrored from www.tooplate.com/templates/2093_flight/contact.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 28 May 2018 11:20:28 GMT -->
 </html>
 
-<!--<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
 
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="apple-touch-icon" href="apple-touch-icon.html">
-
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/fontAwesome.css">
-        <link rel="stylesheet" href="css/hero-slider.css">
-        <link rel="stylesheet" href="css/owl-carousel.css">
-        <link rel="stylesheet" href="css/datepicker.css">
-        <link rel="stylesheet" href="css/tooplate-style.css">
-        <link rel="Shortcut Icon" href="img/logo-i.png"  type="img/x-icon" /> 
-
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    </head>
-    <body>-->
-<!--        <div style="width: 60%">
-            <table id="dtDynamicVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-            <thead>
-                <tr>
-                    <th class="th-sm">Số thứ tự
-                    </th>
-                    <th class="th-sm">Hãng bay
-                    </th>                   
-                    <th class="th-sm">Thời gian đi
-                    </th>
-                    <th class="th-sm">Thời gian đến
-                    </th>
-                    <th class="th-sm">Ngày khởi hành
-                    </th>
-                    <th class="th-sm">Giá vé
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-<c:forEach var="cb" items="${listCb}" varStatus="i">
-<tr>
-    <td>${i.index+1}</td>
-    <td>${cb.name}</td>
-    <td>${cb.timeFrom}</td>
-    <td>${cb.timeTo}</td>
-    <td>${cb.dateFrom}</td>
-    <td>${cb.price}00đ</td>
-</tr>
-</c:forEach>
-    
-</tbody>
-<tfoot>
-</div>-->
-
-<!--            <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-            <script src="js/vendor/bootstrap.min.js"></script>
-
-            <script src="js/datepicker.js"></script>
-            <script src="js/plugins.js"></script>
-            <script src="js/main.js"></script>
-
-            <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-            <script type="text/javascript">-->
-<!--                $(document).ready(function () {
-                    $('#dtVerticalScrollExample').DataTable({
-                        "scrollY": "200px",
-                        "scrollCollapse": true,
-                    });
-                    $('.dataTables_length').addClass('bs-select');
-                });-->
-
-<!--        </body>
-        </html>-->

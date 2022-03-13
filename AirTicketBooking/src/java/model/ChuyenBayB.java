@@ -25,6 +25,18 @@ public class ChuyenBayB {
     public ChuyenBayB() {
     }
 
+    public ChuyenBayB(String name, String localFrom, String localTo, Time timeFrom, Time timeTo, int total_seat, String idMB) {
+        this.name = name;
+        this.localFrom = localFrom;
+        this.localTo = localTo;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.total_seat = total_seat;
+        this.idMB = idMB;
+    }
+    
+    
+
     public ChuyenBayB(int id, String name, String localFrom, String localTo, Time timeFrom, Time timeTo, int total_seat, String idMB) {
         this.id = id;
         this.name = name;

@@ -381,14 +381,14 @@
                             
                             <td>2</td>
                             <td>Bảng Thông tin chi tiết chuyến bay (ThongTinChuyenBay)</td>
-                            <td><a>Edit</a></td>
+                            <td><a href="Edit?go=ThongTinChuyenBay">Edit</a></td>
                             
                         </tr>
                         <tr>
                            
                             <td>3</td>
                             <td>Bảng Thông tin các hành khách (ThongTinHanhKhach)</td>
-                            <td><a>Edit</a></td>
+                            <td><a href="Edit?go=ThongTinHanhKhach">Edit</a></td>
                             
                         </tr>
                         <tr>

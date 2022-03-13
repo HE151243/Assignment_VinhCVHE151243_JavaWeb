@@ -24,6 +24,14 @@
         <servlet-name>EditChuyenBay</servlet-name>
         <servlet-class>controller.ChuyenBayController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ThongTinChuyenBayController</servlet-name>
+        <servlet-class>controller.ThongTinChuyenBayController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ThongTinHanhKhachController</servlet-name>
+        <servlet-class>controller.ThongTinHanhKhachController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChuyenBayServlet</servlet-name>
         <url-pattern>/DsChuyenBay</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>EditChuyenBay</servlet-name>
         <url-pattern>/EditChuyenBay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThongTinChuyenBayController</servlet-name>
+        <url-pattern>/EditThongTinChuyenBay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThongTinHanhKhachController</servlet-name>
+        <url-pattern>/EditThongTinHanhKhach</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

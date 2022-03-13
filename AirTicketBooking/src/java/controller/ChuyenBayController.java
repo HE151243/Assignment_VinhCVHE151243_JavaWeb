@@ -7,7 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +22,9 @@ import javax.servlet.http.HttpSession;
 import model.Account;
 import model.ChuyenBayB;
 import model.ChuyenBayDAO;
+import model.HangBay;
+import model.HangBayDAO;
+import model.MayBay;
 
 /**
  *
@@ -33,8 +42,10 @@ public class ChuyenBayController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String service = request.getParameter("go");
         if (service == null) {
             service = "default";
@@ -44,14 +55,31 @@ public class ChuyenBayController extends HttpServlet {
             if (service.equals("default")) {
                 HttpSession session = request.getSession();
                 Account acc = (Account) session.getAttribute("userS");
+                String ms = (String) session.getAttribute("mess");
+                session.setAttribute("mess", "");
                 if (acc != null) {
                     if (acc.getStatus() == 1) {
-                        ArrayList<ChuyenBayB> lcb = cbd.getAll();
-                        out.print("abcasd");
+                        String s_idx = request.getParameter("page");
+                        int idx = 1;
+                        if (s_idx != null) {
+                            idx = Integer.parseInt(s_idx);
+                        }
+                        int startP = 1;
+                        if (idx > 5) {
+                            startP = idx - 4;
+                        }
+                        request.setAttribute("startP", startP);
+                        request.setAttribute("currPage", idx);
+                        ArrayList<ChuyenBayB> lcb = cbd.selectTop5(idx);
                         request.setAttribute("lcb", lcb);
-//                        for (ChuyenBayB c : lcb) {
-//                            out.print(c);
-//                        }
+                        int count = cbd.countCB();
+                        int total_page = count / 5;
+                        if (count % 5 != 0) {
+                            total_page++;
+                        }
+                        request.setAttribute("ms", ms);
+                        request.setAttribute("toltal_record", count);
+                        request.setAttribute("totalPage", total_page);
                         request.getRequestDispatcher("editCB.jsp").forward(request, response);
                     } else {
                         response.sendRedirect("home");
@@ -61,17 +89,118 @@ public class ChuyenBayController extends HttpServlet {
                 }
             }
 
-            if (service.equals("delete")) {               
+            if (service.equals("delete")) {
                 String id = request.getParameter("id");
-//                request.getRequestDispatcher("EditChuyenBay").forward(request, response);
+//                ArrayList<ChuyenBayB> lcb = cbd.getAll();
+                String ms = "Không thể xóa dữ bản ghi liên quan đến bảng dữ liệu khác!";
+                if(cbd.deleteById(id)>0){
+                    ms = "Xóa thành công!";
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("mess", ms);
+                response.sendRedirect("EditChuyenBay");
+            }
+            
+            if(service.equals("delete[]")){
+                String[] id = request.getParameterValues("options");
+                int n_delete = 0;
+                String ms = "";
+                if(id.length!=0){
+                    ms = "Không thể xóa dữ bản ghi liên quan đến bảng dữ liệu khác!";
+                    for (int i = 0; i < id.length; i++) {
+                        n_delete+=cbd.deleteById(id[i]);                       
+                    }
+                    if(n_delete>0){
+                        ms = "Xóa thành công " + n_delete + " bản ghi!";
+                    }
+                }
+                HttpSession session = request.getSession();
+                session.setAttribute("mess", ms);
+                response.sendRedirect("EditChuyenBay");
             }
 
             if (service.equals("add")) {
                 String submit = request.getParameter("submit");
-                if(submit==null){
-                    request.getRequestDispatcher("add.jsp").forward(request, response);
+                if (submit == null) {
+                    HangBayDAO hbd = new HangBayDAO();
+                    ArrayList<HangBay> lhb = hbd.getAll();
+                    ArrayList<MayBay> lmb = hbd.getAllMayBay();
+                    request.setAttribute("ms", "");
+                    request.setAttribute("listHB", lhb);
+                    request.setAttribute("listMB", lmb);
+                    request.getRequestDispatcher("addCB.jsp").forward(request, response);
+                } else {
+                    HangBayDAO hbd = new HangBayDAO();
+                    ArrayList<HangBay> lhb = hbd.getAll();
+                    ArrayList<MayBay> lmb = hbd.getAllMayBay();
+//                    request.setAttribute(submit, out);
+                    request.setAttribute("listHB", lhb);
+                    request.setAttribute("listMB", lmb);
+                    String name = request.getParameter("name");
+                    String idMB = request.getParameter("idMB");
+                    String localFrom = request.getParameter("localFrom");
+                    String localTo = request.getParameter("localTo");
+                    String s_timeFrom = request.getParameter("timeFrom");
+                    String s_timeTo = request.getParameter("timeTo");
+                    String total_seat = request.getParameter("total_seat");
+                    Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(s_timeFrom).getTime());
+                    Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(s_timeTo).getTime());
+                    ChuyenBayB cb = new ChuyenBayB(name, localFrom, localTo, timeFrom, timeTo, Integer.parseInt(total_seat), idMB);
+                    int n = cbd.addNew(cb);
+                    String ms = "Dữ liệu không hợp lệ!";
+                    if (n > 0) {
+                        ms = "Thêm thành công!";
+                    }
+                    request.setAttribute("ms", ms);
+                    request.getRequestDispatcher("addCB.jsp").forward(request, response);
                 }
             }
+
+            if (service.equals("update")) {
+                String submit = request.getParameter("submit");
+                String id = request.getParameter("id");
+//                out.print(id);
+                if (submit == null) {
+                    HangBayDAO hbd = new HangBayDAO();
+                    ArrayList<HangBay> lhb = hbd.getAll();
+                    ArrayList<MayBay> lmb = hbd.getAllMayBay();
+                    request.setAttribute("ms", "");
+                    request.setAttribute("listHB", lhb);
+                    request.setAttribute("listMB", lmb);
+                    ChuyenBayB cb = cbd.getCbByID(id);
+                    if (cb.getName() != null) {
+                        request.setAttribute("cb", cb);
+                    }
+                    out.print(cb);
+                    request.getRequestDispatcher("updateCb.jsp").forward(request, response);
+                } else {
+                    HangBayDAO hbd = new HangBayDAO();
+                    ArrayList<HangBay> lhb = hbd.getAll();
+                    ArrayList<MayBay> lmb = hbd.getAllMayBay();                  
+                    request.setAttribute("listHB", lhb);
+                    request.setAttribute("listMB", lmb);
+                    String ms = "Dữ liệu không hợp lệ!";
+                    String name = request.getParameter("name");
+                    String idMB = request.getParameter("idMB");
+                    String localFrom = request.getParameter("localFrom");
+                    String localTo = request.getParameter("localTo");
+                    String s_timeFrom = request.getParameter("timeFrom");
+                    String s_timeTo = request.getParameter("timeTo");
+                    String total_seat = request.getParameter("total_seat");
+                    Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(s_timeFrom).getTime());
+                    Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(s_timeTo).getTime());
+                    ChuyenBayB cb = new ChuyenBayB(Integer.parseInt(id), name, localFrom, localTo, timeFrom, timeTo, Integer.parseInt(total_seat), idMB);
+                    request.setAttribute("cb", cb);
+                    int a = cbd.updateCB(cb);
+                    if(a>0){
+                        ms = "Cập nhật thành công!";
+                    }
+                    request.setAttribute("ms", ms);
+                    request.getRequestDispatcher("updateCb.jsp").forward(request, response);
+                }
+            }
+            
+            
 
         }
     }
@@ -88,7 +217,11 @@ public class ChuyenBayController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChuyenBayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -102,7 +235,11 @@ public class ChuyenBayController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ChuyenBayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

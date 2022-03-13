@@ -104,7 +104,7 @@ public class TicketController extends HttpServlet {
                 Date date;
                 date = sdf.parse(elm[6]);
 //                out.print(date+"12345");
-                String date1 = new SimpleDateFormat("dd-MM-YYYY").format(date);
+//                String date1 = new SimpleDateFormat("dd-MM-YYYY").format(date);
                 Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(elm[4]).getTime());
                 Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(elm[5]).getTime());
                 MayBay mb = ad.getMBbyID(elm[8].trim());

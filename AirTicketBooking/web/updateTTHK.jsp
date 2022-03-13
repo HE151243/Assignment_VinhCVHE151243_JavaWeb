@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -344,77 +345,72 @@
 
 
         <div class="container">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h2>Quản lí <b>Chuyến bay</b></h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="EditChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a>
-                            <!--<a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>-->
+
+            <form action="EditThongTinHanhKhach" method="post">
+                <input hidden="" name="go" value="update">
+                
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h2>Quản lí <b>Thông tin hành khách</b></h2>
+                                <h3 style="color: red">${ms}</h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <button  class="btn btn-success" data-toggle="modal" name="submit" value="submit"><i class="material-icons">&#xE147;</i> <span>Cập nhật</span></button>
+                                <a href="EditThongTinHanhKhach" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
+                            </div>
                         </div>
                     </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            
+                            <tr>                           
+                                <th>Mã hành khách</th>
+                                <th>
+                                    <input type="number"  name="id" readonly="" value="${hk.id}" placeholder="${hk.id}"/>
+                                </th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Username</th>
+                                <th>
+                                    <input type="text" list="username" name="username" required="" placeholder="${hk.username}"/>
+                                    <datalist id="username">
+                                        <c:forEach var="acc" items="${la}">
+                                            <option>${acc.username}</option>
+                                        </c:forEach>
+                                    </datalist>
+                                </th>                            
+                            </tr>                    
+                            <tr>                           
+                                <th>Tên khách hàng</th>
+                                <th><input type="text" name="name" required="" placeholder="${hk.name}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Địa chỉ</th>
+                                <th><input type="text" name="address" required="" placeholder="${hk.address}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Số điện thoại</th>
+                                <th><input type="text" name="phone" required="" placeholder="${hk.phone}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Email</th>
+                                <th><input type="text" name="email" required="" placeholder="${hk.email}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>CCCD</th>
+                                <th><input type="text" name="pID" required="" placeholder="${hk.pid}"></th>                            
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                    
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>                           
-                            <th>Tên Hãng</th>
-                            <th><input type="text" name="name"></th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Mã máy bay</th>
-                            <th>
-                                <select name="idMB">
-                                    <option value="">Chọn mã máy bay</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
-                                    <option value="">3</option>
-                                    <option value="">4</option>
-                                </select>
-                            </th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Điểm khởi hành</th>
-                            <th><input type="text" name="localFrom"></th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Điểm đến</th>
-                            <th><input type="text" name="localTo"></th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Thời gian khởi hành</th>
-                            <th><input type="text" id="time1"   name="timeFrom" placeholder=""></th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Thời gian đến</th>
-                            <th><input type="text" id="time2"   name="timeTo" placeholder=""></th>                            
-                        </tr>
-                        <tr>                           
-                            <th>Tổng số ghế</th>
-                            <th><input type="number" name="total_seat"></th>                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%--<c:forEach var="cb" items="${lcb}">--%>
+            </form>
 
-                        <%--</c:forEach>--%>
-
-                    </tbody>
-                </table>
-                <!--                <div class="clearfix">
-                                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                                    <ul class="pagination">
-                                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                                    </ul>
-                                </div>-->
-            </div>
         </div>
 
 
@@ -469,87 +465,87 @@
 
         <script type="text/javascript">
 
-                                var times = {}; // Added to initialize an object
+            var times = {}; // Added to initialize an object
 
-                                var timepicker = new TimePicker(['time1', 'time2'], {
-                                    theme: 'dark',
-                                    lang: 'en'
-                                });
+            var timepicker = new TimePicker(['time1', 'time2'], {
+                theme: 'dark',
+                lang: 'en'
+            });
 
-                                timepicker.on('change', function (evt) {
-                                    var value = (evt.hour || '00') + ':' + (evt.minute || '00');
-                                    evt.element.value = value;
+            timepicker.on('change', function (evt) {
+                var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+                evt.element.value = value;
 
-                                    //Added the below to store in the object and consoling:
-                                    var id = evt.element.id;
-                                    times[id] = value;
-                                    console.clear();
-                                    console.log(times); // Display the object
-                                });
-
-
+                //Added the below to store in the object and consoling:
+                var id = evt.element.id;
+                times[id] = value;
+                console.clear();
+                console.log(times); // Display the object
+            });
 
 
 
-                                $(document).ready(function () {
-                                    // Activate tooltip
-                                    $('[data-toggle="tooltip"]').tooltip();
-
-                                    // Select/Deselect checkboxes
-                                    var checkbox = $('table tbody input[type="checkbox"]');
-                                    $("#selectAll").click(function () {
-                                        if (this.checked) {
-                                            checkbox.each(function () {
-                                                this.checked = true;
-                                            });
-                                        } else {
-                                            checkbox.each(function () {
-                                                this.checked = false;
-                                            });
-                                        }
-                                    });
-                                    checkbox.click(function () {
-                                        if (!this.checked) {
-                                            $("#selectAll").prop("checked", false);
-                                        }
-                                    });
-                                });
 
 
-                                $(document).ready(function () {
-                                    // navigation click actions 
-                                    $('.scroll-link').on('click', function (event) {
-                                        event.preventDefault();
-                                        var sectionID = $(this).attr("data-id");
-                                        scrollToID('#' + sectionID, 750);
-                                    });
-                                    // scroll to top action
-                                    $('.scroll-top').on('click', function (event) {
-                                        event.preventDefault();
-                                        $('html, body').animate({scrollTop: 0}, 'slow');
-                                    });
-                                    // mobile nav toggle
-                                    $('#nav-toggle').on('click', function (event) {
-                                        event.preventDefault();
-                                        $('#main-nav').toggleClass("open");
-                                    });
-                                });
-                                // scroll function
-                                function scrollToID(id, speed) {
-                                    var offSet = 0;
-                                    var targetOffset = $(id).offset().top - offSet;
-                                    var mainNav = $('#main-nav');
-                                    $('html,body').animate({scrollTop: targetOffset}, speed);
-                                    if (mainNav.hasClass("open")) {
-                                        mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                                        mainNav.removeClass("open");
-                                    }
-                                }
-                                if (typeof console === "undefined") {
-                                    console = {
-                                        log: function () { }
-                                    };
-                                }
+            $(document).ready(function () {
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function () {
+                    if (this.checked) {
+                        checkbox.each(function () {
+                            this.checked = true;
+                        });
+                    } else {
+                        checkbox.each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                checkbox.click(function () {
+                    if (!this.checked) {
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+                // navigation click actions 
+                $('.scroll-link').on('click', function (event) {
+                    event.preventDefault();
+                    var sectionID = $(this).attr("data-id");
+                    scrollToID('#' + sectionID, 750);
+                });
+                // scroll to top action
+                $('.scroll-top').on('click', function (event) {
+                    event.preventDefault();
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+                });
+                // mobile nav toggle
+                $('#nav-toggle').on('click', function (event) {
+                    event.preventDefault();
+                    $('#main-nav').toggleClass("open");
+                });
+            });
+            // scroll function
+            function scrollToID(id, speed) {
+                var offSet = 0;
+                var targetOffset = $(id).offset().top - offSet;
+                var mainNav = $('#main-nav');
+                $('html,body').animate({scrollTop: targetOffset}, speed);
+                if (mainNav.hasClass("open")) {
+                    mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+                    mainNav.removeClass("open");
+                }
+            }
+            if (typeof console === "undefined") {
+                console = {
+                    log: function () { }
+                };
+            }
         </script>
     </body>
 

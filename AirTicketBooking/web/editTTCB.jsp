@@ -343,18 +343,18 @@
 
 
         <div class="container">
-            <form action="EditChuyenBay" method="post">
+            <form action="EditThongTinChuyenBay" method="post">
                 <input hidden="" name="go" value="delete[]">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Quản lí <b>Chuyến bay</b></h2>
+                                <h2>Quản lí <b>Thông tin chuyến bay</b></h2>
                                 <h3 style="color: red">${ms}</h3>
                             </div>
 
                             <div class="col-sm-6">
-                                <a href="EditChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm chuyến bay</span></a>
+                                <a href="EditThongTinChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm thông tin chuyến bay</span></a>
                                 <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>
                                 <a href="Edit" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
                             </div>
@@ -364,35 +364,28 @@
                         <thead>
                             <tr>
                                 <th>MaChuyenBay</th>
-                                <th>TenHang</th>
-                                <th>MaMayBay</th>
-                                <th>DiemKhoiHanh</th>
-                                <th>DiemDen</th>
-                                <th>ThoiGianKhoiHanh</th>
-                                <th>ThoiGianDen</th>
-                                <th>TongSoGhe</th>
+                                <th>NgayKhoiHanh</th>
+                                <th>GiaVe</th>
+                                <th>SoGheCon</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="cb" items="${lcb}">
+                            <c:forEach var="cb" items="${lttcb}">
                                 <tr>
-                                    <td>${cb.id}</td>
-                                    <td>${cb.name}</td>
-                                    <td>${cb.localFrom}</td>
-                                    <td>${cb.localTo}</td>
-                                    <td>${cb.timeFrom}</td>
-                                    <td>${cb.timeTo}</td>
-                                    <td>${cb.total_seat}</td>
-                                    <td>${cb.idMB}</td>
+                                    <td>${cb.idCB}</td>
+                                    <td>${cb.dateFrom}</td>
+                                    <td>${cb.price}</td>
+                                    <td>${cb.total_seat}</td>                                  
                                     <td>
                                         <span class="custom-checkbox">
-                                            <input type="checkbox" id="" name="options" value="${cb.id}">
+                                            <input type="checkbox" id="" name="options" value="${cb.idCB},${cb.dateFrom}">
                                             <label for="checkbox"></label>
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="EditChuyenBay?go=update&id=${cb.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
-                                        <a href="#" onclick="showMess('${cb.id}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                        <a href="EditThongTinChuyenBay?go=update&PK=${cb.idCB},${cb.dateFrom}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
+                                        <a href="#" onclick="showMess('${cb.idCB}','${cb.dateFrom}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -405,14 +398,14 @@
 
                             <c:set var="c" value="${currPage}"></c:set>
                             <c:if test="${c>1}">
-                                <li class="page-item disabled"><a href="EditChuyenBay?page=${currPage-1}">Previous</a></li>
+                                <li class="page-item disabled"><a href="EditThongTinChuyenBay?page=${currPage-1}">Previous</a></li>
                                 </c:if>
 
                             <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : startP+4}" varStatus="i">
-                                <li class="page-item"><a href="EditChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
+                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
                                 </c:forEach>
                                 <c:if test="${c<totalPage}">
-                                <li class="page-item"><a href="EditChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
+                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
                                 </c:if>
 
                         </ul>
@@ -472,10 +465,10 @@
                                                 });
                                             }
 
-                                            function showMess(id) {
+                                            function showMess(id,date) {
                                                 var op = confirm('Are you sure to delete?');
                                                 if (op == true) {
-                                                    window.location.href = 'EditChuyenBay?go=delete&id=' + id;
+                                                    window.location.href = 'EditThongTinChuyenBay?go=delete&PK=' + id+','+date;
                                                 }
                                             }
 

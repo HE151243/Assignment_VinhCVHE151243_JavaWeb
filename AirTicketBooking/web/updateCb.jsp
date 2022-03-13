@@ -38,6 +38,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
 
         <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -343,8 +344,9 @@
 
 
         <div class="container">
+
             <form action="EditChuyenBay" method="post">
-                <input hidden="" name="go" value="delete[]">
+                <input hidden="" name="go" value="update">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
@@ -352,75 +354,71 @@
                                 <h2>Quản lí <b>Chuyến bay</b></h2>
                                 <h3 style="color: red">${ms}</h3>
                             </div>
-
                             <div class="col-sm-6">
-                                <a href="EditChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm chuyến bay</span></a>
-                                <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>
-                                <a href="Edit" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
+                                <button  class="btn btn-success" data-toggle="modal" name="submit" value="submit"><i class="material-icons">&#xE147;</i> <span>Cập nhật</span></button>
+                                <a href="EditChuyenBay" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
                             </div>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
-                            <tr>
-                                <th>MaChuyenBay</th>
-                                <th>TenHang</th>
-                                <th>MaMayBay</th>
-                                <th>DiemKhoiHanh</th>
-                                <th>DiemDen</th>
-                                <th>ThoiGianKhoiHanh</th>
-                                <th>ThoiGianDen</th>
-                                <th>TongSoGhe</th>
+                            <tr>                           
+                                <th>Mã chuyến bay</th>
+                                <th>
+                                    <input type="text" readonly="" name="id" required="" value="${cb.id}" placeholder="${cb.id}"/>
+                                </th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Tên Hãng</th>
+                                <th>
+                                    <input type="text" list="tenhang" name="name" required="" placeholder="${cb.name}"/>
+                                    <datalist id="tenhang">                                      
+                                        <c:forEach var="h" items="${listHB}">
+                                            <option>${h.name}</option>
+                                        </c:forEach>
+                                    </datalist>
+                                </th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Mã máy bay</th>
+                                <th>
+                                    <input type="text" list="MB" name="idMB" required="" placeholder="${cb.idMB}"/>
+                                    <datalist id="MB">
+                                        <c:forEach var="m" items="${listMB}">
+                                            <option>${m.getMaMayBay()}</option>
+                                        </c:forEach>
+                                        
+                                    </datalist>                                   
+                                </th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Điểm khởi hành</th>
+                                <th><input type="text" name="localFrom" required="" placeholder="${cb.localFrom}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Điểm đến</th>
+                                <th><input type="text" name="localTo" required="" placeholder="${cb.localTo}"></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Thời gian khởi hành</th>
+                                <th><input type="text" id="time1"   name="timeFrom" placeholder="${cb.timeFrom}" required="" ></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Thời gian đến</th>
+                                <th><input type="text" id="time2"   name="timeTo" placeholder="${cb.timeTo}" required=""></th>                            
+                            </tr>
+                            <tr>                           
+                                <th>Tổng số ghế</th>
+                                <th><input type="number" name="total_seat" required="" placeholder="${cb.total_seat}"></th>                            
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="cb" items="${lcb}">
-                                <tr>
-                                    <td>${cb.id}</td>
-                                    <td>${cb.name}</td>
-                                    <td>${cb.localFrom}</td>
-                                    <td>${cb.localTo}</td>
-                                    <td>${cb.timeFrom}</td>
-                                    <td>${cb.timeTo}</td>
-                                    <td>${cb.total_seat}</td>
-                                    <td>${cb.idMB}</td>
-                                    <td>
-                                        <span class="custom-checkbox">
-                                            <input type="checkbox" id="" name="options" value="${cb.id}">
-                                            <label for="checkbox"></label>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="EditChuyenBay?go=update&id=${cb.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
-                                        <a href="#" onclick="showMess('${cb.id}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-
                         </tbody>
                     </table>
-                    <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>${toltal_record}</b> entries</div>
-                        <ul class="pagination">
-
-                            <c:set var="c" value="${currPage}"></c:set>
-                            <c:if test="${c>1}">
-                                <li class="page-item disabled"><a href="EditChuyenBay?page=${currPage-1}">Previous</a></li>
-                                </c:if>
-
-                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : startP+4}" varStatus="i">
-                                <li class="page-item"><a href="EditChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
-                                </c:forEach>
-                                <c:if test="${c<totalPage}">
-                                <li class="page-item"><a href="EditChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
-                                </c:if>
-
-                        </ul>
-                    </div>
                 </div>
             </form>
         </div>
-
+                            
         <footer>
             <div class="container">
                 <div class="row">
@@ -445,6 +443,10 @@
             </div>
         </footer>
 
+
+
+
+
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
@@ -454,90 +456,91 @@
         <script src="js/main.js"></script>
 
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+
         <script type="text/javascript">
-                                            function Page() {
-                                                $.ajax({
-                                                    url: "/AirTicketBooking/filterControl",
-                                                    type: "get", //send it through get method
-                                                    data: {
 
-                                                    },
-                                                    success: function (response) {
-                                                        //Do Something
+            var times = {}; // Added to initialize an object
 
-                                                    },
-                                                    error: function (xhr) {
-                                                        //Do Something to handle error
-                                                    }
-                                                });
-                                            }
+            var timepicker = new TimePicker(['time1', 'time2'], {
+                theme: 'dark',
+                lang: 'en'
+            });
 
-                                            function showMess(id) {
-                                                var op = confirm('Are you sure to delete?');
-                                                if (op == true) {
-                                                    window.location.href = 'EditChuyenBay?go=delete&id=' + id;
-                                                }
-                                            }
+            timepicker.on('change', function (evt) {
+                var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+                evt.element.value = value;
 
-                                            $(document).ready(function () {
-                                                // Activate tooltip
-                                                $('[data-toggle="tooltip"]').tooltip();
-
-                                                // Select/Deselect checkboxes
-                                                var checkbox = $('table tbody input[type="checkbox"]');
-                                                $("#selectAll").click(function () {
-                                                    if (this.checked) {
-                                                        checkbox.each(function () {
-                                                            this.checked = true;
-                                                        });
-                                                    } else {
-                                                        checkbox.each(function () {
-                                                            this.checked = false;
-                                                        });
-                                                    }
-                                                });
-                                                checkbox.click(function () {
-                                                    if (!this.checked) {
-                                                        $("#selectAll").prop("checked", false);
-                                                    }
-                                                });
-                                            });
+                //Added the below to store in the object and consoling:
+                var id = evt.element.id;
+                times[id] = value;
+                console.clear();
+                console.log(times); // Display the object
+            });
 
 
-                                            $(document).ready(function () {
-                                                // navigation click actions 
-                                                $('.scroll-link').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    var sectionID = $(this).attr("data-id");
-                                                    scrollToID('#' + sectionID, 750);
-                                                });
-                                                // scroll to top action
-                                                $('.scroll-top').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    $('html, body').animate({scrollTop: 0}, 'slow');
-                                                });
-                                                // mobile nav toggle
-                                                $('#nav-toggle').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    $('#main-nav').toggleClass("open");
-                                                });
-                                            });
-                                            // scroll function
-                                            function scrollToID(id, speed) {
-                                                var offSet = 0;
-                                                var targetOffset = $(id).offset().top - offSet;
-                                                var mainNav = $('#main-nav');
-                                                $('html,body').animate({scrollTop: targetOffset}, speed);
-                                                if (mainNav.hasClass("open")) {
-                                                    mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                                                    mainNav.removeClass("open");
-                                                }
-                                            }
-                                            if (typeof console === "undefined") {
-                                                console = {
-                                                    log: function () { }
-                                                };
-                                            }
+
+
+
+            $(document).ready(function () {
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function () {
+                    if (this.checked) {
+                        checkbox.each(function () {
+                            this.checked = true;
+                        });
+                    } else {
+                        checkbox.each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                checkbox.click(function () {
+                    if (!this.checked) {
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
+            });
+
+
+            $(document).ready(function () {
+                // navigation click actions 
+                $('.scroll-link').on('click', function (event) {
+                    event.preventDefault();
+                    var sectionID = $(this).attr("data-id");
+                    scrollToID('#' + sectionID, 750);
+                });
+                // scroll to top action
+                $('.scroll-top').on('click', function (event) {
+                    event.preventDefault();
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+                });
+                // mobile nav toggle
+                $('#nav-toggle').on('click', function (event) {
+                    event.preventDefault();
+                    $('#main-nav').toggleClass("open");
+                });
+            });
+            // scroll function
+            function scrollToID(id, speed) {
+                var offSet = 0;
+                var targetOffset = $(id).offset().top - offSet;
+                var mainNav = $('#main-nav');
+                $('html,body').animate({scrollTop: targetOffset}, speed);
+                if (mainNav.hasClass("open")) {
+                    mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+                    mainNav.removeClass("open");
+                }
+            }
+            if (typeof console === "undefined") {
+                console = {
+                    log: function () { }
+                };
+            }
         </script>
     </body>
 

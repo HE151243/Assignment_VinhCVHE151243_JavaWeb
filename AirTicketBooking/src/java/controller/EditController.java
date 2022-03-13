@@ -39,20 +39,37 @@ public class EditController extends HttpServlet {
             service = "default";
         }
         try (PrintWriter out = response.getWriter()) {
+//            HttpSession session = request.getSession();
+//            Account acc = (Account) session.getAttribute("userS");
+//            response.sendRedirect("home");
+//            out.print(acc==null);
+//            if (acc == null) {
+//                response.sendRedirect("home");
+//            }
             if (service.equals("default")) {
                 HttpSession session = request.getSession();
                 Account acc = (Account) session.getAttribute("userS");
-                if(acc.getStatus() == 1){
+                if (acc == null) {
+                    response.sendRedirect("home");
+                } else if (acc.getStatus() == 1) {
                     request.getRequestDispatcher("admin.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("home");
                 }
             }
-            
-            if(service.equals("ChuyenBay")){
+
+            if (service.equals("ChuyenBay")) {
                 response.sendRedirect("EditChuyenBay");
             }
             
+            if (service.equals("ThongTinChuyenBay")) {
+                response.sendRedirect("EditThongTinChuyenBay");
+            }
+            
+            if (service.equals("ThongTinHanhKhach")) {
+                response.sendRedirect("EditThongTinHanhKhach");
+            }
+
         }
     }
 

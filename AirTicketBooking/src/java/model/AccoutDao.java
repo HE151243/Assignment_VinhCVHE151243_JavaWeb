@@ -42,6 +42,25 @@ public class AccoutDao extends BaseDAO<Account> {
         return la;
     }
     
+    public ArrayList<Account> getAllCus() {
+        ArrayList<Account> la = new ArrayList<>();
+        try {
+            sql = "select * from Account where status = 0";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Account acc = new Account();
+                acc.setUsername(rs.getString(1));
+                acc.setPassword(rs.getString(2));
+                acc.setStatus(rs.getInt(3));
+                la.add(acc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AirDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return la;
+    }
+    
     public Account getLoginAccount(String u, String p){
         Account acc = new Account();
         try {
@@ -95,11 +114,10 @@ public class AccoutDao extends BaseDAO<Account> {
 
     public static void main(String[] args) {
         AccoutDao ad = new AccoutDao();
-        Account acc = ad.getLoginAccount("he151243", "123456@");
-        System.out.println(acc);
-//        ArrayList<Account> la = ad.getAll();
-//        for (Account a : la) {
-//            System.out.println(a);
-//        }
+        
+        ArrayList<Account> la = ad.getAllCus();
+        for (Account a : la) {
+            System.out.println(a);
+        }
     }
 }

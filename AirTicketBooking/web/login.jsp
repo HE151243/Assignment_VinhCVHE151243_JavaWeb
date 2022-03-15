@@ -150,9 +150,9 @@
                                 </div>
                                 <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
                             </div>
-                            <div class="row align-items-center remember">
+<!--                            <div class="row align-items-center remember">
                                 <input type="checkbox">Remember Me
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <input type="submit" value="Đăng nhập" class="btn float-right login_btn">
                             </div>                           

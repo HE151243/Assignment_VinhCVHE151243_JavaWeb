@@ -168,6 +168,8 @@ public class AirDAO extends BaseDAO<ChuyenBay> {
         return s;
     }
     
+    
+    
     public static void main(String[] args) throws SQLException {
         AirDAO ad = new AirDAO();
         ChuyenBay cb = ad.getAllById("8");

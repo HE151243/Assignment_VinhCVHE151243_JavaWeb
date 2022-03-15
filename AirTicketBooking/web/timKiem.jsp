@@ -85,11 +85,28 @@
                     
                 </div>
                 <div class="collapse navbar-collapse">
-                    <a class="navbar-brand" href="index.html">HE151243</a>
+                    <!--<a class="navbar-brand" href="home">HE151243</a>-->
+                    <c:set var="a" value="${userS}"/>
+                        <c:if test="${a!=null}"> 
+                            <a class="navbar-brand" href="home">Welcome ${userS.username}</a>
+                        </c:if>
+                        <c:if test="${a==null}"> 
+                            <a class="navbar-brand" href="home">HE151243 - FLIGHT</a>
+                        </c:if>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="#about">Contact</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                        <li class="active"><a href="home">Home</a></li>
+                        <!--<li><a href="#about">Contact</a></li>-->
+                        <!--<li><a href="home?go=logout">Logout</a></li>-->
+                        <c:set var="a" value="${userS}"/>
+                            <c:if test="${a!=null}"> 
+                            <li><a href="home?go=logout">Logout</a></li>
+                            </c:if>
+                            <c:if test="${a==null}"> 
+                            <li><a href="account?go=login">Login</a></li>
+                            </c:if>
+                            <c:if test="${a.status==1}">
+                            <li><a href="Edit">Admin</a></li>
+                            </c:if>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -119,7 +136,7 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-9">
+<!--                    /<div class="col-md-9">
                         <div class="section-heading">
                             <h2>Các chuyến bay</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
@@ -133,7 +150,7 @@
                             <h2>Tùy Chọn</h2>
                             <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
                         </div>
-                    </div>
+                    </div>-->
 
 
                     <c:set var="trip" value="${tripSTT}"/>
@@ -311,37 +328,7 @@
                     <div class="col-md-4  col-xs-12 col-sm-12" style="font-size: 1.5rem">
                         <div class="section-heading">
                             <div class="filters" style="margin-bottom: 10px"> <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#mobile-filter" aria-expanded="true" aria-controls="mobile-filter">Bộ Lọc<span class="px-1 fas fa-filter"></span></button> </div>
-                            <!--                            <div id="mobile-filter">
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Categories</h5>
-                                                                <ul class="list-group">
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> vegetables <span class="badge badge-primary badge-pill">328</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Fruits <span class="badge badge-primary badge-pill">112</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Kitchen Accessories <span class="badge badge-primary badge-pill">32</span> </li>
-                                                                    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category"> Chefs Tips <span class="badge badge-primary badge-pill">48</span> </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Brands</h5>
-                                                                <form class="brand">
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Royal Fields <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Crasmas Fields <input type="checkbox" checked> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Vegetarisma Farm <input type="checkbox" checked> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">Farmar Field Eve <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-1"> <label class="tick">True Farmar Steve <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                </form>
-                                                            </div>
-                                                            <div class="py-3">
-                                                                <h5 class="font-weight-bold">Rating</h5>
-                                                                <form class="rating">
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"><span class="fas fa-star"></span> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                    <div class="form-inline d-flex align-items-center py-2"> <label class="tick"> <span class="fas fa-star"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <span class="far fa-star px-1 text-muted"></span> <input type="checkbox"> <span class="check"></span> </label> </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>-->
+                            
                             <div class="content py-md-0 py-3" style="border: groove; background: #f9f9f9;">
                                 <section id="sidebar">
                                     <div class="py-3">
@@ -481,7 +468,7 @@
                         </section>
                     </div>
 
-                    <div class="col-md-6">
+<!--                    <div class="col-md-6">
                         <img src="img/contact-01.jpg" alt="">
                     </div>
                     <div class="col-md-6">
@@ -498,14 +485,14 @@
                     <div class="col-md-4">
                         <h6>Duis vel rhoncus lectus</h6>
                         <p>Mauris aliquet eget lorem a tempor. Morbi in dui sed orci placerat ultrices sed a mi. Praesent eget porttitor enim. In tempor eros mi. Morbi a lobortis ante. Sed blandit vitae diam commodo ultricies.</p>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </section>
 
 
 
-        <section class="contact-form">
+<!--        <section class="contact-form">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -541,27 +528,27 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
 
-        <section class="map">
+<!--        <section class="map">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div id="map">
-                            <!-- How to change your own map point
+                             How to change your own map point
                                 1. Go to Google Maps
                                 2. Click on your location point
                                 3. Click "Share" and choose "Embed map" tab
                                 4. Copy only URL and paste it within the src="" field below
-                            -->
+                            
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7895.485196115994!2d103.85995441789784!3d1.2880401763270322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7fb4e58ad9cd826e!2sSingapore+Flyer!5e0!3m2!1sen!2sth!4v1505825620371" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
 

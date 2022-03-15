@@ -105,14 +105,17 @@ public class FilterControl extends HttpServlet {
 //        response.getWriter().print(totalSeat);
 //        int slot = Integer.parseInt(totalSeat);
         AirDAO ad = new AirDAO();
-//        ArrayList<ChuyenBay> lcb = ad.getAllCb(localFrom, localTo, dateFrom, Integer.parseInt(totalSeat)); 
+        ArrayList<ChuyenBay> lcb = ad.getAllCb(localFrom, localTo, dateFrom, Integer.parseInt(totalSeat));
+        ArrayList<ChuyenBay> lcbReturn = ad.getAllCb(localTo, localFrom, dateReturn, Integer.parseInt(totalSeat));
+
         ArrayList<ChuyenBay> lcb1 = ad.getAll();
-        ArrayList<ChuyenBay> lcbSorted = sortCb(lcb1, inValue);
+        ArrayList<ChuyenBay> lcbSorted1 = sortCb(lcb, inValue);
+        ArrayList<ChuyenBay> lcbSorted2 = sortCb(lcbReturn, inValue);
         int i = 1;
         String tripSTT = request.getParameter("tripSTT");
 
         if (trip.equals("oneWay")) {
-            for (ChuyenBay c : lcbSorted) {
+            for (ChuyenBay c : lcbSorted1) {
                 out.println("<tr>\n"
                         + "<td>" + i++ + "</td>\n"
                         + "<td>" + c.getName() + "</td>\n"
@@ -131,7 +134,7 @@ public class FilterControl extends HttpServlet {
         }
 
         if (trip.equals("round")) {
-            for (ChuyenBay c : lcbSorted) {
+            for (ChuyenBay c : lcbSorted2) {
                 out.println("<tr>\n"
                         + "<td>" + i++ + "</td>\n"
                         + "<td>" + c.getName() + "</td>\n"

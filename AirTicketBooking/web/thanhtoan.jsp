@@ -77,11 +77,29 @@
                     
                 </div>
                 <div class="collapse navbar-collapse">
-                    <a class="navbar-brand" href="index.html">HE151243</a>
+                    <!--<a class="navbar-brand" href="home">HE151243</a>-->
+                    <c:set var="a" value="${userS}"/>
+                        <c:if test="${a!=null}"> 
+                            <a class="navbar-brand" href="home">Welcome ${userS.username}</a>
+                        </c:if>
+                        <c:if test="${a==null}"> 
+                            <a class="navbar-brand" href="home">HE151243 - FLIGHT</a>
+                        </c:if>
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.html">Home</a></li>
-                        <li><a href="#about">Contact</a></li>
-                        <li><a href="index.html">Logout</a></li>
+                        <li class="active"><a href="home">Home</a></li>
+                        
+                        <!--<li><a href="#about">Contact</a></li>-->
+                        <!--<li><a href="home?go=logout">Logout</a></li>-->
+                        <c:set var="a" value="${userS}"/>
+                            <c:if test="${a!=null}"> 
+                            <li><a href="home?go=logout">Logout</a></li>
+                            </c:if>
+                            <c:if test="${a==null}"> 
+                            <li><a href="account?go=login">Login</a></li>
+                            </c:if>
+                            <c:if test="${a.status==1}">
+                            <li><a href="Edit">Admin</a></li>
+                            </c:if>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -240,7 +258,7 @@
 
 
 
-        <section class="contact-form">
+<!--        <section class="contact-form">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -276,27 +294,27 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
 
-        <section class="map">
+<!--        <section class="map">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div id="map">
-                            <!-- How to change your own map point
+                             How to change your own map point
                                 1. Go to Google Maps
                                 2. Click on your location point
                                 3. Click "Share" and choose "Embed map" tab
                                 4. Copy only URL and paste it within the src="" field below
-                            -->
+                            
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7895.485196115994!2d103.85995441789784!3d1.2880401763270322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7fb4e58ad9cd826e!2sSingapore+Flyer!5e0!3m2!1sen!2sth!4v1505825620371" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
 

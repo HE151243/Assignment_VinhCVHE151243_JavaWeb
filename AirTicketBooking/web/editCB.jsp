@@ -378,12 +378,13 @@
                                 <tr>
                                     <td>${cb.id}</td>
                                     <td>${cb.name}</td>
+                                    <td>${cb.idMB}</td>
                                     <td>${cb.localFrom}</td>
                                     <td>${cb.localTo}</td>
                                     <td>${cb.timeFrom}</td>
                                     <td>${cb.timeTo}</td>
                                     <td>${cb.total_seat}</td>
-                                    <td>${cb.idMB}</td>
+                                    
                                     <td>
                                         <span class="custom-checkbox">
                                             <input type="checkbox" id="" name="options" value="${cb.id}">
@@ -408,7 +409,7 @@
                                 <li class="page-item disabled"><a href="EditChuyenBay?page=${currPage-1}">Previous</a></li>
                                 </c:if>
 
-                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : startP+4}" varStatus="i">
+                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
                                 <li class="page-item"><a href="EditChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
                                 </c:forEach>
                                 <c:if test="${c<totalPage}">

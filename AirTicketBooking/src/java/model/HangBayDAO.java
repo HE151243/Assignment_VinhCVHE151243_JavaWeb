@@ -82,7 +82,7 @@ public class HangBayDAO extends BaseDAO<HangBay> {
                     System.out.println(m);
                 }
 
-        HangBay hb = hbd.getHbByName("Vietnam Airline");
+        HangBay hb = hbd.getHbByName("Jetstar Pacific Airlines");
         System.out.println(hb);
     }
 

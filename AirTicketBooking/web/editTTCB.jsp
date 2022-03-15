@@ -401,7 +401,7 @@
                                 <li class="page-item disabled"><a href="EditThongTinChuyenBay?page=${currPage-1}">Previous</a></li>
                                 </c:if>
 
-                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : startP+4}" varStatus="i">
+                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
                                 <li class="page-item"><a href="EditThongTinChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
                                 </c:forEach>
                                 <c:if test="${c<totalPage}">

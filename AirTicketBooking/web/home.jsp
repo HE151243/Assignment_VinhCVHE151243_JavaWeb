@@ -77,7 +77,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="home">Home</a></li>
-                        <li><a href="#about">Contact</a></li>
+                        <!--<li><a href="#about">Contact</a></li>-->
                             <c:set var="a" value="${userS}"/>
                             <c:if test="${a!=null}"> 
                             <li><a href="home?go=logout">Logout</a></li>
@@ -224,7 +224,7 @@
 
 
 
-        <div class="tabs-content" id="weather">
+<!--        <div class="tabs-content" id="weather">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
@@ -295,7 +295,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
 
@@ -308,7 +308,7 @@
 
 
 
-        <section id="most-visited">
+<!--        <section id="most-visited">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -412,7 +412,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
 
 
 

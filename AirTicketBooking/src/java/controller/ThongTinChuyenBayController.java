@@ -77,6 +77,11 @@ public class ThongTinChuyenBayController extends HttpServlet {
                         if (count % 5 != 0) {
                             total_page++;
                         }
+                        int endP = startP+4;
+                        if(startP+4>total_page){
+                            endP = total_page;
+                        }
+                        request.setAttribute("endP", endP);
                         request.setAttribute("ms", ms);
                         request.setAttribute("toltal_record", count);
                         request.setAttribute("totalPage", total_page);

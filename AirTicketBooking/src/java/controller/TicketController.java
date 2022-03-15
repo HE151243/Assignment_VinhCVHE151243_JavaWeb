@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.AirDAO;
 import model.ChuyenBay;
+import model.HangBay;
+import model.HangBayDAO;
 import model.MayBay;
 
 /**
@@ -80,12 +82,12 @@ public class TicketController extends HttpServlet {
                 ArrayList<ChuyenBay> lcb1 = ad.getAll();
                 ArrayList<ChuyenBay> lcbReturn = new ArrayList<>();
                 if (tripSTT != null) {
-                    lcbReturn = ad.getAllReturn(from, to, dateReturn, totalSeat);
+                    lcbReturn = ad.getAllCb(to, from, dateReturn, totalSeat);
                 }
 //                out.print(lcbReturn.isEmpty());
-                request.setAttribute("listCbReturn", lcb1);
+                request.setAttribute("listCbReturn", lcbReturn);
                 ArrayList<ChuyenBay> lcb = ad.getAllCb(from, to, dateFrom, totalSeat);
-                request.setAttribute("listCb", lcb1);
+                request.setAttribute("listCb", lcb);
                 request.getRequestDispatcher("timKiem.jsp").forward(request, response);
             }
 
@@ -109,9 +111,17 @@ public class TicketController extends HttpServlet {
                 Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(elm[5]).getTime());
                 MayBay mb = ad.getMBbyID(elm[8].trim());
                 MayBay mbr = new MayBay();
+                HangBayDAO hbd = new HangBayDAO();
+                HangBay hbr = new HangBay();
                 if (cbReturn != null) {
                     mbr = ad.getMBbyID(cbReturn[8].trim());
+                    hbr = hbd.getHbByName(cbReturn[1].trim());
                 }
+                HangBay hb = hbd.getHbByName(elm[1].trim());
+                out.print(elm[1]);
+                out.print(hb);
+                request.setAttribute("hbr", hbr);
+                request.setAttribute("hb", hb);
                 request.setAttribute("mb", mb);
                 request.setAttribute("mbr", mbr);
                 ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0].trim()), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);                             

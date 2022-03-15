@@ -157,7 +157,7 @@
                     <c:if test="${trip==null}">                  <!-- Một chiều -->
                         <c:set var="listFrom" value="${listCb}"/>
                         <c:if test="${listFrom.isEmpty()}">
-                            <div class="col-md-9">
+                            <div class="col-md-8">
                                 <h1 style="text-align: center"><b>${from} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${to}</b></h1>
                                 <h1 style="text-align: center"><b>Rất tiếc! Hiện tại không còn chuyến bay nào!</b></h1>
                             </div>

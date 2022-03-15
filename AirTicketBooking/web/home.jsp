@@ -78,8 +78,9 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="home">Home</a></li>
                         <!--<li><a href="#about">Contact</a></li>-->
-                            <c:set var="a" value="${userS}"/>
-                            <c:if test="${a!=null}"> 
+                        <c:set var="a" value="${userS}"/>
+                        <c:if test="${a!=null}"> 
+                            <li><a href="user">Xem vé đã đặt</a></li>
                             <li><a href="home?go=logout">Logout</a></li>
                             </c:if>
                             <c:if test="${a==null}"> 
@@ -224,195 +225,195 @@
 
 
 
-<!--        <div class="tabs-content" id="weather">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="section-heading">
-                            <h2>Các hình thức thanh toán</h2>
-                            <hr>
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+        <!--        <div class="tabs-content" id="weather">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="section-heading">
+                                    <h2>Các hình thức thanh toán</h2>
+                                    <hr>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        </a>
+                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="d-flex w-100 justify-content-between">
+                                                <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                            </div>
+                                            <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                        </a>
                                     </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                    </div>
-                                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                </a>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="wrapper">
-                        <div class="col-md-6">
-                            <div class="section-heading">
-                                <h2>Cách đặt vé tại ABC</h2>
-                                <hr>
-                                <div class="list-group">
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                            <div class="wrapper">
+                                <div class="col-md-6">
+                                    <div class="section-heading">
+                                        <h2>Cách đặt vé tại ABC</h2>
+                                        <hr>
+                                        <div class="list-group">
+                                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                            </a>
+                                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
+                                                </div>
+                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                            </a>
                                         </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                        </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                        </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h3 class="mb-1" style="color: #0b1e6f"><b>List group item heading</b></h3>
-                                        </div>
-                                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-<!--        <section id="most-visited">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-heading">
-                            <h2>Most Visited Places</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div id="owl-mostvisited" class="owl-carousel owl-theme">
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-01.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>River Views</h4>
-                                        <span>New York</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-02.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Lorem ipsum dolor</h4>
-                                        <span>Tokyo</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-03.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Proin dignissim</h4>
-                                        <span>Paris</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-04.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Fusce sed ipsum</h4>
-                                        <span>Hollywood</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-02.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Vivamus egestas</h4>
-                                        <span>Tokyo</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-01.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Aliquam elit metus</h4>
-                                        <span>New York</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-03.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Phasellus pharetra</h4>
-                                        <span>Paris</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-04.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>In in quam efficitur</h4>
-                                        <span>Hollywood</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-01.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Sed faucibus odio</h4>
-                                        <span>NEW YORK</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item col-md-12">
-                                <div class="visited-item">
-                                    <img src="img/place-02.jpg" alt="">
-                                    <div class="text-content">
-                                        <h4>Donec varius porttitor</h4>
-                                        <span>Tokyo</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>-->
+                </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--        <section id="most-visited">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-heading">
+                                    <h2>Most Visited Places</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div id="owl-mostvisited" class="owl-carousel owl-theme">
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-01.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>River Views</h4>
+                                                <span>New York</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-02.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Lorem ipsum dolor</h4>
+                                                <span>Tokyo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-03.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Proin dignissim</h4>
+                                                <span>Paris</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-04.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Fusce sed ipsum</h4>
+                                                <span>Hollywood</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-02.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Vivamus egestas</h4>
+                                                <span>Tokyo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-01.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Aliquam elit metus</h4>
+                                                <span>New York</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-03.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Phasellus pharetra</h4>
+                                                <span>Paris</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-04.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>In in quam efficitur</h4>
+                                                <span>Hollywood</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-01.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Sed faucibus odio</h4>
+                                                <span>NEW YORK</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="item col-md-12">
+                                        <div class="visited-item">
+                                            <img src="img/place-02.jpg" alt="">
+                                            <div class="text-content">
+                                                <h4>Donec varius porttitor</h4>
+                                                <span>Tokyo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>-->
 
 
 

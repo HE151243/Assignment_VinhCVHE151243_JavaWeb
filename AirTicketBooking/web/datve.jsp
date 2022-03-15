@@ -371,6 +371,9 @@
                                             <td colspan="2"><p><b>Thông tin liên hệ</b></p></td>                                          
                                         </tr>
                                         <tr>
+                                            <td colspan="2"><p style="color: red"><b>${mess}</b></p></td>                                          
+                                        </tr>
+                                        <tr>
                                             <td><p>Tên liên hệ</p></td>
                                             <td style="padding-left: 30px">
                                                 <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập tên liên hệ..." name="tenNDV" required="" onchange='this.form'></p>
@@ -385,7 +388,19 @@
                                         <tr>
                                             <td><p>Email</p></td>
                                             <td style="padding-left: 30px">
-                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Không bắt buộc..." name="emailNDV" onchange='this.form'></p>
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập email..." name="emailNDV" required="" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>Địa chỉ</p></td>
+                                            <td style="padding-left: 30px">
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập địa chỉ..." name="diachiNDV" required="" onchange='this.form'></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><p>CCCD</p></td>
+                                            <td style="padding-left: 30px">
+                                                <p><input style="font-size: 15px; width: 150%" type="text" placeholder="Nhập CCCD..." name="cccdNDV" required="" onchange='this.form'></p>
                                             </td>
                                         </tr>
                                     </tbody>

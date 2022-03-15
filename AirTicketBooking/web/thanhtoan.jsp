@@ -129,7 +129,7 @@
             <div class="container" >
 
                 <div class="row" style="margin: 0 auto; width: 60%">
-                    <div style="text-align: center"><h1><b>Thanh toán đơn hàng SE1620A${cb.id}</b></h1></div>
+                    <div style="text-align: center"><h1><b>Thanh toán đơn hàng SE1620A${veDi}${veVe!=null ? "_" : ""}${veVe!=null ? veVe : ""}</b></h1></div>
                     <div style="width: 100%; ">
                         <section style="background-color: #eee; border-radius: 10px">
                             <div style="margin: 10px 10px 10px 20px;">
@@ -189,7 +189,7 @@
                                             <td style="padding-left: 30px"><h3><fmt:formatDate pattern="dd-MM-yyyy" value="${cb.dateFrom}"/> </h3></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2"><h3><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h3></td>
+                                            <td colspan="2"><h3><img src="${hb.logo}" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cb.id}</span> </h3></td>
                                         </tr>
                                         <c:set var="a" value="${cbr[0]}"></c:set>
                                         <c:if test="${a!=null}">
@@ -207,7 +207,7 @@
                                                                                     <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></h3></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2"><h3><img src="img/hang1.gif" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cbr[0]}</span> </h3></td>
+                                                <td colspan="2"><h3><img src="${hbr.logo}" style="max-width: 40px; margin: 0"> <span>&nbsp;&nbsp;&nbsp;&nbsp;SE1620A${cbr[0]}</span> </h3></td>
                                             </tr>
                                         </c:if>
                                     </tbody>
@@ -240,7 +240,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Ghi nội dung</td>
-                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; SE1620A${cb.id}</td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; SE1620A${veDi}${veVe!=null ? "_" : ""}${veVe!=null ? veVe : ""}</td>
                                             </tr>
                                         </tbody>
                                     </table>

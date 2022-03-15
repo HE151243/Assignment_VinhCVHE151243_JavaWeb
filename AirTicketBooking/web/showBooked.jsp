@@ -333,7 +333,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-heading">
-                            <h2 style="font-family: serif">Quản lí dữ liệu</h2>
+                            <h2 style="font-family: serif">Thông tin vé đã đặt</h2>
                         </div>
                     </div>
                 </div>
@@ -343,60 +343,62 @@
 
 
         <div class="container">
-            <form action="EditChuyenBay" method="post">
+            <form action="user" method="post">
                 <input hidden="" name="go" value="delete[]">
                 <div class="table-wrapper">
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6">
-                                <h2>Quản lí <b>Chuyến bay</b></h2>
+                                <h2>Danh sách <b>Các chuyến bay đã đặt</b></h2>
                                 <h3 style="color: red">${ms}</h3>
                             </div>
 
                             <div class="col-sm-6">
-                                <a href="EditChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm chuyến bay</span></a>
-                                <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>
-                                <a href="Edit" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
+<!--                                <a href="EditThongTinChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm thông tin chuyến bay</span></a>
+                                <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>-->
+                                <a href="home" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
                             </div>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>MaChuyenBay</th>
-                                <th>TenHang</th>
-                                <th>MaMayBay</th>
-                                <th>DiemKhoiHanh</th>
-                                <th>DiemDen</th>
-                                <th>ThoiGianKhoiHanh</th>
-                                <th>ThoiGianDen</th>
-                                <th>TongSoGhe</th>
+                                <th style="text-align: center">Mã vé</th>
+                                <th style="text-align: center">Tuyến bay</th>
+                                <th style="text-align: center">Thời gian bay</th>
+                                <th style="text-align: center">Ngày bay</th>
+                                <th style="text-align: center">Hãng bay</th>
+                                <th style="text-align: center">Người đặt vé</th>
+                                <th style="text-align: center">Số CCCD</th>
+                                <th style="text-align: center">Số người bay</th>
+                                <th style="text-align: center">Số tiền</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="cb" items="${lcb}">
+                            <%--<c:forEach var="cb" items="${lttcb}">--%>
                                 <tr>
-                                    <td>${cb.id}</td>
-                                    <td>${cb.name}</td>
-                                    <td>${cb.idMB}</td>
-                                    <td>${cb.localFrom}</td>
-                                    <td>${cb.localTo}</td>
-                                    <td>${cb.timeFrom}</td>
-                                    <td>${cb.timeTo}</td>
-                                    <td>${cb.total_seat}</td>
-                                    
-                                    <td>
+                                    <td style="text-align: center">SE1620A20</td>
+                                    <td style="text-align: center">Hà Nội<br>-<br>Đà Nẵng</td>
+                                    <td style="text-align: center">20:00:00<br>-<br>23:00:00</td>
+                                    <td style="text-align: center">2022-12-12</td>      
+                                    <td style="text-align: center"><img src="img/hang1.gif" style="max-width: 40px; margin: 0"><br>VKA21A</td>
+                                    <td style="text-align: center">Nguyễn Hoàng Anh</td>  
+                                    <td style="text-align: center">1472583694561</td>
+                                    <td style="text-align: center">2 Người lớn<br>0 Trẻ em<br>1 Em bé</td>
+                                    <td style="text-align: center">999.000đ</td>
+<!--                                    <td>
                                         <span class="custom-checkbox">
-                                            <input type="checkbox" id="" name="options" value="${cb.id}">
+                                            <input type="checkbox" id="" name="options" value="${cb.idCB},${cb.dateFrom}">
                                             <label for="checkbox"></label>
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="EditChuyenBay?go=update&id=${cb.id}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
-                                        <a href="#" onclick="showMess('${cb.id}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>
+                                        <a href="EditThongTinChuyenBay?go=update&PK=${cb.idCB},${cb.dateFrom}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
+                                        <a href="#" onclick="showMess('${cb.idCB}','${cb.dateFrom}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    </td>-->
                                 </tr>
-                            </c:forEach>
+                            <%--</c:forEach>--%>
 
                         </tbody>
                     </table>
@@ -406,14 +408,14 @@
 
                             <c:set var="c" value="${currPage}"></c:set>
                             <c:if test="${c>1}">
-                                <li class="page-item disabled"><a href="EditChuyenBay?page=${currPage-1}">Previous</a></li>
+                                <li class="page-item disabled"><a href="EditThongTinChuyenBay?page=${currPage-1}">Previous</a></li>
                                 </c:if>
 
                             <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
-                                <li class="page-item"><a href="EditChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
+                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
                                 </c:forEach>
                                 <c:if test="${c<totalPage}">
-                                <li class="page-item"><a href="EditChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
+                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
                                 </c:if>
 
                         </ul>
@@ -473,10 +475,10 @@
                                                 });
                                             }
 
-                                            function showMess(id) {
+                                            function showMess(id,date) {
                                                 var op = confirm('Are you sure to delete?');
                                                 if (op == true) {
-                                                    window.location.href = 'EditChuyenBay?go=delete&id=' + id;
+                                                    window.location.href = 'EditThongTinChuyenBay?go=delete&PK=' + id+','+date;
                                                 }
                                             }
 

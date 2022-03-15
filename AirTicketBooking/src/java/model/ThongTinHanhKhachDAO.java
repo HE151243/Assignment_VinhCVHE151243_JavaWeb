@@ -8,6 +8,7 @@ package model;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,30 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
         try {
             sql = "select  * from ThongTinHanhKhach ";
             ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ThongTinHanhKhach s = new ThongTinHanhKhach();
+                s.setId(rs.getInt(1));
+                s.setUsername(rs.getString(2));
+                s.setName(rs.getString(3));
+                s.setAddress(rs.getString(4));
+                s.setPhone(rs.getString(5));
+                s.setEmail(rs.getString(6));
+                s.setPid(rs.getString(7));
+                ListHK.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AirDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ListHK;
+    }
+    
+    public ArrayList<ThongTinHanhKhach> getHkByUser(String user){
+        ArrayList<ThongTinHanhKhach> ListHK = new ArrayList<>();
+        try {
+            sql = "select  * from ThongTinHanhKhach where Username = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, user);
             rs = ps.executeQuery();
             while (rs.next()) {
                 ThongTinHanhKhach s = new ThongTinHanhKhach();
@@ -79,7 +104,12 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
             sql = "insert ThongTinHanhKhach (Username,  Name, DiaChi, SoDienThoai, Email, pID)\n"
                     + "   values (?,?,?,?,?,?)";
             ps = connection.prepareStatement(sql);
-            ps.setString(1, hk.getUsername());
+            if (hk.username == null) {
+                ps.setNull(1, Types.VARCHAR);
+            } else {
+                ps.setString(1, hk.getUsername());
+            }
+
             ps.setString(2, hk.getName());
             ps.setString(3, hk.getAddress());
             ps.setString(4, hk.getPhone());
@@ -91,6 +121,20 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
         return res;
     }
     
+    public int getLastedHK(){
+        int res = 0;
+        try {
+            sql = "select MAX(MaHanhKhach) from ThongTinHanhKhach";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                res = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return res;
+    }
+
     public ThongTinHanhKhach getHkByID(String id) {
         ThongTinHanhKhach s = new ThongTinHanhKhach();
         try {
@@ -99,7 +143,7 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
 //            System.out.println(PK[0] + PK[1]);
             ps.setString(1, id);
             rs = ps.executeQuery();
-            while (rs.next()) {              
+            while (rs.next()) {
                 s.setId(rs.getInt(1));
                 s.setUsername(rs.getString(2));
                 s.setName(rs.getString(3));
@@ -113,7 +157,7 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
         }
         return s;
     }
-    
+
     public int updateTTHK(ThongTinHanhKhach tthk) {
         int res = 0;
         try {
@@ -138,7 +182,7 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
         }
         return res;
     }
-    
+
     public int deleteById(String id) {
         int res = 0;
         try {
@@ -167,7 +211,7 @@ public class ThongTinHanhKhachDAO extends BaseDAO<ThongTinHanhKhach> {
 
     public static void main(String[] args) {
         ThongTinHanhKhachDAO hkDAO = new ThongTinHanhKhachDAO();
-        ArrayList<ThongTinHanhKhach> ListHK = hkDAO.selectTop5(3);
+        ArrayList<ThongTinHanhKhach> ListHK = hkDAO.getHkByUser("username3");
         for (ThongTinHanhKhach hk : ListHK) {
             System.out.println(hk);
         }

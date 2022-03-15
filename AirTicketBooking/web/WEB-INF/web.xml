@@ -32,6 +32,10 @@
         <servlet-name>ThongTinHanhKhachController</servlet-name>
         <servlet-class>controller.ThongTinHanhKhachController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserController</servlet-name>
+        <servlet-class>controller.UserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChuyenBayServlet</servlet-name>
         <url-pattern>/DsChuyenBay</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ThongTinHanhKhachController</servlet-name>
         <url-pattern>/EditThongTinHanhKhach</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserController</servlet-name>
+        <url-pattern>/user</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

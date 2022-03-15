@@ -19,11 +19,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Account;
 import model.AirDAO;
 import model.ChuyenBay;
 import model.HangBay;
 import model.HangBayDAO;
 import model.MayBay;
+import model.ThongTinHanhKhach;
+import model.ThongTinHanhKhachDAO;
+import model.ThongTinVeDaDat;
+import model.ThongTinVeDaDatDAO;
 
 /**
  *
@@ -99,10 +105,9 @@ public class TicketController extends HttpServlet {
                 String cbRe = request.getParameter("bookingInfoReturn");
 //                out.print("--" );
                 String[] cbReturn = null;
-                if(cbRe!=null){
+                if (cbRe != null) {
                     cbReturn = request.getParameter("bookingInfoReturn").split(",");
                 }
-                request.setAttribute("cbr", cbReturn);
                 Date date;
                 date = sdf.parse(elm[6]);
 //                out.print(date+"12345");
@@ -120,83 +125,148 @@ public class TicketController extends HttpServlet {
                 HangBay hb = hbd.getHbByName(elm[1].trim());
                 out.print(elm[1]);
                 out.print(hb);
-                request.setAttribute("hbr", hbr);
-                request.setAttribute("hb", hb);
-                request.setAttribute("mb", mb);
-                request.setAttribute("mbr", mbr);
-                ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0].trim()), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);                             
+
+                ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0].trim()), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);
                 String[] cust = request.getParameter("cus").split(",");
 //                out.print(cust==null    );
-                request.setAttribute("cb", cb);
-                request.setAttribute("NL", cust[0].trim());
-                request.setAttribute("TE", cust[1].trim());
-                request.setAttribute("EB", cust[2].trim());
+                HttpSession session = request.getSession();
+                session.setAttribute("cbr", cbReturn);
+                session.setAttribute("hbr", hbr);
+                session.setAttribute("hb", hb);
+                session.setAttribute("mb", mb);
+                session.setAttribute("mbr", mbr);
+                session.setAttribute("cb", cb);
+                session.setAttribute("NL", cust[0].trim());
+                session.setAttribute("TE", cust[1].trim());
+                session.setAttribute("EB", cust[2].trim());
+//                request.setAttribute("cbr", cbReturn);
+//                request.setAttribute("hbr", hbr);
+//                request.setAttribute("hb", hb);
+//                request.setAttribute("mb", mb);
+//                request.setAttribute("mbr", mbr);
+//                request.setAttribute("cb", cb);
+//                request.setAttribute("NL", cust[0].trim());
+//                request.setAttribute("TE", cust[1].trim());
+//                request.setAttribute("EB", cust[2].trim());
 //                out.print(cb);
+
                 request.getRequestDispatcher("datve.jsp").forward(request, response);
             }
 
             if (service.equals("thanhtoan")) {
+                ThongTinHanhKhachDAO hkd = new ThongTinHanhKhachDAO();
+                ThongTinVeDaDatDAO vd = new ThongTinVeDaDatDAO();
+                HangBayDAO hbd = new HangBayDAO();
+                HangBay hbr = new HangBay();
+                String tenNDV = request.getParameter("tenNDV");
+                String sdtNDV = request.getParameter("sdtNDV");
+                String emailNDV = request.getParameter("emailNDV");
+                String diachiNDV = request.getParameter("diachiNDV");
+                String cccdNDV = request.getParameter("cccdNDV");
+                HttpSession session = request.getSession();
+                Account acc = (Account) session.getAttribute("userS");
+                boolean check = false;
+                String mess = "";
+                String phone_rg = "(\\+[0/9]{1,2})?[0-9]{8,11}";
+                String email_rg = "[a-zA-Z]\\w+@\\w+(\\.\\w+){1,3}";
+                String pID_rg = "\\d{13}";
+                if (!sdtNDV.matches(phone_rg) || !emailNDV.matches(email_rg) || !cccdNDV.matches(pID_rg)) {
+                    request.setAttribute("mess", "Thông tin không hợp lệ");
+                    request.getRequestDispatcher("datve.jsp").forward(request, response);
+                } else {
+                    if (acc != null) {
+                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(acc.getUsername(), tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                        int a = hkd.addNew(tthk);
+                    } else {
+                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(null, tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                        int a = hkd.addNew(tthk);
+                    }
 
-                String[] mbay = request.getParameter("mb").split(",");
-                String[] cbay = request.getParameter("cb").split(",");
-                String[] cbayr = request.getParameter("cbr").split(",");
-                request.setAttribute("cbr", cbayr);
-                for (int i = 0; i < cbayr.length; i++) {
-                    out.print("--" + cbayr[i]);
+                    String[] mbay = request.getParameter("mb").split(",");
+                    String[] cbay = request.getParameter("cb").split(",");
+                    String[] cbayr = request.getParameter("cbr").split(",");
+                    out.print(cbayr.length == 0);
+                    
+                    request.setAttribute("cbr", cbayr);
+//                    for (int i = 0; i < cbayr.length; i++) {
+//
+//                        out.print("--" + cbayr[i]);
+//
+//                    }
+                    String totalPrice = request.getParameter("totalPrice");
+                    String[] GTNL = request.getParameterValues("gt-NL");
+                    String[] GTTE = request.getParameterValues("gt-TE");
+                    String[] GTEB = request.getParameterValues("gt-EB");
+                    request.setAttribute("GTNL", GTNL);
+                    request.setAttribute("GTTE", GTTE);
+                    request.setAttribute("GTEB", GTEB);
 
-                }
-                String totalPrice = request.getParameter("totalPrice");
+                    String[] tenNL = request.getParameterValues("nlName");
+                    String[] tenTE = request.getParameterValues("teName");
+                    String[] tenEB = request.getParameterValues("ebName");
+                    request.setAttribute("tenNL", tenNL);
+                    request.setAttribute("tenTE", tenTE);
+                    request.setAttribute("tenEB", tenEB);
+                    
+                    if (cbayr.length != 0) {
+                        hbr = hbd.getHbByName(cbayr[1].trim());
+                        java.sql.Date dateReturn = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(cbayr[6].trim()).getTime());
+                        int a = hkd.getLastedHK();
+                        ThongTinVeDaDat veVe = new ThongTinVeDaDat(Integer.parseInt(cbayr[0].trim()), a, dateReturn, tenNL.length,tenTE.length,tenEB.length);
+                        request.setAttribute("veVe", vd.getLastedTicket());
+                        vd.addNew(veVe);
+//                        out.print("b: " + b);
+//                        out.print("------" + cbayr[0] + "------" + dateReturn);
+                    }
 
-                String[] GTNL = request.getParameterValues("gt-NL");
-                String[] GTTE = request.getParameterValues("gt-TE");
-                String[] GTEB = request.getParameterValues("gt-EB");
-                request.setAttribute("GTNL", GTNL);
-                request.setAttribute("GTTE", GTTE);
-                request.setAttribute("GTEB", GTEB);
+                    String[] dayTE = request.getParameterValues("day-TE");
+                    String[] monthTE = request.getParameterValues("month-TE");
+                    String[] yearTE = request.getParameterValues("year-TE");
+                    request.setAttribute("dayTE", dayTE);
+                    request.setAttribute("monthTE", monthTE);
+                    request.setAttribute("yearTE", yearTE);
 
-                String[] tenNL = request.getParameterValues("nlName");
-                String[] tenTE = request.getParameterValues("teName");
-                String[] tenEB = request.getParameterValues("ebName");
-                request.setAttribute("tenNL", tenNL);
-                request.setAttribute("tenTE", tenTE);
-                request.setAttribute("tenEB", tenEB);
+                    String[] dayEB = request.getParameterValues("day-EB");
+                    String[] monthEB = request.getParameterValues("month-EB");
+                    String[] yearEB = request.getParameterValues("year-EB");
+                    request.setAttribute("dayEB", dayEB);
+                    request.setAttribute("monthEB", monthEB);
+                    request.setAttribute("yearEB", yearEB);
 
-                String[] dayTE = request.getParameterValues("day-TE");
-                String[] monthTE = request.getParameterValues("month-TE");
-                String[] yearTE = request.getParameterValues("year-TE");
-                request.setAttribute("dayTE", dayTE);
-                request.setAttribute("monthTE", monthTE);
-                request.setAttribute("yearTE", yearTE);
-
-                String[] dayEB = request.getParameterValues("day-EB");
-                String[] monthEB = request.getParameterValues("month-EB");
-                String[] yearEB = request.getParameterValues("year-EB");
-                request.setAttribute("dayEB", dayEB);
-                request.setAttribute("monthEB", monthEB);
-                request.setAttribute("yearEB", yearEB);
+                    HangBay hb = hbd.getHbByName(cbay[1].trim());
+                    session.setAttribute("hbr", hbr);
+                    session.setAttribute("hb", hb);
 
 //                out.print(tenEB[0]);
 //                out.print(tenNL[0] + tenTE[0] + tenEB[0]);
 //                request.setAttribute("cb", cbay);
 //                request.setAttribute("mb", mbay);
-                request.setAttribute("totalPrice", totalPrice);
-                AirDAO ad = new AirDAO();
-                SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-                Date date = null;
+                    request.setAttribute("totalPrice", totalPrice);
+                    AirDAO ad = new AirDAO();
+                    SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+                    Date date = null;
 //                out.print(cbay[6]);
-                date = sdf.parse(cbay[6].trim());
+                    date = sdf.parse(cbay[6].trim());
+                    out.print(cbay[6]);
+                    java.sql.Date dateFrom = new java.sql.Date(sdf.parse(cbay[6].trim()).getTime());
+                    int a = hkd.getLastedHK();
+                    ThongTinVeDaDat veDi = new ThongTinVeDaDat(Integer.parseInt(cbay[0].trim()), a, dateFrom, tenNL.length,tenTE.length,tenEB.length);
+                    vd.addNew(veDi);
+                    out.print(veDi + "----" + a);
+                    request.setAttribute("veDi", vd.getLastedTicket());
 //                out.print(date);
 //                String date1 = new SimpleDateFormat("dd-MM-YYYY").format(date);
 //                out.print("<----"+date1+"---->");
-                Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[4]).getTime());
-                Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[5]).getTime());
-                MayBay mb = new MayBay(mbay[0], mbay[1]);
-                request.setAttribute("mb", mb);
-                ChuyenBay cb = new ChuyenBay(Integer.parseInt(cbay[0]), cbay[1], cbay[2], cbay[3], timeFrom, timeTo, date, Float.parseFloat(cbay[7]), cbay[8]);
+                    Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[4]).getTime());
+                    Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[5]).getTime());
+                    MayBay mb = new MayBay(mbay[0], mbay[1]);
+                    request.setAttribute("mb", mb);
+                    ChuyenBay cb = new ChuyenBay(Integer.parseInt(cbay[0]), cbay[1], cbay[2], cbay[3], timeFrom, timeTo, date, Float.parseFloat(cbay[7]), cbay[8]);
 //                out.print(mb + "----" + cb);
-                request.setAttribute("cb", cb);
+                    request.setAttribute("cb", cb);
+                    request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
+                }
 
-                request.getRequestDispatcher("thanhtoan.jsp").forward(request, response);
             }
         }
 

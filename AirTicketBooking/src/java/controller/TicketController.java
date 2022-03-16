@@ -26,6 +26,7 @@ import model.ChuyenBay;
 import model.HangBay;
 import model.HangBayDAO;
 import model.MayBay;
+import model.ThongTinChuyenBayDAO;
 import model.ThongTinHanhKhach;
 import model.ThongTinHanhKhachDAO;
 import model.ThongTinVeDaDat;
@@ -123,11 +124,13 @@ public class TicketController extends HttpServlet {
                     hbr = hbd.getHbByName(cbReturn[1].trim());
                 }
                 HangBay hb = hbd.getHbByName(elm[1].trim());
-                out.print(elm[1]);
-                out.print(hb);
 
+//                out.print(hb);
+                out.print(elm[0]);
                 ChuyenBay cb = new ChuyenBay(Integer.parseInt(elm[0].trim()), elm[1], elm[2], elm[3], timeFrom, timeTo, date, Float.parseFloat(elm[7]), elm[8]);
+
                 String[] cust = request.getParameter("cus").split(",");
+
 //                out.print(cust==null    );
                 HttpSession session = request.getSession();
                 session.setAttribute("cbr", cbReturn);
@@ -154,6 +157,7 @@ public class TicketController extends HttpServlet {
             }
 
             if (service.equals("thanhtoan")) {
+                ThongTinChuyenBayDAO ttcbd = new ThongTinChuyenBayDAO();
                 ThongTinHanhKhachDAO hkd = new ThongTinHanhKhachDAO();
                 ThongTinVeDaDatDAO vd = new ThongTinVeDaDatDAO();
                 HangBayDAO hbd = new HangBayDAO();
@@ -174,51 +178,16 @@ public class TicketController extends HttpServlet {
                     request.setAttribute("mess", "Thông tin không hợp lệ");
                     request.getRequestDispatcher("datve.jsp").forward(request, response);
                 } else {
-                    if (acc != null) {
-                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(acc.getUsername(), tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
-                        int a = hkd.addNew(tthk);
-                    } else {
-                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(null, tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
-                        int a = hkd.addNew(tthk);
-                    }
 
                     String[] mbay = request.getParameter("mb").split(",");
                     String[] cbay = request.getParameter("cb").split(",");
                     String[] cbayr = request.getParameter("cbr").split(",");
                     out.print(cbayr.length == 0);
-                    
+
                     request.setAttribute("cbr", cbayr);
 //                    for (int i = 0; i < cbayr.length; i++) {
-//
 //                        out.print("--" + cbayr[i]);
-//
 //                    }
-                    String totalPrice = request.getParameter("totalPrice");
-                    String[] GTNL = request.getParameterValues("gt-NL");
-                    String[] GTTE = request.getParameterValues("gt-TE");
-                    String[] GTEB = request.getParameterValues("gt-EB");
-                    request.setAttribute("GTNL", GTNL);
-                    request.setAttribute("GTTE", GTTE);
-                    request.setAttribute("GTEB", GTEB);
-
-                    String[] tenNL = request.getParameterValues("nlName");
-                    String[] tenTE = request.getParameterValues("teName");
-                    String[] tenEB = request.getParameterValues("ebName");
-                    request.setAttribute("tenNL", tenNL);
-                    request.setAttribute("tenTE", tenTE);
-                    request.setAttribute("tenEB", tenEB);
-                    
-                    if (cbayr.length != 0) {
-                        hbr = hbd.getHbByName(cbayr[1].trim());
-                        java.sql.Date dateReturn = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(cbayr[6].trim()).getTime());
-                        int a = hkd.getLastedHK();
-                        ThongTinVeDaDat veVe = new ThongTinVeDaDat(Integer.parseInt(cbayr[0].trim()), a, dateReturn, tenNL.length,tenTE.length,tenEB.length);
-                        request.setAttribute("veVe", vd.getLastedTicket());
-                        vd.addNew(veVe);
-//                        out.print("b: " + b);
-//                        out.print("------" + cbayr[0] + "------" + dateReturn);
-                    }
-
                     String[] dayTE = request.getParameterValues("day-TE");
                     String[] monthTE = request.getParameterValues("month-TE");
                     String[] yearTE = request.getParameterValues("year-TE");
@@ -237,6 +206,37 @@ public class TicketController extends HttpServlet {
                     session.setAttribute("hbr", hbr);
                     session.setAttribute("hb", hb);
 
+                    String totalPrice = request.getParameter("totalPrice");
+                    String[] GTNL = request.getParameterValues("gt-NL");
+                    String[] GTTE = request.getParameterValues("gt-TE");
+                    String[] GTEB = request.getParameterValues("gt-EB");
+                    request.setAttribute("GTNL", GTNL);
+                    request.setAttribute("GTTE", GTTE);
+                    request.setAttribute("GTEB", GTEB);
+
+                    String[] tenNL = request.getParameterValues("nlName");
+                    String[] tenTE = request.getParameterValues("teName");
+                    String[] tenEB = request.getParameterValues("ebName");
+                    request.setAttribute("tenNL", tenNL);
+                    request.setAttribute("tenTE", tenTE);
+                    request.setAttribute("tenEB", tenEB);
+
+                    int te = 0, eb = 0;
+                    out.print(tenEB != null);
+                    if (tenTE != null) {
+                        te = tenTE.length;
+                    }
+                    if (tenEB != null) {
+                        eb = tenEB.length;
+                    }
+
+                    if (acc != null) {
+                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(acc.getUsername(), tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                        hkd.addNew(tthk);
+                    } else {
+                        ThongTinHanhKhach tthk = new ThongTinHanhKhach(null, tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                        hkd.addNew(tthk);
+                    }
 //                out.print(tenEB[0]);
 //                out.print(tenNL[0] + tenTE[0] + tenEB[0]);
 //                request.setAttribute("cb", cbay);
@@ -247,16 +247,36 @@ public class TicketController extends HttpServlet {
                     Date date = null;
 //                out.print(cbay[6]);
                     date = sdf.parse(cbay[6].trim());
-                    out.print(cbay[6]);
                     java.sql.Date dateFrom = new java.sql.Date(sdf.parse(cbay[6].trim()).getTime());
                     int a = hkd.getLastedHK();
-                    ThongTinVeDaDat veDi = new ThongTinVeDaDat(Integer.parseInt(cbay[0].trim()), a, dateFrom, tenNL.length,tenTE.length,tenEB.length);
+                    out.print(eb);
+                    ThongTinVeDaDat veDi = new ThongTinVeDaDat(Integer.parseInt(cbay[0].trim()), a, dateFrom, tenNL.length, te, eb);
+//                    out.print(veDi);
                     vd.addNew(veDi);
-                    out.print(veDi + "----" + a);
+                    if (cbayr.length != 0) {
+                        if (acc != null) {
+                            ThongTinHanhKhach tthk = new ThongTinHanhKhach(acc.getUsername(), tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                            hkd.addNew(tthk);
+                        } else {
+                            ThongTinHanhKhach tthk = new ThongTinHanhKhach(null, tenNDV, diachiNDV, sdtNDV, emailNDV, cccdNDV);
+                            hkd.addNew(tthk);
+                        }
+                        hbr = hbd.getHbByName(cbayr[1].trim());
+                        java.sql.Date dateReturn = new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd").parse(cbayr[6].trim()).getTime());
+                        int b = hkd.getLastedHK();
+                        ThongTinVeDaDat veVe = new ThongTinVeDaDat(Integer.parseInt(cbayr[0].trim()), b, dateReturn, tenNL.length, te, eb);
+                        request.setAttribute("veVe", vd.getLastedTicket());
+                        vd.addNew(veVe);
+
+//                        out.print("b: " + b);
+                        out.print("------" + veVe + "------" + dateReturn);
+                    }
+//                    out.print(veDi + "----" + a);
                     request.setAttribute("veDi", vd.getLastedTicket());
 //                out.print(date);
 //                String date1 = new SimpleDateFormat("dd-MM-YYYY").format(date);
 //                out.print("<----"+date1+"---->");
+
                     Time timeFrom = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[4]).getTime());
                     Time timeTo = new java.sql.Time(new SimpleDateFormat("HH:mm").parse(cbay[5]).getTime());
                     MayBay mb = new MayBay(mbay[0], mbay[1]);

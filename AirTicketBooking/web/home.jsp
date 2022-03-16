@@ -80,15 +80,17 @@
                         <!--<li><a href="#about">Contact</a></li>-->
                         <c:set var="a" value="${userS}"/>
                         <c:if test="${a!=null}"> 
-                            <li><a href="user">Xem vé đã đặt</a></li>
+                            <c:if test="${a.status==1}">
+                                <li><a href="Edit">Admin</a></li>
+                                </c:if>
+                            <li><a href="user">Booked</a></li>
+                            <li><a href="account?go=changePW">Change Password</a></li>
                             <li><a href="home?go=logout">Logout</a></li>
                             </c:if>
                             <c:if test="${a==null}"> 
                             <li><a href="account?go=login">Login</a></li>
                             </c:if>
-                            <c:if test="${a.status==1}">
-                            <li><a href="Edit">Admin</a></li>
-                            </c:if>
+
 
 
                     </ul>
@@ -113,9 +115,9 @@
                                     <li><a href="http://instagram.com/">Follow our <em>instagram</em><i class="fa fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="page-direction-button">
-                                <a href="contact.html"><i class="fa fa-phone"></i>Contact Us Now</a>
-                            </div>
+                            <!--                            <div class="page-direction-button">
+                                                            <a href="contact.html"><i class="fa fa-phone"></i>Contact Us Now</a>
+                                                        </div>-->
                         </div>
                     </div>
                     <div class="col-md-5 col-md-offset-1">

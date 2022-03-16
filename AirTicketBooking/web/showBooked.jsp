@@ -5,6 +5,7 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -376,46 +377,43 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%--<c:forEach var="cb" items="${lttcb}">--%>
+                            <c:forEach begin="${(currPage-1)*5}" end="${total<=currPage*5 ? total-1 : currPage*5-1}" varStatus="i">
                                 <tr>
-                                    <td style="text-align: center">SE1620A20</td>
-                                    <td style="text-align: center">Hà Nội<br>-<br>Đà Nẵng</td>
-                                    <td style="text-align: center">20:00:00<br>-<br>23:00:00</td>
-                                    <td style="text-align: center">2022-12-12</td>      
-                                    <td style="text-align: center"><img src="img/hang1.gif" style="max-width: 40px; margin: 0"><br>VKA21A</td>
-                                    <td style="text-align: center">Nguyễn Hoàng Anh</td>  
-                                    <td style="text-align: center">1472583694561</td>
-                                    <td style="text-align: center">2 Người lớn<br>0 Trẻ em<br>1 Em bé</td>
-                                    <td style="text-align: center">999.000đ</td>
-<!--                                    <td>
-                                        <span class="custom-checkbox">
-                                            <input type="checkbox" id="" name="options" value="${cb.idCB},${cb.dateFrom}">
-                                            <label for="checkbox"></label>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <a href="EditThongTinChuyenBay?go=update&PK=${cb.idCB},${cb.dateFrom}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Update">&#xE254;</i></a>
-                                        <a href="#" onclick="showMess('${cb.idCB}','${cb.dateFrom}')" id="del"  class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                    </td>-->
+                                    <td style="text-align: center">${lv.get(i.index).mave}</td>
+                                    <td style="text-align: center">${lcb.get(i.index).localFrom}<br>-<br>${lcb.get(i.index).localTo}</td>
+                                    <td style="text-align: center">${lcb.get(i.index).timeFrom}<br>-<br>${lcb.get(i.index).timeTo}</td>
+                                    <td style="text-align: center">${lttcb.get(i.index).dateFrom}</td>      
+                                    <td style="text-align: center"><img src="${lhb.get(i.index).logo}" style="max-width: 40px; margin: 0"><br>FLIGHT-${lcb.get(i.index).id}</td>
+                                    <td style="text-align: center">${lhk.get(i.index).name}</td>  
+                                    <td style="text-align: center">${lhk.get(i.index).pid}</td>
+                                    <td style="text-align: center">${lv.get(i.index).NL} Người lớn<br>${lv.get(i.index).TE} Trẻ em<br>${lv.get(i.index).EB} Em bé</td>
+                                    <c:set var="SNL" value="${lv.get(i.index).NL}"></c:set>
+                                    <c:set var="STE" value="${lv.get(i.index).TE}"></c:set>
+                                    <c:set var="SEB" value="${lv.get(i.index).EB}"></c:set>
+                                    <c:set var="pricee" value="${lttcb.get(i.index).price}"></c:set>
+                                    
+                                    <td style="text-align: center"><fmt:formatNumber type = "number" 
+          maxFractionDigits = "3" value = "${(SNL*pricee+STE*75/100*pricee+SEB*50/100*pricee)*1000}" />đ</td>
+
                                 </tr>
-                            <%--</c:forEach>--%>
+                            </c:forEach>
 
                         </tbody>
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>${toltal_record}</b> entries</div>
+                        
                         <ul class="pagination">
 
                             <c:set var="c" value="${currPage}"></c:set>
                             <c:if test="${c>1}">
-                                <li class="page-item disabled"><a href="EditThongTinChuyenBay?page=${currPage-1}">Previous</a></li>
+                                <li class="page-item disabled"><a href="user?page=${currPage-1}">Previous</a></li>
                                 </c:if>
 
                             <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
-                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${i.index}" class="page-link">${i.index}</a></li>
+                                <li class="page-item"><a href="user?page=${i.index}" class="page-link">${i.index}</a></li>
                                 </c:forEach>
                                 <c:if test="${c<totalPage}">
-                                <li class="page-item"><a href="EditThongTinChuyenBay?page=${currPage+1}" class="page-link">Next</a></li>
+                                <li class="page-item"><a href="user?page=${currPage+1}" class="page-link">Next</a></li>
                                 </c:if>
 
                         </ul>

@@ -127,7 +127,7 @@ public class FilterControl extends HttpServlet {
                     out.println("<td><button class=\"btn-danger\" style=\"border-radius: 6px; font-size: 15px\" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
                             + "</tr>");
                 } else {
-                    out.println("<td><button class=\"btn-danger\" style=\"border-radius: 6px; \" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
+                    out.println("<td><button type=\"button\" class=\"btn-danger\" onclick=\"fromm('"+c+"')\" style=\"border-radius: 6px;\" name=\"bookingInfo\" value=\"\"> Chọn Vé</button></td>"
                             + "</tr>");
                 }
             }
@@ -142,7 +142,10 @@ public class FilterControl extends HttpServlet {
                         + "<td>" + c.getTimeTo() + "</td>\n"
                         + "<td>" + c.getDateFrom() + "</td>\n"
                         + "<td>" + c.getPrice() + "00đ</td>\n"
-                        + "<td><button class=\"btn-danger\" style=\"border-radius: 6px;\" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
+                        + "<td style=\"text-align: center\">\n"
+                        + "     <button class=\"btn-danger\" style=\"border-radius: 6px;\" name=\"bookingInfoReturn\" value=\""+c+"\"> Đặt Vé</button> \n"
+                        + "     <button type=\"button\" class=\"btn-danger\" onclick=\"selectFromAgain()\" style=\"border-radius: 6px;\" > Chọn chiều đi</button>\n"
+                        + "</td>"
                         + "</tr>");
             }
         }

@@ -98,6 +98,34 @@ public class loginController extends HttpServlet {
 
             }
 
+            if (service.equals("changePW")) {
+                AccoutDao ad = new AccoutDao();
+                String submit = request.getParameter("submit");
+                if (submit == null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("userS", null);
+                    request.getRequestDispatcher("changePW.jsp").forward(request, response);
+                } else {
+                    String ms = "";
+                    String user = request.getParameter("user");
+                    String oldP = request.getParameter("oldPass");
+                    String newP = request.getParameter("newPass");
+                    Account acc = ad.getLoginAccount(user, oldP);
+                    if (acc.getUsername() == null) {
+                        ms = "Sai tên tài khoản hoặc mật khẩu!";
+                        request.setAttribute("ms", ms);
+                        request.getRequestDispatcher("changePW.jsp").forward(request, response);
+                    } else {
+                        if (ad.changePass(newP, user) > 0) {
+                            ms = "Đổi mật khẩu thành công!";
+                            request.setAttribute("ms", ms);
+                            request.getRequestDispatcher("changePW.jsp").forward(request, response);
+                        }
+                    }
+
+                }
+            }
+
         }
     }
 

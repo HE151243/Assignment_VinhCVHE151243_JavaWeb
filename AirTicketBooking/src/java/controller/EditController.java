@@ -69,6 +69,10 @@ public class EditController extends HttpServlet {
             if (service.equals("ThongTinHanhKhach")) {
                 response.sendRedirect("EditThongTinHanhKhach");
             }
+            
+            if (service.equals("ThongTinVe")) {
+                response.sendRedirect("EditThongTinVe");
+            }
 
         }
     }

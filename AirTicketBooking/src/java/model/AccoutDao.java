@@ -79,6 +79,21 @@ public class AccoutDao extends BaseDAO<Account> {
         }
         return acc;
     }
+    
+    public int changePass(String newP, String user){
+        int res = 0;
+        try {
+            sql = "UPDATE Account\n"
+                    + "SET password = ? \n"                
+                    + "WHERE username = ?;";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, newP);
+            ps.setString(2, user);
+            res = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return res;
+    }
 
     public Account getAccoutByUserName(String u) {
         Account acc = new Account();

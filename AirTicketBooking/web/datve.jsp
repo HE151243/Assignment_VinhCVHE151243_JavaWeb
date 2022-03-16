@@ -53,7 +53,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-        
+
         <style>
             .datve{
 
@@ -68,7 +68,7 @@
                 margin: 5px 0; 
                 border-radius: 6px
             }
-            
+
             @media (min-width: 768px){
                 .navbar-nav{
                     margin: 0 auto;
@@ -83,7 +83,7 @@
     </head>
 
     <body>
-        
+
         <div class="navbar navbar-inverse navbar-fixed">
             <div class="container">
                 <div class="navbar-header">
@@ -92,23 +92,24 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    
+
                 </div>
                 <div class="collapse navbar-collapse">
                     <!--<a class="navbar-brand" href="home">HE151243</a>-->
                     <c:set var="a" value="${userS}"/>
-                        <c:if test="${a!=null}"> 
-                            <a class="navbar-brand" href="home">Welcome ${userS.username}</a>
-                        </c:if>
-                        <c:if test="${a==null}"> 
-                            <a class="navbar-brand" href="home">HE151243 - FLIGHT</a>
-                        </c:if>
+                    <c:if test="${a!=null}"> 
+                        <a class="navbar-brand" href="home">Welcome ${userS.username}</a>
+                    </c:if>
+                    <c:if test="${a==null}"> 
+                        <a class="navbar-brand" href="home">HE151243 - FLIGHT</a>
+                    </c:if>
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="home">Home</a></li>
                         <!--<li><a href="#about">Contact</a></li>-->
                         <!--<li><a href="home?go=logout">Logout</a></li>-->
                         <c:set var="a" value="${userS}"/>
-                            <c:if test="${a!=null}"> 
+                        <c:if test="${a!=null}"> 
+                            <li><a href="user">Booked</a></li>
                             <li><a href="home?go=logout">Logout</a></li>
                             </c:if>
                             <c:if test="${a==null}"> 
@@ -131,11 +132,11 @@
                             <img src="img/logo.png" alt="Flight Template">
                         </div>
                     </div>
-<!--                    <div class="col-md-6">
-                        <div class="page-direction-button">
-                            <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-md-6">
+                                            <div class="page-direction-button">
+                                                <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
+                                            </div>
+                                        </div>-->
                 </div>
             </div>
         </section>
@@ -146,19 +147,19 @@
             <div class="container">
 
                 <div class="row">
-<!--                    <div class="col-md-9">
-                        <div class="section-heading">
-                            <h2>Các chuyến bay</h2>
-                            <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="section-heading">
-                            <h2>Tùy Chọn</h2>
-                            <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
-                        </div>
-                    </div>-->
+                    <!--                    <div class="col-md-9">
+                                            <div class="section-heading">
+                                                <h2>Các chuyến bay</h2>
+                                                <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
+                                            </div>
+                                        </div>
+                    
+                                        <div class="col-md-3">
+                                            <div class="section-heading">
+                                                <h2>Tùy Chọn</h2>
+                                                <p> Pellentesque quis turpis et lectus auctor gravida ut vel orci. Proin et tempus nunc. Proin sed justo neque. Donec et tempus ligula, et gravida elit. Vivamus vitae placerat metus.</p>
+                                            </div>
+                                        </div>-->
 
 
 
@@ -197,7 +198,7 @@
                                                     <tr>
                                                         <td colspan="2"><p>${cbr[2]} <i class='fas fa-arrow-circle-right' style="font-size: 15px"></i> ${cbr[3]}</p></td>
                                                         <td style="padding-left: 30px"><p>Ngày bay: <fmt:parseDate pattern="yyyy-MM-dd" value="${cbr[6]}" var="date"/> 
-                                                                                                    <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p></td>
+                                                                <fmt:formatDate pattern="dd-MM-yyyy" value="${date}"/></p></td>
                                                     </tr>
                                                     <tr>
                                                         <td><p><img src="${hbr.logo}" style="max-width: 40px; margin: 0"></p></td>
@@ -412,11 +413,11 @@
                             </div>
                         </form>
 
-<!--                        <div class="col-md-12" style="text-align: center">
-                            <form>
-                                <button type="submit" class="btn btn-primary bt-book">Chọn lại chuyến bay</button>
-                            </form>
-                        </div>-->
+                        <!--                        <div class="col-md-12" style="text-align: center">
+                                                    <form>
+                                                        <button type="submit" class="btn btn-primary bt-book">Chọn lại chuyến bay</button>
+                                                    </form>
+                                                </div>-->
 
                     </div>
 
@@ -431,23 +432,23 @@
 
                                     <h4 style="text-align: center">Đặt Vé Khác</h4>
                                     <form id="form-submit" action="DsChuyenBay" method="get">
-                                        <input hidden="" name="go" value="booking">
+                                        <input hidden="" name="go" value="search">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <fieldset>
                                                     <label for="from">Điểm khởi hành:</label>
                                                     <select required name='from' onchange='this.form'>
                                                         <option value="">Chọn địa điểm...</option>
-                                                        <option value="HaNoi">Hà Nội</option>
-                                                        <option value="HaiPhong">Hải Phòng</option>
-                                                        <option value="TP.HCM">TP.HCM</option>
-                                                        <option value="DaNang">Đà Nẵng</option>
-                                                        <option value="PhuQuoc">Phú Quốc</option>
-                                                        <option value="CanTho">Cần Thơ</option>
-                                                        <option value="QuyNhon">Quy Nhơn</option>
-                                                        <option value="DienBien">Điện Biên</option>
-                                                        <option value="ConDao">Côn Đảo</option>
-                                                        <option value="NhaTrang">Nha Trang</option>
+                                                        <option value="Hà Nội">Hà Nội</option>
+                                                        <option value="Hải Phòng">Hải Phòng</option>
+                                                        <option value="TP. Hồ Chí Minh">TP.HCM</option>
+                                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                                        <option value="Phú Quốc">Phú Quốc</option>
+                                                        <option value="Cần Thơ">Cần Thơ</option>
+                                                        <option value="Quy Nhơn">Quy Nhơn</option>
+                                                        <option value="Điện Biên">Điện Biên</option>
+                                                        <option value="Côn Đảo">Côn Đảo</option>
+                                                        <option value="Nha Trang">Nha Trang</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -456,16 +457,16 @@
                                                     <label for="to">Điểm đến:</label>
                                                     <select required name='to' onchange='this.form'>
                                                         <option value="">Chọn địa điểm...</option>
-                                                        <option value="HaNoi">Hà Nội</option>
-                                                        <option value="HaiPhong">Hải Phòng</option>
-                                                        <option value="TP.HCM">TP.HCM</option>
-                                                        <option value="DaNang">Đà Nẵng</option>
-                                                        <option value="PhuQuoc">Phú Quốc</option>
-                                                        <option value="CanTho">Cần Thơ</option>
-                                                        <option value="QuyNhon">Quy Nhơn</option>
-                                                        <option value="DienBien">Điện Biên</option>
-                                                        <option value="ConDao">Côn Đảo</option>
-                                                        <option value="NhaTrang">Nha Trang</option>
+                                                        <option value="Hà Nội">Hà Nội</option>
+                                                        <option value="Hải Phòng">Hải Phòng</option>
+                                                        <option value="TP. Hồ Chí Minh">TP.HCM</option>
+                                                        <option value="Đà Nẵng">Đà Nẵng</option>
+                                                        <option value="Phú Quốc">Phú Quốc</option>
+                                                        <option value="Cần Thơ">Cần Thơ</option>
+                                                        <option value="Quy Nhơn">Quy Nhơn</option>
+                                                        <option value="Điện Biên">Điện Biên</option>
+                                                        <option value="Côn Đảo">Côn Đảo</option>
+                                                        <option value="Nha Trang">Nha Trang</option>
                                                     </select>
                                                 </fieldset>
                                             </div>
@@ -527,87 +528,87 @@
                         </section>
                     </div>
 
-<!--                    <div class="col-md-6">
-                        <img src="img/contact-01.jpg" alt="">
-                    </div>
-                    <div class="col-md-6">
-                        <img src="img/contact-02.jpg" alt="">
-                    </div>
-                    <div class="col-md-4">
-                        <h6>Proin dignissim rhoncus</h6>
-                        <p>Aliquam elit metus, varius in ligula sed, posuere aliquam nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis vel rhoncus lectus.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h6>Duis vehicula quis elit</h6>
-                        <p>Donec nisl felis, eleifend eu diam ut, condimentum finibus erat. Aliquam luctus commodo ultricies. Etiam in tellus mi. Nam lobortis est magna, et rutrum ipsum lacinia id.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h6>Duis vel rhoncus lectus</h6>
-                        <p>Mauris aliquet eget lorem a tempor. Morbi in dui sed orci placerat ultrices sed a mi. Praesent eget porttitor enim. In tempor eros mi. Morbi a lobortis ante. Sed blandit vitae diam commodo ultricies.</p>
-                    </div>-->
+                    <!--                    <div class="col-md-6">
+                                            <img src="img/contact-01.jpg" alt="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <img src="img/contact-02.jpg" alt="">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Proin dignissim rhoncus</h6>
+                                            <p>Aliquam elit metus, varius in ligula sed, posuere aliquam nibh. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis vel rhoncus lectus.</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Duis vehicula quis elit</h6>
+                                            <p>Donec nisl felis, eleifend eu diam ut, condimentum finibus erat. Aliquam luctus commodo ultricies. Etiam in tellus mi. Nam lobortis est magna, et rutrum ipsum lacinia id.</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6>Duis vel rhoncus lectus</h6>
+                                            <p>Mauris aliquet eget lorem a tempor. Morbi in dui sed orci placerat ultrices sed a mi. Praesent eget porttitor enim. In tempor eros mi. Morbi a lobortis ante. Sed blandit vitae diam commodo ultricies.</p>
+                                        </div>-->
                 </div>
             </div>
         </section>
 
 
 
-<!--        <section class="contact-form">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-heading">
-                            <h2>Leave us a message</h2>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-md-offset-3">
-                        <form id="contact" action="#" method="post">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-6">
-                                    <fieldset>
-                                        <input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-12">
-                                    <fieldset>
-                                        <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
-                                    </fieldset>
-                                </div>
-                                <div class="col-md-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="btn">Submit Your Message</button>
-                                    </fieldset>
+        <!--        <section class="contact-form">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-heading">
+                                    <h2>Leave us a message</h2>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>-->
-
-
-
-<!--        <section class="map">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div id="map">
-                             How to change your own map point
-                                1. Go to Google Maps
-                                2. Click on your location point
-                                3. Click "Share" and choose "Embed map" tab
-                                4. Copy only URL and paste it within the src="" field below
-                            
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7895.485196115994!2d103.85995441789784!3d1.2880401763270322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7fb4e58ad9cd826e!2sSingapore+Flyer!5e0!3m2!1sen!2sth!4v1505825620371" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+                            <div class="col-md-6 col-md-offset-3">
+                                <form id="contact" action="#" method="post">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <fieldset>
+                                                <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <fieldset>
+                                                <input name="email" type="text" class="form-control" id="email" placeholder="Your email..." required="">
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <fieldset>
+                                                <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your message..." required=""></textarea>
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <fieldset>
+                                                <button type="submit" id="form-submit" class="btn">Submit Your Message</button>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>-->
+                </section>-->
+
+
+
+        <!--        <section class="map">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="map">
+                                     How to change your own map point
+                                        1. Go to Google Maps
+                                        2. Click on your location point
+                                        3. Click "Share" and choose "Embed map" tab
+                                        4. Copy only URL and paste it within the src="" field below
+                                    
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7895.485196115994!2d103.85995441789784!3d1.2880401763270322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7fb4e58ad9cd826e!2sSingapore+Flyer!5e0!3m2!1sen!2sth!4v1505825620371" width="100%" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>-->
 
 
 

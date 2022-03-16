@@ -36,6 +36,10 @@
         <servlet-name>UserController</servlet-name>
         <servlet-class>controller.UserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ThongTinVeDaDatController</servlet-name>
+        <servlet-class>controller.ThongTinVeDaDatController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChuyenBayServlet</servlet-name>
         <url-pattern>/DsChuyenBay</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/user</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThongTinVeDaDatController</servlet-name>
+        <url-pattern>/EditThongTinVe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

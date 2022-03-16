@@ -125,6 +125,24 @@ public class ThongTinChuyenBayDAO extends BaseDAO<ThongTinChuyenBay> {
         }
         return res;
     }
+    
+    
+    
+    public int updateSoGhe(ThongTinChuyenBay ttcb, String[] PK, int soghedat) {
+        int res = 0;
+        try {
+            sql = "UPDATE ThongTinChuyenBay\n"
+                    + "SET SoGheCon = ?, \n"
+                    + "WHERE MaChuyenBay = ? and NgayKhoiHanh = ?;";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, ttcb.getTotal_seat()-soghedat);
+            ps.setString(2, PK[0]);
+            ps.setString(3, PK[1]);
+            res = ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return res;
+    }
 
     public int deleteByPK(String PK) {
         int res = 0;

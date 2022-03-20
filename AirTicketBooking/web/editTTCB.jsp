@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -375,7 +376,7 @@
                                 <tr>
                                     <td>${cb.idCB}</td>
                                     <td>${cb.dateFrom}</td>
-                                    <td>${cb.price}</td>
+                                    <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${cb.price*1000}"></fmt:formatNumber></td>
                                     <td>${cb.total_seat}</td>                                  
                                     <td>
                                         <span class="custom-checkbox">

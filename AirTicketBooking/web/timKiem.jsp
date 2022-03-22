@@ -4,6 +4,7 @@
     Author     : admin
 --%>
 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="model.ChuyenBay"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -199,7 +200,7 @@
                                                     <td>${cb.timeFrom}</td>
                                                     <td>${cb.timeTo}</td>
                                                     <td colspan="2">${cb.dateFrom}</td>
-                                                    <td>${cb.price}00đ</td>
+                                                    <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${cb.price*1000}"></fmt:formatNumber></td>
                                                     <td><button class="btn-danger" style="border-radius: 6px; font-size: 15px" name="bookingInfo" value="${cb},${cus}"> Chọn Vé</button></td>
                                                 </tr>
                                             </c:forEach>
@@ -262,7 +263,7 @@
                                                                     <td>${cb.timeFrom}</td>
                                                                     <td>${cb.timeTo}</td>
                                                                     <td>${cb.dateFrom}</td>
-                                                                    <td>${cb.price}00đ</td>
+                                                                    <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${cb.price*1000}"></fmt:formatNumber></td>
                                                                     <td><button type="button" class="btn-danger" onclick="fromm('${cb}')" style="border-radius: 6px;" name="bookingInfo" value=""> Chọn Vé</button></td>
                                                                 </tr>
                                                             </c:forEach>
@@ -305,7 +306,7 @@
                                                                     <td>${cbr.timeFrom}</td>
                                                                     <td>${cbr.timeTo}</td>
                                                                     <td>${cbr.dateFrom}</td>
-                                                                    <td>${cbr.price}00đ</td>
+                                                                    <td><fmt:formatNumber type="number" maxFractionDigits="3" value="${cbr.price*1000}"></fmt:formatNumber></td>
                                                                     <td style="text-align: center">
                                                                         <button class="btn-danger" style="border-radius: 6px;" name="bookingInfoReturn" value="${cbr}"> Đặt Vé</button> 
                                                                         <button type="button" class="btn-danger" onclick="selectFromAgain()" style="border-radius: 6px;" > Chọn chiều đi</button>
@@ -604,6 +605,7 @@
 
                                                                 function fromm(cb) {
 //                                                                    alert('abv');
+
                                                                     document.getElementById("titleReturn").removeAttribute("hidden");
                                                                     document.getElementById("dataReturn").removeAttribute("hidden");
                                                                     document.getElementById("titleFrom").setAttribute("hidden", "hidden");
@@ -628,7 +630,7 @@
                                                                         },
                                                                         success: function (response) {
                                                                             //Do Something
-                                                                            document.getElementById("dataReturn").appendChild(response) ;
+                                                                            document.getElementById("dataReturn").innerHTML =(response) ;
                                                                         },
                                                                         error: function (xhr) {
                                                                             //Do Something to handle error

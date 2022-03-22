@@ -43,8 +43,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-        
-        
+
+
 
 
 
@@ -282,14 +282,16 @@
 
         </style>
     </head>
-    
+
     <%
         Account acc = (Account) request.getSession().getAttribute("userS");
-        if(acc==null) response.sendRedirect("home");
+        if (acc == null) {
+            response.sendRedirect("home");
+        }
     %>
 
     <body>
-        
+
         <div class="navbar navbar-inverse navbar-fixed">
             <div class="container">
                 <div class="navbar-header">
@@ -329,7 +331,7 @@
             </div>
         </section>
 
-        
+
 
         <section class="contact-us">
             <div class="container">
@@ -378,40 +380,40 @@
                             <td><a href="Edit?go=ChuyenBay">Edit</a></td>
                         </tr>
                         <tr>
-                            
+
                             <td>2</td>
                             <td>Bảng Thông tin chi tiết chuyến bay (ThongTinChuyenBay)</td>
                             <td><a href="Edit?go=ThongTinChuyenBay">Edit</a></td>
-                            
+
                         </tr>
                         <tr>
-                           
+
                             <td>3</td>
                             <td>Bảng Thông tin các hành khách (ThongTinHanhKhach)</td>
                             <td><a href="Edit?go=ThongTinHanhKhach">Edit</a></td>
-                            
+
                         </tr>
                         <tr>
-                          
+
                             <td>4</td>
                             <td>Bảng Thông tin các vé đã đặt (ThongTinVeDaDat)</td>
                             <td><a href="Edit?go=ThongTinVe">Edit</a></td>
-                           
+
                         </tr>
-<!--                        <tr>
-                           
-                            <td>5</td>
-                            <td>Bảng Danh sách các máy bay (MayBay)</td>
-                            <td><a>Edit</a></td>
-                            
-                        </tr>
-                        <tr>
-                           
-                            <td>6</td>
-                            <td>Bảng Danh sách các tài khoản trên web (Account)</td>
-                            <td><a>Edit</a></td>
-                            
-                        </tr>-->
+                        <!--                        <tr>
+                                                   
+                                                    <td>5</td>
+                                                    <td>Bảng Danh sách các máy bay (MayBay)</td>
+                                                    <td><a>Edit</a></td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                   
+                                                    <td>6</td>
+                                                    <td>Bảng Danh sách các tài khoản trên web (Account)</td>
+                                                    <td><a>Edit</a></td>
+                                                    
+                                                </tr>-->
                     </tbody>
                 </table>
                 <!--                <div class="clearfix">

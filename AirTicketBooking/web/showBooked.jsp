@@ -355,69 +355,75 @@
                             </div>
 
                             <div class="col-sm-6">
-<!--                                <a href="EditThongTinChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm thông tin chuyến bay</span></a>
-                                <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>-->
+                                <!--                                <a href="EditThongTinChuyenBay?go=add" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Thêm thông tin chuyến bay</span></a>
+                                                                <button  class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Xóa</span></button>-->
                                 <a href="home" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center">Mã vé</th>
-                                <th style="text-align: center">Tuyến bay</th>
-                                <th style="text-align: center">Thời gian bay</th>
-                                <th style="text-align: center">Ngày bay</th>
-                                <th style="text-align: center">Hãng bay</th>
-                                <th style="text-align: center">Người đặt vé</th>
-                                <th style="text-align: center">Số CCCD</th>
-                                <th style="text-align: center">Số người bay</th>
-                                <th style="text-align: center">Số tiền</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach begin="${(currPage-1)*5}" end="${total<=currPage*5 ? total-1 : currPage*5-1}" varStatus="i">
+                    <c:if test="${toltal_record==0}">
+                        <h1 style="text-align: center; color: red">Chưa có vé nào được đặt!</h1>
+                    </c:if>
+                    <c:if test="${toltal_record!=0}">
+                        <table class="table table-striped table-hover">
+                            <thead>
                                 <tr>
-                                    <td style="text-align: center">${lv.get(i.index).mave}</td>
-                                    <td style="text-align: center">${lcb.get(i.index).localFrom}<br>-<br>${lcb.get(i.index).localTo}</td>
-                                    <td style="text-align: center">${lcb.get(i.index).timeFrom}<br>-<br>${lcb.get(i.index).timeTo}</td>
-                                    <td style="text-align: center">${lttcb.get(i.index).dateFrom}</td>      
-                                    <td style="text-align: center"><img src="${lhb.get(i.index).logo}" style="max-width: 40px; margin: 0"><br>FLIGHT-${lcb.get(i.index).id}</td>
-                                    <td style="text-align: center">${lhk.get(i.index).name}</td>  
-                                    <td style="text-align: center">${lhk.get(i.index).pid}</td>
-                                    <td style="text-align: center">${lv.get(i.index).NL} Người lớn<br>${lv.get(i.index).TE} Trẻ em<br>${lv.get(i.index).EB} Em bé</td>
-                                    <c:set var="SNL" value="${lv.get(i.index).NL}"></c:set>
-                                    <c:set var="STE" value="${lv.get(i.index).TE}"></c:set>
-                                    <c:set var="SEB" value="${lv.get(i.index).EB}"></c:set>
-                                    <c:set var="pricee" value="${lttcb.get(i.index).price}"></c:set>
-                                    
-                                    <td style="text-align: center"><fmt:formatNumber type = "number" 
-          maxFractionDigits = "3" value = "${(SNL*pricee+STE*75/100*pricee+SEB*50/100*pricee)*1000}" />đ</td>
+                                    <th style="text-align: center">Mã vé</th>
+                                    <th style="text-align: center">Tuyến bay</th>
+                                    <th style="text-align: center">Thời gian bay</th>
+                                    <th style="text-align: center">Ngày bay</th>
+                                    <th style="text-align: center">Hãng bay</th>
+                                    <th style="text-align: center">Người đặt vé</th>
+                                    <th style="text-align: center">Số CCCD</th>
+                                    <th style="text-align: center">Số người bay</th>
+                                    <th style="text-align: center">Số tiền</th>
 
                                 </tr>
-                            </c:forEach>
+                            </thead>
+                            <tbody>
+                                <c:forEach begin="${(currPage-1)*5}" end="${total<=currPage*5 ? total-1 : currPage*5-1}" varStatus="i">
+                                    <tr>
+                                        <td style="text-align: center">${lv.get(i.index).mave}</td>
+                                        <td style="text-align: center">${lcb.get(i.index).localFrom}<br>-<br>${lcb.get(i.index).localTo}</td>
+                                        <td style="text-align: center">${lcb.get(i.index).timeFrom}<br>-<br>${lcb.get(i.index).timeTo}</td>
+                                        <td style="text-align: center">${lttcb.get(i.index).dateFrom}</td>      
+                                        <td style="text-align: center"><img src="${lhb.get(i.index).logo}" style="max-width: 40px; margin: 0"><br>FLIGHT-${lcb.get(i.index).id}</td>
+                                        <td style="text-align: center">${lhk.get(i.index).name}</td>  
+                                        <td style="text-align: center">${lhk.get(i.index).pid}</td>
+                                        <td style="text-align: center">${lv.get(i.index).NL} Người lớn<br>${lv.get(i.index).TE} Trẻ em<br>${lv.get(i.index).EB} Em bé</td>
+                                            <c:set var="SNL" value="${lv.get(i.index).NL}"></c:set>
+                                            <c:set var="STE" value="${lv.get(i.index).TE}"></c:set>
+                                            <c:set var="SEB" value="${lv.get(i.index).EB}"></c:set>
+                                            <c:set var="pricee" value="${lttcb.get(i.index).price}"></c:set>
 
-                        </tbody>
-                    </table>
-                    <div class="clearfix">
-                        
-                        <ul class="pagination">
+                                            <td style="text-align: center"><fmt:formatNumber type = "number" 
+                                                          maxFractionDigits = "3" value = "${(SNL*pricee+STE*75/100*pricee+SEB*50/100*pricee)*1000}" />đ</td>
 
-                            <c:set var="c" value="${currPage}"></c:set>
-                            <c:if test="${c>1}">
-                                <li class="page-item disabled"><a href="user?page=${currPage-1}">Previous</a></li>
-                                </c:if>
-
-                            <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
-                                <li class="page-item"><a href="user?page=${i.index}" class="page-link">${i.index}</a></li>
+                                    </tr>
                                 </c:forEach>
-                                <c:if test="${c<totalPage}">
-                                <li class="page-item"><a href="user?page=${currPage+1}" class="page-link">Next</a></li>
-                                </c:if>
 
-                        </ul>
-                    </div>
+                            </tbody>
+                        </table>
+                        <div class="clearfix">
+
+                            <ul class="pagination">
+
+                                <c:set var="c" value="${currPage}"></c:set>
+                                <c:if test="${c>1}">
+                                    <li class="page-item disabled"><a href="user?page=${currPage-1}">Previous</a></li>
+                                    </c:if>
+
+                                <c:forEach begin="${startP}" end="${totalPage < 5 ? totalPage : endP}" varStatus="i">
+                                    <li class="page-item"><a href="user?page=${i.index}" class="page-link">${i.index}</a></li>
+                                    </c:forEach>
+                                    <c:if test="${c<totalPage}">
+                                    <li class="page-item"><a href="user?page=${currPage+1}" class="page-link">Next</a></li>
+                                    </c:if>
+
+                            </ul>
+                        </div>
+                    </c:if>
+
                 </div>
             </form>
         </div>
@@ -456,89 +462,89 @@
 
         <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">
-                                            function Page() {
-                                                $.ajax({
-                                                    url: "/AirTicketBooking/filterControl",
-                                                    type: "get", //send it through get method
-                                                    data: {
+            function Page() {
+                $.ajax({
+                    url: "/AirTicketBooking/filterControl",
+                    type: "get", //send it through get method
+                    data: {
 
-                                                    },
-                                                    success: function (response) {
-                                                        //Do Something
+                    },
+                    success: function (response) {
+                        //Do Something
 
-                                                    },
-                                                    error: function (xhr) {
-                                                        //Do Something to handle error
-                                                    }
-                                                });
-                                            }
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
 
-                                            function showMess(id,date) {
-                                                var op = confirm('Are you sure to delete?');
-                                                if (op == true) {
-                                                    window.location.href = 'EditThongTinChuyenBay?go=delete&PK=' + id+','+date;
-                                                }
-                                            }
+            function showMess(id, date) {
+                var op = confirm('Are you sure to delete?');
+                if (op == true) {
+                    window.location.href = 'EditThongTinChuyenBay?go=delete&PK=' + id + ',' + date;
+                }
+            }
 
-                                            $(document).ready(function () {
-                                                // Activate tooltip
-                                                $('[data-toggle="tooltip"]').tooltip();
+            $(document).ready(function () {
+                // Activate tooltip
+                $('[data-toggle="tooltip"]').tooltip();
 
-                                                // Select/Deselect checkboxes
-                                                var checkbox = $('table tbody input[type="checkbox"]');
-                                                $("#selectAll").click(function () {
-                                                    if (this.checked) {
-                                                        checkbox.each(function () {
-                                                            this.checked = true;
-                                                        });
-                                                    } else {
-                                                        checkbox.each(function () {
-                                                            this.checked = false;
-                                                        });
-                                                    }
-                                                });
-                                                checkbox.click(function () {
-                                                    if (!this.checked) {
-                                                        $("#selectAll").prop("checked", false);
-                                                    }
-                                                });
-                                            });
+                // Select/Deselect checkboxes
+                var checkbox = $('table tbody input[type="checkbox"]');
+                $("#selectAll").click(function () {
+                    if (this.checked) {
+                        checkbox.each(function () {
+                            this.checked = true;
+                        });
+                    } else {
+                        checkbox.each(function () {
+                            this.checked = false;
+                        });
+                    }
+                });
+                checkbox.click(function () {
+                    if (!this.checked) {
+                        $("#selectAll").prop("checked", false);
+                    }
+                });
+            });
 
 
-                                            $(document).ready(function () {
-                                                // navigation click actions 
-                                                $('.scroll-link').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    var sectionID = $(this).attr("data-id");
-                                                    scrollToID('#' + sectionID, 750);
-                                                });
-                                                // scroll to top action
-                                                $('.scroll-top').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    $('html, body').animate({scrollTop: 0}, 'slow');
-                                                });
-                                                // mobile nav toggle
-                                                $('#nav-toggle').on('click', function (event) {
-                                                    event.preventDefault();
-                                                    $('#main-nav').toggleClass("open");
-                                                });
-                                            });
-                                            // scroll function
-                                            function scrollToID(id, speed) {
-                                                var offSet = 0;
-                                                var targetOffset = $(id).offset().top - offSet;
-                                                var mainNav = $('#main-nav');
-                                                $('html,body').animate({scrollTop: targetOffset}, speed);
-                                                if (mainNav.hasClass("open")) {
-                                                    mainNav.css("height", "1px").removeClass("in").addClass("collapse");
-                                                    mainNav.removeClass("open");
-                                                }
-                                            }
-                                            if (typeof console === "undefined") {
-                                                console = {
-                                                    log: function () { }
-                                                };
-                                            }
+            $(document).ready(function () {
+                // navigation click actions 
+                $('.scroll-link').on('click', function (event) {
+                    event.preventDefault();
+                    var sectionID = $(this).attr("data-id");
+                    scrollToID('#' + sectionID, 750);
+                });
+                // scroll to top action
+                $('.scroll-top').on('click', function (event) {
+                    event.preventDefault();
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+                });
+                // mobile nav toggle
+                $('#nav-toggle').on('click', function (event) {
+                    event.preventDefault();
+                    $('#main-nav').toggleClass("open");
+                });
+            });
+            // scroll function
+            function scrollToID(id, speed) {
+                var offSet = 0;
+                var targetOffset = $(id).offset().top - offSet;
+                var mainNav = $('#main-nav');
+                $('html,body').animate({scrollTop: targetOffset}, speed);
+                if (mainNav.hasClass("open")) {
+                    mainNav.css("height", "1px").removeClass("in").addClass("collapse");
+                    mainNav.removeClass("open");
+                }
+            }
+            if (typeof console === "undefined") {
+                console = {
+                    log: function () { }
+                };
+            }
         </script>
     </body>
 

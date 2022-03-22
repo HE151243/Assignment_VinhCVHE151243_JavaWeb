@@ -282,143 +282,145 @@
         </style>
 
         <%
-//            Account acc = (Account) request.getSession().getAttribute("userS");
-//            if (acc == null) {
-//                response.sendRedirect("home");
-//            }
+            Account acc = (Account) request.getSession().getAttribute("userS");
+            if (acc == null) {
+                response.sendRedirect("home");
+            }
         %>
     </head>
 
     <body>
-
-        <div class="navbar navbar-inverse navbar-fixed">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="home">HE151243</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="home">Home</a></li>
-                        <!--<li><a href="#about">Contact</a></li>-->
-                        <li><a href="home?go=logout">Logout</a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </div>
-
-
-        <section class="page-heading" id="top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="logo">
-                            <img src="img/logo.png" alt="Flight Template">
-                        </div>
+        <c:if test="<%= acc != null%>">
+            <div class="navbar navbar-inverse navbar-fixed">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="home">HE151243</a>
                     </div>
-                    <!--                    <div class="col-md-6">
-                                            <div class="page-direction-button">
-                                                <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
-                                            </div>
-                                        </div>-->
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="home">Home</a></li>
+                            <!--<li><a href="#about">Contact</a></li>-->
+                            <li><a href="home?go=logout">Logout</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
                 </div>
             </div>
-        </section>
-
-        <section class="contact-us">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-heading">
-                            <h2 style="font-family: serif">Quản lí dữ liệu</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
 
-
-        <div class="container">
-
-            <form action="EditChuyenBay" method="post">
-                <input hidden="" name="go" value="update">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <h2>Quản lí <b>Chuyến bay</b></h2>
-                                <h3 style="color: red">${ms}</h3>
+            <section class="page-heading" id="top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="logo">
+                                <img src="img/logo.png" alt="Flight Template">
                             </div>
-                            <div class="col-sm-6">
-                                <button  class="btn btn-success" data-toggle="modal" name="submit" value="submit"><i class="material-icons">&#xE147;</i> <span>Cập nhật</span></button>
-                                <a href="EditChuyenBay" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
+                        </div>
+                        <!--                    <div class="col-md-6">
+                                                <div class="page-direction-button">
+                                                    <a href="index.html"><i class="fa fa-home"></i>Go Back Home</a>
+                                                </div>
+                                            </div>-->
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-us">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-heading">
+                                <h2 style="font-family: serif">Quản lí dữ liệu</h2>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>                           
-                                <th>Mã chuyến bay</th>
-                                <th>
-                                    <input type="text" readonly="" name="id" required="" value="${cb.id}" placeholder="${cb.id}"/>
-                                </th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Tên Hãng</th>
-                                <th>
-                                    <input type="text" list="tenhang" name="name" required="" placeholder="${cb.name}"/>
-                                    <datalist id="tenhang">                                      
-                                        <c:forEach var="h" items="${listHB}">
-                                            <option>${h.name}</option>
-                                        </c:forEach>
-                                    </datalist>
-                                </th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Mã máy bay</th>
-                                <th>
-                                    <input type="text" list="MB" name="idMB" required="" placeholder="${cb.idMB}"/>
-                                    <datalist id="MB">
-                                        <c:forEach var="m" items="${listMB}">
-                                            <option>${m.getMaMayBay()}</option>
-                                        </c:forEach>
-                                        
-                                    </datalist>                                   
-                                </th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Điểm khởi hành</th>
-                                <th><input type="text" name="localFrom" required="" placeholder="${cb.localFrom}"></th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Điểm đến</th>
-                                <th><input type="text" name="localTo" required="" placeholder="${cb.localTo}"></th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Thời gian khởi hành</th>
-                                <th><input type="text" id="time1"   name="timeFrom" placeholder="${cb.timeFrom}" required="" ></th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Thời gian đến</th>
-                                <th><input type="text" id="time2"   name="timeTo" placeholder="${cb.timeTo}" required=""></th>                            
-                            </tr>
-                            <tr>                           
-                                <th>Tổng số ghế</th>
-                                <th><input type="number" name="total_seat" required="" placeholder="${cb.total_seat}"></th>                            
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
                 </div>
-            </form>
-        </div>
-                            
+            </section>
+
+
+
+            <div class="container">
+
+                <form action="EditChuyenBay" method="post">
+                    <input hidden="" name="go" value="update">
+                    <div class="table-wrapper">
+                        <div class="table-title">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h2>Quản lí <b>Chuyến bay</b></h2>
+                                    <h3 style="color: red">${ms}</h3>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button  class="btn btn-success" data-toggle="modal" name="submit" value="submit"><i class="material-icons">&#xE147;</i> <span>Cập nhật</span></button>
+                                    <a href="EditChuyenBay" class="btn btn-danger" ><i class="material-icons arrow_circle_left">&#xeaa7;</i> <span>Trở lại</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>                           
+                                    <th>Mã chuyến bay</th>
+                                    <th>
+                                        <input type="text" readonly="" name="id" required="" value="${cb.id}" placeholder="${cb.id}"/>
+                                    </th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Tên Hãng</th>
+                                    <th>
+                                        <input type="text" list="tenhang" name="name" required="" placeholder="${cb.name}"/>
+                                        <datalist id="tenhang">                                      
+                                            <c:forEach var="h" items="${listHB}">
+                                                <option>${h.name}</option>
+                                            </c:forEach>
+                                        </datalist>
+                                    </th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Mã máy bay</th>
+                                    <th>
+                                        <input type="text" list="MB" name="idMB" required="" placeholder="${cb.idMB}"/>
+                                        <datalist id="MB">
+                                            <c:forEach var="m" items="${listMB}">
+                                                <option>${m.getMaMayBay()}</option>
+                                            </c:forEach>
+
+                                        </datalist>                                   
+                                    </th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Điểm khởi hành</th>
+                                    <th><input type="text" name="localFrom" required="" placeholder="${cb.localFrom}"></th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Điểm đến</th>
+                                    <th><input type="text" name="localTo" required="" placeholder="${cb.localTo}"></th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Thời gian khởi hành</th>
+                                    <th><input type="text" id="time1"   name="timeFrom" placeholder="${cb.timeFrom}" required="" ></th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Thời gian đến</th>
+                                    <th><input type="text" id="time2"   name="timeTo" placeholder="${cb.timeTo}" required=""></th>                            
+                                </tr>
+                                <tr>                           
+                                    <th>Tổng số ghế</th>
+                                    <th><input type="number" name="total_seat" required="" placeholder="${cb.total_seat}"></th>                            
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </c:if>
+
+
         <footer>
             <div class="container">
                 <div class="row">

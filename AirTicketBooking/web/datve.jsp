@@ -222,14 +222,14 @@
                                             <tr>
                                                 <td><p>Vé người lớn</p></td>
                                                 <td style="padding: 0 20px"><p> x${NL}=</p></td>
-                                                <td style="padding: 0 5px; text-align: right"><p>${cbr==null? NL*cb.price : NL*(cb.price+cbr[7]) }00<u>đ</u></p></td>
+                                                <td style="padding: 0 5px; text-align: right"><p><fmt:formatNumber type="number" maxFractionDigits="3" value="${cbr==null? NL*cb.price*1000 : NL*(cb.price+cbr[7])*1000 }"></fmt:formatNumber><u>đ</u></p></td>
                                             </tr>
                                             <c:set var="te" value="${TE}"/>
                                             <c:if test="${te > 0}">
                                                 <tr>
                                                     <td><p>Vé trẻ em</p></td>
                                                     <td style="padding: 0 20px"><p> x${TE}=</p></td>
-                                                    <td style="padding: 0 5px; text-align: right"><p>${cbr==null? TE*cb.price*75/100 : NL*(cb.price+cbr[7])*75/100}00<u>đ</u></p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p><fmt:formatNumber type="number" maxFractionDigits="3" value="${cbr==null? TE*cb.price*75/100*1000 : NL*(cb.price+cbr[7])*75/100*1000}"></fmt:formatNumber><u>đ</u></p></td>
                                                 </tr>
                                             </c:if>
                                             <c:set var="eb" value="${EB}"/>
@@ -237,13 +237,13 @@
                                                 <tr>
                                                     <td><p>Vé em bé</p></td>
                                                     <td style="padding: 0 20px"><p> x${EB}=</p></td>
-                                                    <td style="padding: 0 5px; text-align: right"><p>${cbr==null? EB*cb.price*50/100 : NL*(cb.price+cbr[7])*50/100}00<u>đ</u></p></td>
+                                                    <td style="padding: 0 5px; text-align: right"><p><fmt:formatNumber type="number" maxFractionDigits="3" value="${cbr==null? EB*cb.price*50/100*1000 : NL*(cb.price+cbr[7])*50/100*1000}"></fmt:formatNumber><u>đ</u></p></td>
                                                 </tr>
                                             </c:if>
                                             <c:set var="totalPrice" value="${NL*(cb.price+cbr[7])+TE*(cb.price+cbr[7])*75/100+EB*(cb.price+cbr[7])*50/100}"/>
                                             <tr>
                                                 <td colspan="2" style="padding:"><p>Tổng giá vé</p></td>
-                                                <td style="padding:0 5px; text-align: right"><p style="color: red">${totalPrice}00<u>đ</u></p></td>
+                                                <td style="padding:0 5px; text-align: right"><p style="color: red"><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice*1000}"></fmt:formatNumber><u>đ</u></p></td>
                                             </tr>
                                         </tbody>
                                     </table>

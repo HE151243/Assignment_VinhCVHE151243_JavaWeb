@@ -123,7 +123,7 @@ public class FilterControl extends HttpServlet {
                         + "<td>" + c.getTimeTo() + "</td>\n"
                         + "<td colspan=\"2\">" + c.getDateFrom() + "</td>\n"
                         + "<td>" + c.getPrice() + "00đ</td>\n");
-                if (tripSTT == null) {
+                if (tripSTT.equals("")) {
                     out.println("<td><button class=\"btn-danger\" style=\"border-radius: 6px; font-size: 15px\" name=\"bookingInfo\" value=\"" + c + "," + cus + "\"> Chọn Vé</button></td>"
                             + "</tr>");
                 } else {
@@ -134,6 +134,7 @@ public class FilterControl extends HttpServlet {
         }
 
         if (trip.equals("round")) {
+            
             for (ChuyenBay c : lcbSorted2) {
                 out.println("<tr>\n"
                         + "<td>" + i++ + "</td>\n"
@@ -145,7 +146,7 @@ public class FilterControl extends HttpServlet {
                         + "<td style=\"text-align: center\">\n"
                         + "     <button class=\"btn-danger\" style=\"border-radius: 6px;\" name=\"bookingInfoReturn\" value=\""+c+"\"> Đặt Vé</button> \n"
                         + "     <button type=\"button\" class=\"btn-danger\" onclick=\"selectFromAgain()\" style=\"border-radius: 6px;\" > Chọn chiều đi</button>\n"
-                        + "</td>"
+                        + "</td>\n"
                         + "</tr>");
             }
         }

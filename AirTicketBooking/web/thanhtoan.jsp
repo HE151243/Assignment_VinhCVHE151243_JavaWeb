@@ -141,7 +141,7 @@
                                     <tbody>
                                         <tr>
                                             <td><h3>Số tiền:</h3></td>
-                                            <td style="padding-left: 30px"><h3><span style="color: red">${totalPrice}00đ</span></h3></td>
+                                            <td style="padding-left: 30px"><h3><span style="color: red"><fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice*1000}"></fmt:formatNumber></span></h3></td>
                                         </tr>
                                         <c:forEach begin="0" end="${fn:length(tenNL)-1}" varStatus="i">
                                             <tr>
@@ -238,7 +238,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Số tiền</td>
-                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red"> ${totalPrice}00đ</span></td>
+                                                <td style="padding-left: 50px">:&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: red"> <fmt:formatNumber type="number" maxFractionDigits="3" value="${totalPrice*1000}"></fmt:formatNumber></span></td>
                                             </tr>
                                             <tr>
                                                 <td>Ghi nội dung</td>

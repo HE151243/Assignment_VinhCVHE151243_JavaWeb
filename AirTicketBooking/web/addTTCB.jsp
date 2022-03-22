@@ -283,10 +283,10 @@
         </style>
 
         <%
-//            Account acc = (Account) request.getSession().getAttribute("userS");
-//            if (acc == null) {
-//                response.sendRedirect("home");
-//            }
+            Account acc = (Account) request.getSession().getAttribute("userS");
+            if (acc == null) {
+                response.sendRedirect("home");
+            }
         %>
     </head>
 
